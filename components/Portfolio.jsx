@@ -154,7 +154,7 @@ const Portfolio = () => {
              borderBottom: `1px solid ${isDarkMode ? 'rgba(255,255,255,0.1)' : 'rgba(0,0,0,0.1)'}`
            }}>
         <div className="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center">
-          <div className="text-xl font-bold tracking-tight">Hoàng</div>
+          <div className="text-xl font-bold tracking-tight">Hoangf</div>
           
           <div className="flex items-center gap-8">
             <div className="hidden md:flex gap-6 text-sm">
@@ -201,7 +201,7 @@ const Portfolio = () => {
                }}>
               {t.hero.cta}
             </a>
-            <a href="https://github.com/nguyenhuuhoang12" target="_blank" rel="noopener noreferrer"
+            <a href="https://github.com/Hoangnguyenhuu12" target="_blank" rel="noopener noreferrer"
                className="px-6 py-3 rounded-lg font-medium border transition flex items-center gap-2"
                style={{
                  borderColor: isDarkMode ? 'rgba(255,255,255,0.2)' : 'rgba(0,0,0,0.2)',
@@ -325,7 +325,7 @@ const Portfolio = () => {
                }}>
               <Mail size={18} /> {t.contact.email}
             </a>
-            <a href="https://github.com/nguyenhuuhoang12" target="_blank" rel="noopener noreferrer"
+            <a href="https://github.com/Hoangnguyenhuu12" target="_blank" rel="noopener noreferrer"
                className="px-6 py-3 rounded-lg font-medium transition flex items-center gap-2"
                style={{
                  backgroundColor: isDarkMode ? '#3b82f6' : '#2563eb',
@@ -341,7 +341,7 @@ const Portfolio = () => {
       <section className="max-w-6xl mx-auto px-6 py-8 mt-12 border-t"
                style={{borderColor: isDarkMode ? 'rgba(255,255,255,0.1)' : 'rgba(0,0,0,0.1)'}}>
         <p className="text-sm opacity-50 text-center">
-          © 2024 Nguyễn Hữu Hoàng. Designed with focus on clarity and impact.
+          © 2024 Nguyen Huu Hoang. Designed with focus on clarity and impact.
         </p>
       </section>
     </div>
