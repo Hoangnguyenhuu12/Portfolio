@@ -1,21 +1,15 @@
 import React, { useState, useEffect } from 'react';
-import { Mail, Github, ExternalLink, Moon, Sun } from 'lucide-react';
+import { Mail, Github, ExternalLink, Moon, Sun, ArrowUpRight } from 'lucide-react';
 
 const Portfolio = () => {
   const [isDark, setIsDark] = useState(false);
   const [isLang, setIsLang] = useState('en');
-  const [scrollY, setScrollY] = useState(0);
+  const [hoveredProject, setHoveredProject] = useState(null);
 
   useEffect(() => {
     if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
       setIsDark(true);
     }
-  }, []);
-
-  useEffect(() => {
-    const handleScroll = () => setScrollY(window.scrollY);
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
   const content = {
@@ -140,43 +134,135 @@ const Portfolio = () => {
   const t = content[isLang];
   const isDarkMode = isDark;
 
+  const glassStyle = {
+    background: isDarkMode 
+      ? 'rgba(255, 255, 255, 0.05)' 
+      : 'rgba(255, 255, 255, 0.7)',
+    backdropFilter: 'blur(10px)',
+    border: `1px solid ${isDarkMode ? 'rgba(255,255,255,0.15)' : 'rgba(255,255,255,0.3)'}`,
+    boxShadow: isDarkMode
+      ? '0 8px 32px 0 rgba(31, 38, 135, 0.15)'
+      : '0 8px 32px 0 rgba(31, 38, 135, 0.1)'
+  };
+
   return (
-    <div className={`${isDarkMode ? 'dark' : 'light'} min-h-screen transition-colors duration-300`}
+    <div className={`${isDarkMode ? 'dark' : 'light'} min-h-screen transition-colors duration-500`}
          style={{
-           backgroundColor: isDarkMode ? '#0a0a0a' : '#ffffff',
+           backgroundColor: isDarkMode ? '#0a0a0a' : '#f9f9f9',
            color: isDarkMode ? '#e5e5e5' : '#1a1a1a'
          }}>
       
+      <style>{`
+        @keyframes subtle-float {
+          0%, 100% { transform: translateY(0px); }
+          50% { transform: translateY(-4px); }
+        }
+        
+        @keyframes glow-pulse {
+          0%, 100% { opacity: 1; }
+          50% { opacity: 0.8; }
+        }
+        
+        .glass-card {
+          transition: all 0.3s cubic-bezier(0.23, 1, 0.320, 1);
+        }
+        
+        .glass-card:hover {
+          transform: translateY(-2px);
+          ${isDarkMode 
+            ? 'background: rgba(255, 255, 255, 0.08) !important;' 
+            : 'background: rgba(255, 255, 255, 0.8) !important;'}
+          box-shadow: ${isDarkMode
+            ? '0 12px 48px 0 rgba(31, 38, 135, 0.25) !important;'
+            : '0 12px 48px 0 rgba(31, 38, 135, 0.2) !important;'}
+        }
+        
+        .glass-button {
+          transition: all 0.3s cubic-bezier(0.23, 1, 0.320, 1);
+        }
+        
+        .glass-button:hover {
+          transform: translateY(-2px);
+          box-shadow: 0 8px 24px rgba(59, 130, 246, 0.3);
+        }
+        
+        .skill-badge {
+          transition: all 0.3s ease;
+        }
+        
+        .skill-badge:hover {
+          transform: scale(1.05) translateY(-2px);
+        }
+        
+        .project-card {
+          transition: all 0.4s cubic-bezier(0.23, 1, 0.320, 1);
+        }
+        
+        .project-card:hover {
+          transform: translateY(-4px);
+        }
+        
+        .nav-link {
+          transition: all 0.3s ease;
+          position: relative;
+        }
+        
+        .nav-link:hover {
+          opacity: 1 !important;
+        }
+        
+        .nav-link::after {
+          content: '';
+          position: absolute;
+          bottom: -2px;
+          left: 0;
+          width: 0;
+          height: 1px;
+          background: currentColor;
+          transition: width 0.3s ease;
+        }
+        
+        .nav-link:hover::after {
+          width: 100%;
+        }
+      `}</style>
+
       {/* Navigation */}
-      <nav className="sticky top-0 z-50 backdrop-blur-md" 
+      <nav className="sticky top-0 z-50" 
            style={{
-             backgroundColor: isDarkMode ? 'rgba(10, 10, 10, 0.8)' : 'rgba(255, 255, 255, 0.8)',
+             background: isDarkMode 
+               ? 'rgba(10, 10, 10, 0.7)' 
+               : 'rgba(255, 255, 255, 0.5)',
+             backdropFilter: 'blur(10px)',
              borderBottom: `1px solid ${isDarkMode ? 'rgba(255,255,255,0.1)' : 'rgba(0,0,0,0.1)'}`
            }}>
         <div className="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center">
-          <div className="text-xl font-bold tracking-tight">Hoangf</div>
+          <div className="text-xl font-bold tracking-tight" style={{
+            background: 'linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%)',
+            WebkitBackgroundClip: 'text',
+            WebkitTextFillColor: 'transparent',
+            backgroundClip: 'text'
+          }}>
+            Hoangf
+          </div>
           
           <div className="flex items-center gap-8">
-            <div className="hidden md:flex gap-6 text-sm">
-              <a href="#skills" className="opacity-70 hover:opacity-100 transition">{t.nav.skills}</a>
-              <a href="#projects" className="opacity-70 hover:opacity-100 transition">{t.nav.projects}</a>
-              <a href="#contact" className="opacity-70 hover:opacity-100 transition">{t.nav.contact}</a>
+            <div className="hidden md:flex gap-8 text-sm">
+              <a href="#skills" className="nav-link opacity-70">{t.nav.skills}</a>
+              <a href="#projects" className="nav-link opacity-70">{t.nav.projects}</a>
+              <a href="#contact" className="nav-link opacity-70">{t.nav.contact}</a>
             </div>
 
             <div className="flex items-center gap-3 pl-6" style={{borderLeft: `1px solid ${isDarkMode ? 'rgba(255,255,255,0.1)' : 'rgba(0,0,0,0.1)'}`}}>
               <button onClick={() => setIsLang(isLang === 'en' ? 'vi' : 'en')}
-                      className="text-xs font-semibold px-3 py-1 rounded transition"
-                      style={{
-                        backgroundColor: isDarkMode ? 'rgba(255,255,255,0.1)' : 'rgba(0,0,0,0.05)',
-                        opacity: 0.7
-                      }}>
+                      className="text-xs font-semibold px-3 py-1.5 rounded-lg glass-button"
+                      style={glassStyle}>
                 {isLang === 'en' ? 'VI' : 'EN'}
               </button>
 
               <button onClick={() => setIsDark(!isDarkMode)}
-                      className="p-1 rounded transition"
-                      style={{opacity: 0.7}}
-                      title="Toggle theme">
+                      className="p-1.5 rounded-lg glass-button"
+                      style={glassStyle}>
                 {isDarkMode ? <Sun size={18} /> : <Moon size={18} />}
               </button>
             </div>
@@ -185,89 +271,103 @@ const Portfolio = () => {
       </nav>
 
       {/* Hero */}
-      <section className="max-w-6xl mx-auto px-6 py-24 md:py-32">
+      <section className="max-w-6xl mx-auto px-6 py-32">
         <div className="max-w-3xl">
-          <h1 className="text-5xl md:text-6xl font-bold mb-4 leading-tight">
+          <h1 className="text-6xl md:text-7xl font-bold mb-6 leading-tight" style={{
+            background: isDarkMode
+              ? 'linear-gradient(135deg, #ffffff 0%, #a0aec0 100%)'
+              : 'linear-gradient(135deg, #1a1a1a 0%, #4a5568 100%)',
+            WebkitBackgroundClip: 'text',
+            WebkitTextFillColor: 'transparent',
+            backgroundClip: 'text'
+          }}>
             {t.hero.title}
           </h1>
-          <p className="text-lg md:text-xl opacity-70 mb-8">
+          <p className="text-lg md:text-xl opacity-70 mb-10 leading-relaxed">
             {t.hero.subtitle}
           </p>
           <div className="flex gap-4 flex-wrap">
-            <a href="#projects" className="px-6 py-3 rounded-lg font-medium transition"
+            <a href="#projects" className="glass-button px-8 py-4 rounded-xl font-medium"
                style={{
-                 backgroundColor: isDarkMode ? '#3b82f6' : '#2563eb',
-                 color: 'white'
+                 ...glassStyle,
+                 background: 'linear-gradient(135deg, #3b82f6 0%, #2563eb 100%)',
+                 color: 'white',
+                 border: 'none'
                }}>
               {t.hero.cta}
             </a>
             <a href="https://github.com/Hoangnguyenhuu12" target="_blank" rel="noopener noreferrer"
-               className="px-6 py-3 rounded-lg font-medium border transition flex items-center gap-2"
-               style={{
-                 borderColor: isDarkMode ? 'rgba(255,255,255,0.2)' : 'rgba(0,0,0,0.2)',
-                 color: isDarkMode ? '#e5e5e5' : '#1a1a1a'
-               }}>
-              GitHub <ExternalLink size={16} />
+               className="glass-button px-8 py-4 rounded-xl font-medium inline-flex items-center gap-2"
+               style={glassStyle}>
+              GitHub <ArrowUpRight size={18} />
             </a>
           </div>
         </div>
       </section>
 
       {/* About */}
-      <section className="max-w-6xl mx-auto px-6 py-16">
-        <h2 className="text-3xl font-bold mb-8">{t.about.title}</h2>
+      <section className="max-w-6xl mx-auto px-6 py-20">
+        <h2 className="text-4xl font-bold mb-12">{t.about.title}</h2>
         <div className="grid md:grid-cols-2 gap-12">
-          <div>
-            <p className="text-lg opacity-80 leading-relaxed mb-8">
+          <div className="glass-card p-8 rounded-2xl" style={glassStyle}>
+            <p className="text-lg opacity-80 leading-relaxed">
               {t.about.intro}
             </p>
           </div>
 
           <div className="space-y-6">
-            <div>
-              <h3 className="text-sm font-semibold opacity-50 uppercase tracking-wide mb-4">
-                {t.about.experience.title}
-              </h3>
-              
-              {/* Internship */}
-              <div className="mb-8 pl-4" style={{borderLeft: `2px solid rgba(59, 130, 246, 0.5)`}}>
-                <div className="font-semibold">{t.about.experience.internship.role}</div>
-                <div className="text-sm opacity-60 mb-2">
-                  {t.about.experience.internship.company} · {t.about.experience.internship.duration}
-                </div>
-                <div className="text-sm opacity-70">{t.about.experience.internship.desc}</div>
+            <h3 className="text-sm font-semibold opacity-50 uppercase tracking-widest">{t.about.experience.title}</h3>
+            
+            {/* Internship */}
+            <div className="glass-card p-6 rounded-2xl pl-8" style={{
+              ...glassStyle,
+              borderLeft: '3px solid rgb(59, 130, 246)'
+            }}>
+              <div className="font-semibold text-lg">{t.about.experience.internship.role}</div>
+              <div className="text-sm opacity-60 mt-1">
+                {t.about.experience.internship.company} · {t.about.experience.internship.duration}
               </div>
+              <div className="text-sm opacity-70 mt-3">{t.about.experience.internship.desc}</div>
+            </div>
 
-              {/* Education */}
-              <div className="pl-4" style={{borderLeft: `2px solid rgba(59, 130, 246, 0.5)`}}>
-                <div className="font-semibold">{t.about.experience.education.role}</div>
-                <div className="text-sm opacity-60 mb-2">
-                  {t.about.experience.education.company} · {t.about.experience.education.duration}
-                </div>
-                <div className="text-sm opacity-70">{t.about.experience.education.desc}</div>
+            {/* Education */}
+            <div className="glass-card p-6 rounded-2xl pl-8" style={{
+              ...glassStyle,
+              borderLeft: '3px solid rgb(168, 85, 247)'
+            }}>
+              <div className="font-semibold text-lg">{t.about.experience.education.role}</div>
+              <div className="text-sm opacity-60 mt-1">
+                {t.about.experience.education.company} · {t.about.experience.education.duration}
               </div>
+              <div className="text-sm opacity-70 mt-3">{t.about.experience.education.desc}</div>
             </div>
           </div>
         </div>
       </section>
 
       {/* Skills */}
-      <section id="skills" className="max-w-6xl mx-auto px-6 py-16">
-        <h2 className="text-3xl font-bold mb-12">{t.skills.title}</h2>
+      <section id="skills" className="max-w-6xl mx-auto px-6 py-20">
+        <h2 className="text-4xl font-bold mb-12">{t.skills.title}</h2>
         <div className="grid md:grid-cols-3 gap-8">
           {Object.entries(t.skills.categories).map(([key, category]) => (
-            <div key={key} className="p-6 rounded-lg"
-                 style={{
-                   backgroundColor: isDarkMode ? 'rgba(255,255,255,0.05)' : 'rgba(0,0,0,0.02)',
-                   border: `1px solid ${isDarkMode ? 'rgba(255,255,255,0.1)' : 'rgba(0,0,0,0.1)'}`
-                 }}>
-              <h3 className="font-semibold mb-4 text-blue-500">{category.name}</h3>
-              <div className="flex flex-wrap gap-2">
+            <div key={key} className="glass-card p-8 rounded-2xl" style={glassStyle}>
+              <h3 className="font-semibold mb-6 text-lg" style={{
+                background: 'linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%)',
+                WebkitBackgroundClip: 'text',
+                WebkitTextFillColor: 'transparent',
+                backgroundClip: 'text'
+              }}>
+                {category.name}
+              </h3>
+              <div className="flex flex-wrap gap-3">
                 {category.items.map((skill, idx) => (
-                  <span key={idx} className="text-sm px-3 py-1 rounded-full"
+                  <span key={idx} className="skill-badge text-sm px-4 py-2 rounded-full"
                         style={{
-                          backgroundColor: isDarkMode ? 'rgba(255,255,255,0.1)' : 'rgba(0,0,0,0.05)',
-                          color: isDarkMode ? '#e5e5e5' : '#1a1a1a'
+                          background: isDarkMode 
+                            ? 'rgba(59, 130, 246, 0.15)' 
+                            : 'rgba(59, 130, 246, 0.1)',
+                          border: `1px solid ${isDarkMode ? 'rgba(59, 130, 246, 0.3)' : 'rgba(59, 130, 246, 0.2)'}`,
+                          color: isDarkMode ? '#60a5fa' : '#2563eb'
                         }}>
                     {skill}
                   </span>
@@ -279,30 +379,42 @@ const Portfolio = () => {
       </section>
 
       {/* Projects */}
-      <section id="projects" className="max-w-6xl mx-auto px-6 py-16">
-        <h2 className="text-3xl font-bold mb-12">{t.projects.title}</h2>
+      <section id="projects" className="max-w-6xl mx-auto px-6 py-20">
+        <h2 className="text-4xl font-bold mb-12">{t.projects.title}</h2>
         <div className="grid md:grid-cols-2 gap-8">
           {t.projects.items.map((project, idx) => (
-            <div key={idx} className="p-8 rounded-lg border transition hover:border-blue-500"
+            <div key={idx} 
+                 className="project-card p-8 rounded-2xl cursor-pointer"
+                 onMouseEnter={() => setHoveredProject(idx)}
+                 onMouseLeave={() => setHoveredProject(null)}
                  style={{
-                   backgroundColor: isDarkMode ? 'rgba(255,255,255,0.03)' : 'rgba(0,0,0,0.01)',
-                   borderColor: isDarkMode ? 'rgba(255,255,255,0.1)' : 'rgba(0,0,0,0.1)'
+                   ...glassStyle,
+                   background: hoveredProject === idx
+                     ? (isDarkMode ? 'rgba(59, 130, 246, 0.1)' : 'rgba(59, 130, 246, 0.08)')
+                     : glassStyle.background
                  }}>
               <h3 className="text-xl font-bold mb-3">{project.title}</h3>
-              <p className="opacity-75 mb-4 leading-relaxed">{project.desc}</p>
+              <p className="opacity-75 mb-6 leading-relaxed text-sm">{project.desc}</p>
               <div className="flex flex-wrap gap-2 mb-6">
                 {project.tech.map((tech, i) => (
-                  <span key={i} className="text-xs px-3 py-1 rounded-full font-medium"
+                  <span key={i} className="text-xs px-3 py-1.5 rounded-full font-medium"
                         style={{
-                          backgroundColor: isDarkMode ? 'rgba(59, 130, 246, 0.15)' : 'rgba(37, 99, 235, 0.1)',
-                          color: isDarkMode ? '#60a5fa' : '#2563eb'
+                          background: isDarkMode 
+                            ? 'rgba(139, 92, 246, 0.2)' 
+                            : 'rgba(139, 92, 246, 0.15)',
+                          color: isDarkMode ? '#d8b4fe' : '#9333ea',
+                          border: `1px solid ${isDarkMode ? 'rgba(139, 92, 246, 0.3)' : 'rgba(139, 92, 246, 0.2)'}`
                         }}>
                     {tech}
                   </span>
                 ))}
               </div>
-              <a href={project.link} className="inline-flex items-center gap-2 text-blue-500 hover:opacity-70 transition text-sm font-medium">
-                Learn More <ExternalLink size={14} />
+              <a href={project.link} className="inline-flex items-center gap-2 text-blue-500 hover:opacity-70 transition text-sm font-medium group">
+                Learn More 
+                <ArrowUpRight size={14} style={{
+                  transition: 'all 0.3s ease',
+                  transform: hoveredProject === idx ? 'translate(2px, -2px)' : 'translate(0, 0)'
+                }} />
               </a>
             </div>
           ))}
@@ -311,36 +423,34 @@ const Portfolio = () => {
 
       {/* Contact */}
       <section id="contact" className="max-w-6xl mx-auto px-6 py-20">
-        <div className="max-w-2xl">
-          <h2 className="text-3xl font-bold mb-4">{t.contact.title}</h2>
-          <p className="opacity-70 mb-8">{t.contact.subtitle}</p>
+        <div className="glass-card p-12 rounded-3xl" style={glassStyle}>
+          <h2 className="text-4xl font-bold mb-4">{t.contact.title}</h2>
+          <p className="opacity-70 mb-10 text-lg">{t.contact.subtitle}</p>
           
           <div className="flex gap-4 flex-wrap">
             <a href="mailto:nguyenhuuhoang5038@gmail.com"
-               className="px-6 py-3 rounded-lg font-medium border transition flex items-center gap-2"
-               style={{
-                 borderColor: isDarkMode ? 'rgba(255,255,255,0.2)' : 'rgba(0,0,0,0.2)',
-                 color: isDarkMode ? '#e5e5e5' : '#1a1a1a',
-                 backgroundColor: isDarkMode ? 'rgba(255,255,255,0.05)' : 'rgba(0,0,0,0.02)'
-               }}>
-              <Mail size={18} /> {t.contact.email}
+               className="glass-button px-8 py-4 rounded-xl font-medium inline-flex items-center gap-2"
+               style={glassStyle}>
+              <Mail size={20} /> {t.contact.email}
             </a>
             <a href="https://github.com/Hoangnguyenhuu12" target="_blank" rel="noopener noreferrer"
-               className="px-6 py-3 rounded-lg font-medium transition flex items-center gap-2"
+               className="glass-button px-8 py-4 rounded-xl font-medium inline-flex items-center gap-2"
                style={{
-                 backgroundColor: isDarkMode ? '#3b82f6' : '#2563eb',
-                 color: 'white'
+                 ...glassStyle,
+                 background: 'linear-gradient(135deg, #3b82f6 0%, #2563eb 100%)',
+                 color: 'white',
+                 border: 'none'
                }}>
-              <Github size={18} /> {t.contact.github}
+              <Github size={20} /> {t.contact.github}
             </a>
           </div>
         </div>
       </section>
 
       {/* Footer */}
-      <section className="max-w-6xl mx-auto px-6 py-8 mt-12 border-t"
+      <section className="max-w-6xl mx-auto px-6 py-12 mt-8 border-t"
                style={{borderColor: isDarkMode ? 'rgba(255,255,255,0.1)' : 'rgba(0,0,0,0.1)'}}>
-        <p className="text-sm opacity-50 text-center">
+        <p className="text-sm opacity-40 text-center">
           © 2024 Nguyen Huu Hoang. Designed with focus on clarity and impact.
         </p>
       </section>
