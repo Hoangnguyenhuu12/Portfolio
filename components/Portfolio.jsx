@@ -183,7 +183,7 @@ const Portfolio = () => {
         
         .glass-button:hover {
           transform: translateY(-2px);
-          box-shadow: 0 8px 24px rgba(59, 130, 246, 0.3);
+          box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
         }
         
         .skill-badge {
@@ -238,7 +238,7 @@ const Portfolio = () => {
            }}>
         <div className="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center">
           <div className="text-xl font-bold tracking-tight" style={{
-            color: '#3b82f6'
+            color: isDarkMode ? '#ffffff' : '#000000'
           }}>
             Hoangf
           </div>
@@ -280,8 +280,8 @@ const Portfolio = () => {
             <a href="#projects" className="glass-button px-8 py-4 rounded-xl font-medium"
                style={{
                  ...glassStyle,
-                 background: '#3b82f6',
-                 color: 'white',
+                 background: isDarkMode ? '#ffffff' : '#000000',
+                 color: isDarkMode ? '#000000' : '#ffffff',
                  border: 'none'
                }}>
               {t.hero.cta}
@@ -342,7 +342,7 @@ const Portfolio = () => {
           {Object.entries(t.skills.categories).map(([key, category]) => (
             <div key={key} className="glass-card p-8 rounded-2xl" style={glassStyle}>
               <h3 className="font-semibold mb-6 text-lg" style={{
-                color: '#3b82f6'
+                color: isDarkMode ? '#ffffff' : '#000000'
               }}>
                 {category.name}
               </h3>
@@ -424,8 +424,8 @@ const Portfolio = () => {
                className="glass-button px-8 py-4 rounded-xl font-medium inline-flex items-center gap-2"
                style={{
                  ...glassStyle,
-                 background: '#3b82f6',
-                 color: 'white',
+                 background: isDarkMode ? '#ffffff' : '#000000',
+                 color: isDarkMode ? '#000000' : '#ffffff',
                  border: 'none'
                }}>
               <Github size={20} /> {t.contact.github}
