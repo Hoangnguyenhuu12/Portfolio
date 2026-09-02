@@ -351,10 +351,10 @@ const Portfolio = () => {
                   <span key={idx} className="skill-badge text-sm px-4 py-2 rounded-full"
                         style={{
                           background: isDarkMode 
-                            ? 'rgba(59, 130, 246, 0.15)' 
-                            : 'rgba(59, 130, 246, 0.1)',
-                          border: `1px solid ${isDarkMode ? 'rgba(59, 130, 246, 0.3)' : 'rgba(59, 130, 246, 0.2)'}`,
-                          color: isDarkMode ? '#60a5fa' : '#2563eb'
+                            ? 'rgba(255, 255, 255, 0.08)' 
+                            : 'rgba(0, 0, 0, 0.04)',
+                          border: `1px solid ${isDarkMode ? 'rgba(255, 255, 255, 0.15)' : 'rgba(0, 0, 0, 0.08)'}`,
+                          color: isDarkMode ? 'rgba(255, 255, 255, 0.7)' : 'rgba(0, 0, 0, 0.6)'
                         }}>
                     {skill}
                   </span>
@@ -377,7 +377,7 @@ const Portfolio = () => {
                  style={{
                    ...glassStyle,
                    background: hoveredProject === idx
-                     ? (isDarkMode ? 'rgba(59, 130, 246, 0.1)' : 'rgba(59, 130, 246, 0.08)')
+                     ? (isDarkMode ? 'rgba(255, 255, 255, 0.08)' : 'rgba(0, 0, 0, 0.04)')
                      : glassStyle.background
                  }}>
               <h3 className="text-xl font-bold mb-3">{project.title}</h3>
@@ -387,10 +387,10 @@ const Portfolio = () => {
                   <span key={i} className="text-xs px-3 py-1.5 rounded-full font-medium"
                         style={{
                           background: isDarkMode 
-                            ? 'rgba(139, 92, 246, 0.2)' 
-                            : 'rgba(139, 92, 246, 0.15)',
-                          color: isDarkMode ? '#d8b4fe' : '#9333ea',
-                          border: `1px solid ${isDarkMode ? 'rgba(139, 92, 246, 0.3)' : 'rgba(139, 92, 246, 0.2)'}`
+                            ? 'rgba(255, 255, 255, 0.08)' 
+                            : 'rgba(0, 0, 0, 0.04)',
+                          color: isDarkMode ? 'rgba(255, 255, 255, 0.7)' : 'rgba(0, 0, 0, 0.6)',
+                          border: `1px solid ${isDarkMode ? 'rgba(255, 255, 255, 0.15)' : 'rgba(0, 0, 0, 0.08)'}`
                         }}>
                     {tech}
                   </span>
