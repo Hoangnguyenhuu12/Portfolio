@@ -238,10 +238,7 @@ const Portfolio = () => {
            }}>
         <div className="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center">
           <div className="text-xl font-bold tracking-tight" style={{
-            background: 'linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%)',
-            WebkitBackgroundClip: 'text',
-            WebkitTextFillColor: 'transparent',
-            backgroundClip: 'text'
+            color: '#3b82f6'
           }}>
             Hoangf
           </div>
@@ -273,14 +270,7 @@ const Portfolio = () => {
       {/* Hero */}
       <section className="max-w-6xl mx-auto px-6 py-32">
         <div className="max-w-3xl">
-          <h1 className="text-6xl md:text-7xl font-bold mb-6 leading-tight" style={{
-            background: isDarkMode
-              ? 'linear-gradient(135deg, #ffffff 0%, #a0aec0 100%)'
-              : 'linear-gradient(135deg, #1a1a1a 0%, #4a5568 100%)',
-            WebkitBackgroundClip: 'text',
-            WebkitTextFillColor: 'transparent',
-            backgroundClip: 'text'
-          }}>
+          <h1 className="text-6xl md:text-7xl font-bold mb-6 leading-tight">
             {t.hero.title}
           </h1>
           <p className="text-lg md:text-xl opacity-70 mb-10 leading-relaxed">
@@ -290,7 +280,7 @@ const Portfolio = () => {
             <a href="#projects" className="glass-button px-8 py-4 rounded-xl font-medium"
                style={{
                  ...glassStyle,
-                 background: 'linear-gradient(135deg, #3b82f6 0%, #2563eb 100%)',
+                 background: '#3b82f6',
                  color: 'white',
                  border: 'none'
                }}>
@@ -352,10 +342,7 @@ const Portfolio = () => {
           {Object.entries(t.skills.categories).map(([key, category]) => (
             <div key={key} className="glass-card p-8 rounded-2xl" style={glassStyle}>
               <h3 className="font-semibold mb-6 text-lg" style={{
-                background: 'linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%)',
-                WebkitBackgroundClip: 'text',
-                WebkitTextFillColor: 'transparent',
-                backgroundClip: 'text'
+                color: '#3b82f6'
               }}>
                 {category.name}
               </h3>
@@ -437,7 +424,7 @@ const Portfolio = () => {
                className="glass-button px-8 py-4 rounded-xl font-medium inline-flex items-center gap-2"
                style={{
                  ...glassStyle,
-                 background: 'linear-gradient(135deg, #3b82f6 0%, #2563eb 100%)',
+                 background: '#3b82f6',
                  color: 'white',
                  border: 'none'
                }}>
