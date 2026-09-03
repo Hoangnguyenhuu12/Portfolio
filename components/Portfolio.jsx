@@ -291,24 +291,38 @@ const Portfolio = () => {
           </div>
         </nav>
 
-        {/* Hero Content Section - below hero */}
+        {/* Hero Content - Building Intelligence */}
         <section className="max-w-6xl mx-auto px-6 py-20">
-          <div className="text-center max-w-3xl mx-auto">
+          <div className="max-w-2xl">
             <h2 className="text-4xl md:text-5xl font-bold mb-4">{t.hero.title}</h2>
             <p className="text-lg md:text-xl opacity-70 mb-10">{t.hero.subtitle}</p>
-            <div className="flex gap-4 justify-center flex-wrap">
+            <div className="flex gap-4 flex-wrap">
               <a href="#projects" className="glass-button px-8 py-4 rounded-xl font-medium"
                  style={{
                    ...glassStyle,
                    background: isDarkMode ? '#ffffff' : '#000000',
                    color: isDarkMode ? '#000000' : '#ffffff',
-                   border: 'none'
+                   border: 'none',
+                   transition: 'all 0.3s cubic-bezier(0.23, 1, 0.320, 1)'
+                 }}
+                 onMouseEnter={(e) => {
+                   e.currentTarget.style.background = isDarkMode ? '#000000' : '#ffffff';
+                   e.currentTarget.style.color = isDarkMode ? '#ffffff' : '#000000';
+                   e.currentTarget.style.transform = 'translateY(-2px)';
+                 }}
+                 onMouseLeave={(e) => {
+                   e.currentTarget.style.background = isDarkMode ? '#ffffff' : '#000000';
+                   e.currentTarget.style.color = isDarkMode ? '#000000' : '#ffffff';
+                   e.currentTarget.style.transform = 'translateY(0)';
                  }}>
                 {t.hero.cta}
               </a>
               <a href="https://github.com/Hoangnguyenhuu12" target="_blank" rel="noopener noreferrer"
                  className="glass-button px-8 py-4 rounded-xl font-medium inline-flex items-center gap-2"
-                 style={glassStyle}
+                 style={{
+                   ...glassStyle,
+                   transition: 'all 0.3s cubic-bezier(0.23, 1, 0.320, 1)'
+                 }}
                  onMouseEnter={(e) => {
                    e.currentTarget.style.background = isDarkMode ? '#ffffff' : '#000000';
                    e.currentTarget.style.color = isDarkMode ? '#000000' : '#ffffff';
