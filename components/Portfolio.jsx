@@ -152,7 +152,7 @@ const Portfolio = () => {
     backdropFilter: 'blur(10px)',
     border: `1px solid ${isDarkMode ? 'rgba(255,255,255,0.15)' : 'rgba(255,255,255,0.3)'}`,
     boxShadow: isDarkMode
-      ? '0 8px 32px 0 rgba(0, 0, 0, 0.3)'
+      ? '0 8px 32px 0 rgba(255, 255, 255, 0.08)'
       : '0 8px 32px 0 rgba(0, 0, 0, 0.1)'
   };
 
@@ -170,12 +170,12 @@ const Portfolio = () => {
         
         .glass-card:hover {
           transform: translateY(-2px);
-          ${isDarkMode 
-            ? 'background: rgba(255, 255, 255, 0.08) !important;' 
-            : 'background: rgba(255, 255, 255, 0.8) !important;'}
+          background: ${isDarkMode 
+            ? 'rgba(255, 255, 255, 0.12)' 
+            : 'rgba(255, 255, 255, 0.8)'} !important;
           box-shadow: ${isDarkMode
-            ? '0 12px 48px 0 rgba(0, 0, 0, 0.4) !important;'
-            : '0 12px 48px 0 rgba(0, 0, 0, 0.15) !important;'}
+            ? '0 12px 48px 0 rgba(255, 255, 255, 0.15)'
+            : '0 12px 48px 0 rgba(0, 0, 0, 0.15)'} !important;
         }
         
         .glass-button {
@@ -184,7 +184,9 @@ const Portfolio = () => {
         
         .glass-button:hover {
           transform: translateY(-2px);
-          box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+          box-shadow: ${isDarkMode 
+            ? '0 8px 24px rgba(255, 255, 255, 0.2)'
+            : '0 8px 24px rgba(0, 0, 0, 0.15)'} !important;
         }
         
         .skill-badge {
@@ -193,6 +195,9 @@ const Portfolio = () => {
         
         .skill-badge:hover {
           transform: scale(1.05) translateY(-2px);
+          background: ${isDarkMode 
+            ? 'rgba(255, 255, 255, 0.15)'
+            : 'rgba(0, 0, 0, 0.08)'} !important;
         }
         
         .project-card {
