@@ -4,12 +4,19 @@ import { Mail, Github, ExternalLink, Moon, Sun, ArrowUpRight } from 'lucide-reac
 const Portfolio = () => {
   const [isDark, setIsDark] = useState(false);
   const [isLang, setIsLang] = useState('en');
+  const [scrollY, setScrollY] = useState(0);
   const [hoveredProject, setHoveredProject] = useState(null);
 
   useEffect(() => {
     if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
       setIsDark(true);
     }
+  }, []);
+
+  useEffect(() => {
+    const handleScroll = () => setScrollY(window.scrollY);
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
   const content = {
@@ -134,6 +141,10 @@ const Portfolio = () => {
   const t = content[isLang];
   const isDarkMode = isDark;
 
+  // Calculate hero opacity based on scroll
+  const heroOpacity = Math.max(0, 1 - scrollY / 500);
+  const heroScale = Math.max(0.95, 1 - scrollY / 2000);
+
   const glassStyle = {
     background: isDarkMode 
       ? 'rgba(255, 255, 255, 0.05)' 
@@ -153,11 +164,6 @@ const Portfolio = () => {
          }}>
       
       <style>{`
-        @keyframes subtle-float {
-          0%, 100% { transform: translateY(0px); }
-          50% { transform: translateY(-4px); }
-        }
-        
         .glass-card {
           transition: all 0.3s cubic-bezier(0.23, 1, 0.320, 1);
         }
@@ -222,45 +228,50 @@ const Portfolio = () => {
         }
       `}</style>
 
-      {/* Sticky Footer */}
-      <div className="sticky z-0 bottom-0 left-0 w-full"
+      {/* Full Screen Hero - Sticky with fade out on scroll */}
+      <div className="fixed inset-0 z-0 flex flex-col items-center justify-center pointer-events-none"
            style={{
-             height: '300px',
-             background: isDarkMode ? '#ffffff' : '#000000',
-             display: 'flex',
-             justifyContent: 'center',
-             alignItems: 'center'
+             backgroundColor: isDarkMode ? '#000000' : '#ffffff',
+             color: isDarkMode ? '#ffffff' : '#000000',
+             opacity: heroOpacity,
+             transform: `scale(${heroScale})`,
+             transition: 'opacity 0.1s linear, transform 0.1s linear',
+             pointerEvents: heroOpacity > 0 ? 'auto' : 'none'
            }}>
-        <div className="relative w-full h-full flex justify-end px-12 items-center"
-             style={{
-               color: isDarkMode ? '#000000' : '#ffffff'
-             }}>
-          <h2 className="absolute left-12 text-7xl md:text-9xl font-bold opacity-10 select-none"
-              style={{
-                letterSpacing: '2px'
-              }}>
-            Hoang's Portfolio
-          </h2>
-          
-          <div className="relative flex gap-12">
-            <div className="flex flex-col gap-4 text-sm md:text-base">
-              <a href="#skills" className="opacity-80 hover:opacity-100 transition">Skills</a>
-              <a href="#projects" className="opacity-80 hover:opacity-100 transition">Projects</a>
-              <a href="#contact" className="opacity-80 hover:opacity-100 transition">Contact</a>
-            </div>
-            <div className="flex flex-col gap-4 text-sm md:text-base">
-              <a href="https://github.com/Hoangnguyenhuu12" target="_blank" rel="noopener noreferrer" className="opacity-80 hover:opacity-100 transition">GitHub</a>
-              <a href="mailto:nguyenhuuhoang5038@gmail.com" className="opacity-80 hover:opacity-100 transition">Email</a>
-              <a href="#" className="opacity-80 hover:opacity-100 transition">LinkedIn</a>
-            </div>
+        <div className="text-center max-w-3xl px-6">
+          <h1 className="text-7xl md:text-8xl font-bold mb-4 leading-tight">
+            {t.hero.title}
+          </h1>
+          <p className="text-lg md:text-2xl opacity-70 mb-10">
+            {t.hero.subtitle}
+          </p>
+          <div className="flex gap-4 justify-center flex-wrap">
+            <a href="#projects" className="glass-button px-8 py-4 rounded-xl font-medium"
+               style={{
+                 ...glassStyle,
+                 background: isDarkMode ? '#ffffff' : '#000000',
+                 color: isDarkMode ? '#000000' : '#ffffff',
+                 border: 'none',
+                 pointerEvents: 'auto'
+               }}>
+              {t.hero.cta}
+            </a>
+            <a href="https://github.com/Hoangnguyenhuu12" target="_blank" rel="noopener noreferrer"
+               className="glass-button px-8 py-4 rounded-xl font-medium inline-flex items-center gap-2"
+               style={{
+                 ...glassStyle,
+                 pointerEvents: 'auto'
+               }}>
+              GitHub <ArrowUpRight size={18} />
+            </a>
           </div>
         </div>
       </div>
 
-      {/* Main Content - sits on top of sticky footer */}
-      <div className="relative z-10"
+      {/* Main Content - appears as you scroll */}
+      <div className="relative z-10 pt-screen"
            style={{
-             minHeight: '100vh'
+             paddingTop: '100vh'
            }}>
         
         {/* Navigation */}
@@ -302,34 +313,6 @@ const Portfolio = () => {
             </div>
           </div>
         </nav>
-
-        {/* Hero */}
-        <section className="max-w-6xl mx-auto px-6 py-32">
-          <div className="max-w-3xl">
-            <h1 className="text-6xl md:text-7xl font-bold mb-6 leading-tight">
-              {t.hero.title}
-            </h1>
-            <p className="text-lg md:text-xl opacity-70 mb-10 leading-relaxed">
-              {t.hero.subtitle}
-            </p>
-            <div className="flex gap-4 flex-wrap">
-              <a href="#projects" className="glass-button px-8 py-4 rounded-xl font-medium"
-                 style={{
-                   ...glassStyle,
-                   background: isDarkMode ? '#ffffff' : '#000000',
-                   color: isDarkMode ? '#000000' : '#ffffff',
-                   border: 'none'
-                 }}>
-                {t.hero.cta}
-              </a>
-              <a href="https://github.com/Hoangnguyenhuu12" target="_blank" rel="noopener noreferrer"
-                 className="glass-button px-8 py-4 rounded-xl font-medium inline-flex items-center gap-2"
-                 style={glassStyle}>
-                GitHub <ArrowUpRight size={18} />
-              </a>
-            </div>
-          </div>
-        </section>
 
         {/* About */}
         <section className="max-w-6xl mx-auto px-6 py-20">
