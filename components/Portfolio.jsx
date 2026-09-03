@@ -146,7 +146,7 @@ const Portfolio = () => {
   };
 
   return (
-    <div className={`${isDarkMode ? 'dark' : 'light'} min-h-screen transition-colors duration-500`}
+    <div className={`${isDarkMode ? 'dark' : 'light'}`}
          style={{
            backgroundColor: isDarkMode ? '#0a0a0a' : '#f9f9f9',
            color: isDarkMode ? '#e5e5e5' : '#1a1a1a'
@@ -156,11 +156,6 @@ const Portfolio = () => {
         @keyframes subtle-float {
           0%, 100% { transform: translateY(0px); }
           50% { transform: translateY(-4px); }
-        }
-        
-        @keyframes glow-pulse {
-          0%, 100% { opacity: 1; }
-          50% { opacity: 0.8; }
         }
         
         .glass-card {
@@ -227,220 +222,260 @@ const Portfolio = () => {
         }
       `}</style>
 
-      {/* Navigation */}
-      <nav className="sticky top-0 z-50" 
+      {/* Sticky Footer */}
+      <div className="sticky z-0 bottom-0 left-0 w-full"
            style={{
-             background: isDarkMode 
-               ? 'rgba(10, 10, 10, 0.7)' 
-               : 'rgba(255, 255, 255, 0.5)',
-             backdropFilter: 'blur(10px)',
-             borderBottom: `1px solid ${isDarkMode ? 'rgba(255,255,255,0.1)' : 'rgba(0,0,0,0.1)'}`
+             height: '300px',
+             background: isDarkMode ? '#ffffff' : '#000000',
+             display: 'flex',
+             justifyContent: 'center',
+             alignItems: 'center'
            }}>
-        <div className="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center">
-          <div className="text-xl font-bold tracking-tight" style={{
-            color: isDarkMode ? '#ffffff' : '#000000'
-          }}>
-            Hoangf
-          </div>
-          
-          <div className="flex items-center gap-8">
-            <div className="hidden md:flex gap-8 text-sm">
-              <a href="#skills" className="nav-link opacity-70">{t.nav.skills}</a>
-              <a href="#projects" className="nav-link opacity-70">{t.nav.projects}</a>
-              <a href="#contact" className="nav-link opacity-70">{t.nav.contact}</a>
-            </div>
-
-            <div className="flex items-center gap-3 pl-6" style={{borderLeft: `1px solid ${isDarkMode ? 'rgba(255,255,255,0.1)' : 'rgba(0,0,0,0.1)'}`}}>
-              <button onClick={() => setIsLang(isLang === 'en' ? 'vi' : 'en')}
-                      className="text-xs font-semibold px-3 py-1.5 rounded-lg glass-button"
-                      style={glassStyle}>
-                {isLang === 'en' ? 'VI' : 'EN'}
-              </button>
-
-              <button onClick={() => setIsDark(!isDarkMode)}
-                      className="p-1.5 rounded-lg glass-button"
-                      style={glassStyle}>
-                {isDarkMode ? <Sun size={18} /> : <Moon size={18} />}
-              </button>
-            </div>
-          </div>
-        </div>
-      </nav>
-
-      {/* Hero */}
-      <section className="max-w-6xl mx-auto px-6 py-32">
-        <div className="max-w-3xl">
-          <h1 className="text-6xl md:text-7xl font-bold mb-6 leading-tight">
-            {t.hero.title}
-          </h1>
-          <p className="text-lg md:text-xl opacity-70 mb-10 leading-relaxed">
-            {t.hero.subtitle}
-          </p>
-          <div className="flex gap-4 flex-wrap">
-            <a href="#projects" className="glass-button px-8 py-4 rounded-xl font-medium"
-               style={{
-                 ...glassStyle,
-                 background: isDarkMode ? '#ffffff' : '#000000',
-                 color: isDarkMode ? '#000000' : '#ffffff',
-                 border: 'none'
-               }}>
-              {t.hero.cta}
-            </a>
-            <a href="https://github.com/Hoangnguyenhuu12" target="_blank" rel="noopener noreferrer"
-               className="glass-button px-8 py-4 rounded-xl font-medium inline-flex items-center gap-2"
-               style={glassStyle}>
-              GitHub <ArrowUpRight size={18} />
-            </a>
-          </div>
-        </div>
-      </section>
-
-      {/* About */}
-      <section className="max-w-6xl mx-auto px-6 py-20">
-        <h2 className="text-4xl font-bold mb-12">{t.about.title}</h2>
-        <div className="grid md:grid-cols-2 gap-12">
-          <div className="glass-card p-8 rounded-2xl" style={glassStyle}>
-            <p className="text-lg opacity-80 leading-relaxed">
-              {t.about.intro}
-            </p>
-          </div>
-
-          <div className="space-y-6">
-            <h3 className="text-sm font-semibold opacity-50 uppercase tracking-widest">{t.about.experience.title}</h3>
-            
-            {/* Internship */}
-            <div className="glass-card p-6 rounded-2xl pl-8" style={{
-              ...glassStyle,
-              borderLeft: '3px solid rgb(59, 130, 246)'
-            }}>
-              <div className="font-semibold text-lg">{t.about.experience.internship.role}</div>
-              <div className="text-sm opacity-60 mt-1">
-                {t.about.experience.internship.company} · {t.about.experience.internship.duration}
-              </div>
-              <div className="text-sm opacity-70 mt-3">{t.about.experience.internship.desc}</div>
-            </div>
-
-            {/* Education */}
-            <div className="glass-card p-6 rounded-2xl pl-8" style={{
-              ...glassStyle,
-              borderLeft: '3px solid rgb(168, 85, 247)'
-            }}>
-              <div className="font-semibold text-lg">{t.about.experience.education.role}</div>
-              <div className="text-sm opacity-60 mt-1">
-                {t.about.experience.education.company} · {t.about.experience.education.duration}
-              </div>
-              <div className="text-sm opacity-70 mt-3">{t.about.experience.education.desc}</div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Skills */}
-      <section id="skills" className="max-w-6xl mx-auto px-6 py-20">
-        <h2 className="text-4xl font-bold mb-12">{t.skills.title}</h2>
-        <div className="grid md:grid-cols-3 gap-8">
-          {Object.entries(t.skills.categories).map(([key, category]) => (
-            <div key={key} className="glass-card p-8 rounded-2xl" style={glassStyle}>
-              <h3 className="font-semibold mb-6 text-lg" style={{
-                color: isDarkMode ? '#ffffff' : '#000000'
+        <div className="relative w-full h-full flex justify-end px-12 items-center"
+             style={{
+               color: isDarkMode ? '#000000' : '#ffffff'
+             }}>
+          <h2 className="absolute left-12 text-7xl md:text-9xl font-bold opacity-10 select-none"
+              style={{
+                letterSpacing: '2px'
               }}>
-                {category.name}
-              </h3>
-              <div className="flex flex-wrap gap-3">
-                {category.items.map((skill, idx) => (
-                  <span key={idx} className="skill-badge text-sm px-4 py-2 rounded-full"
-                        style={{
-                          background: isDarkMode 
-                            ? 'rgba(255, 255, 255, 0.08)' 
-                            : 'rgba(0, 0, 0, 0.04)',
-                          border: `1px solid ${isDarkMode ? 'rgba(255, 255, 255, 0.15)' : 'rgba(0, 0, 0, 0.08)'}`,
-                          color: isDarkMode ? 'rgba(255, 255, 255, 0.7)' : 'rgba(0, 0, 0, 0.6)'
-                        }}>
-                    {skill}
-                  </span>
-                ))}
+            Hoang's Portfolio
+          </h2>
+          
+          <div className="relative flex gap-12">
+            <div className="flex flex-col gap-4 text-sm md:text-base">
+              <a href="#skills" className="opacity-80 hover:opacity-100 transition">Skills</a>
+              <a href="#projects" className="opacity-80 hover:opacity-100 transition">Projects</a>
+              <a href="#contact" className="opacity-80 hover:opacity-100 transition">Contact</a>
+            </div>
+            <div className="flex flex-col gap-4 text-sm md:text-base">
+              <a href="https://github.com/Hoangnguyenhuu12" target="_blank" rel="noopener noreferrer" className="opacity-80 hover:opacity-100 transition">GitHub</a>
+              <a href="mailto:nguyenhuuhoang5038@gmail.com" className="opacity-80 hover:opacity-100 transition">Email</a>
+              <a href="#" className="opacity-80 hover:opacity-100 transition">LinkedIn</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Main Content - sits on top of sticky footer */}
+      <div className="relative z-10"
+           style={{
+             minHeight: '100vh'
+           }}>
+        
+        {/* Navigation */}
+        <nav className="sticky top-0 z-50" 
+             style={{
+               background: isDarkMode 
+                 ? 'rgba(10, 10, 10, 0.7)' 
+                 : 'rgba(255, 255, 255, 0.5)',
+               backdropFilter: 'blur(10px)',
+               borderBottom: `1px solid ${isDarkMode ? 'rgba(255,255,255,0.1)' : 'rgba(0,0,0,0.1)'}`
+             }}>
+          <div className="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center">
+            <div className="text-xl font-bold tracking-tight" style={{
+              color: isDarkMode ? '#ffffff' : '#000000'
+            }}>
+              Hoangf
+            </div>
+            
+            <div className="flex items-center gap-8">
+              <div className="hidden md:flex gap-8 text-sm">
+                <a href="#skills" className="nav-link opacity-70">{t.nav.skills}</a>
+                <a href="#projects" className="nav-link opacity-70">{t.nav.projects}</a>
+                <a href="#contact" className="nav-link opacity-70">{t.nav.contact}</a>
+              </div>
+
+              <div className="flex items-center gap-3 pl-6" style={{borderLeft: `1px solid ${isDarkMode ? 'rgba(255,255,255,0.1)' : 'rgba(0,0,0,0.1)'}`}}>
+                <button onClick={() => setIsLang(isLang === 'en' ? 'vi' : 'en')}
+                        className="text-xs font-semibold px-3 py-1.5 rounded-lg glass-button"
+                        style={glassStyle}>
+                  {isLang === 'en' ? 'VI' : 'EN'}
+                </button>
+
+                <button onClick={() => setIsDark(!isDarkMode)}
+                        className="p-1.5 rounded-lg glass-button"
+                        style={glassStyle}>
+                  {isDarkMode ? <Sun size={18} /> : <Moon size={18} />}
+                </button>
               </div>
             </div>
-          ))}
-        </div>
-      </section>
+          </div>
+        </nav>
 
-      {/* Projects */}
-      <section id="projects" className="max-w-6xl mx-auto px-6 py-20">
-        <h2 className="text-4xl font-bold mb-12">{t.projects.title}</h2>
-        <div className="grid md:grid-cols-2 gap-8">
-          {t.projects.items.map((project, idx) => (
-            <div key={idx} 
-                 className="project-card p-8 rounded-2xl cursor-pointer"
-                 onMouseEnter={() => setHoveredProject(idx)}
-                 onMouseLeave={() => setHoveredProject(null)}
+        {/* Hero */}
+        <section className="max-w-6xl mx-auto px-6 py-32">
+          <div className="max-w-3xl">
+            <h1 className="text-6xl md:text-7xl font-bold mb-6 leading-tight">
+              {t.hero.title}
+            </h1>
+            <p className="text-lg md:text-xl opacity-70 mb-10 leading-relaxed">
+              {t.hero.subtitle}
+            </p>
+            <div className="flex gap-4 flex-wrap">
+              <a href="#projects" className="glass-button px-8 py-4 rounded-xl font-medium"
                  style={{
                    ...glassStyle,
-                   background: hoveredProject === idx
-                     ? (isDarkMode ? 'rgba(255, 255, 255, 0.08)' : 'rgba(0, 0, 0, 0.04)')
-                     : glassStyle.background
+                   background: isDarkMode ? '#ffffff' : '#000000',
+                   color: isDarkMode ? '#000000' : '#ffffff',
+                   border: 'none'
                  }}>
-              <h3 className="text-xl font-bold mb-3">{project.title}</h3>
-              <p className="opacity-75 mb-6 leading-relaxed text-sm">{project.desc}</p>
-              <div className="flex flex-wrap gap-2 mb-6">
-                {project.tech.map((tech, i) => (
-                  <span key={i} className="text-xs px-3 py-1.5 rounded-full font-medium"
-                        style={{
-                          background: isDarkMode 
-                            ? 'rgba(255, 255, 255, 0.08)' 
-                            : 'rgba(0, 0, 0, 0.04)',
-                          color: isDarkMode ? 'rgba(255, 255, 255, 0.7)' : 'rgba(0, 0, 0, 0.6)',
-                          border: `1px solid ${isDarkMode ? 'rgba(255, 255, 255, 0.15)' : 'rgba(0, 0, 0, 0.08)'}`
-                        }}>
-                    {tech}
-                  </span>
-                ))}
-              </div>
-              <a href={project.link} className="inline-flex items-center gap-2 text-blue-500 hover:opacity-70 transition text-sm font-medium group">
-                Learn More 
-                <ArrowUpRight size={14} style={{
-                  transition: 'all 0.3s ease',
-                  transform: hoveredProject === idx ? 'translate(2px, -2px)' : 'translate(0, 0)'
-                }} />
+                {t.hero.cta}
+              </a>
+              <a href="https://github.com/Hoangnguyenhuu12" target="_blank" rel="noopener noreferrer"
+                 className="glass-button px-8 py-4 rounded-xl font-medium inline-flex items-center gap-2"
+                 style={glassStyle}>
+                GitHub <ArrowUpRight size={18} />
               </a>
             </div>
-          ))}
-        </div>
-      </section>
-
-      {/* Contact */}
-      <section id="contact" className="max-w-6xl mx-auto px-6 py-20">
-        <div className="glass-card p-12 rounded-3xl" style={glassStyle}>
-          <h2 className="text-4xl font-bold mb-4">{t.contact.title}</h2>
-          <p className="opacity-70 mb-10 text-lg">{t.contact.subtitle}</p>
-          
-          <div className="flex gap-4 flex-wrap">
-            <a href="mailto:nguyenhuuhoang5038@gmail.com"
-               className="glass-button px-8 py-4 rounded-xl font-medium inline-flex items-center gap-2"
-               style={glassStyle}>
-              <Mail size={20} /> {t.contact.email}
-            </a>
-            <a href="https://github.com/Hoangnguyenhuu12" target="_blank" rel="noopener noreferrer"
-               className="glass-button px-8 py-4 rounded-xl font-medium inline-flex items-center gap-2"
-               style={{
-                 ...glassStyle,
-                 background: isDarkMode ? '#ffffff' : '#000000',
-                 color: isDarkMode ? '#000000' : '#ffffff',
-                 border: 'none'
-               }}>
-              <Github size={20} /> {t.contact.github}
-            </a>
           </div>
-        </div>
-      </section>
+        </section>
 
-      {/* Footer */}
-      <section className="max-w-6xl mx-auto px-6 py-12 mt-8 border-t"
-               style={{borderColor: isDarkMode ? 'rgba(255,255,255,0.1)' : 'rgba(0,0,0,0.1)'}}>
-        <p className="text-sm opacity-40 text-center">
-          © 2024 Nguyen Huu Hoang. Designed with focus on clarity and impact.
-        </p>
-      </section>
+        {/* About */}
+        <section className="max-w-6xl mx-auto px-6 py-20">
+          <h2 className="text-4xl font-bold mb-12">{t.about.title}</h2>
+          <div className="grid md:grid-cols-2 gap-12">
+            <div className="glass-card p-8 rounded-2xl" style={glassStyle}>
+              <p className="text-lg opacity-80 leading-relaxed">
+                {t.about.intro}
+              </p>
+            </div>
+
+            <div className="space-y-6">
+              <h3 className="text-sm font-semibold opacity-50 uppercase tracking-widest">{t.about.experience.title}</h3>
+              
+              <div className="glass-card p-6 rounded-2xl pl-8" style={{
+                ...glassStyle,
+                borderLeft: `3px solid ${isDarkMode ? '#ffffff' : '#000000'}`
+              }}>
+                <div className="font-semibold text-lg">{t.about.experience.internship.role}</div>
+                <div className="text-sm opacity-60 mt-1">
+                  {t.about.experience.internship.company} · {t.about.experience.internship.duration}
+                </div>
+                <div className="text-sm opacity-70 mt-3">{t.about.experience.internship.desc}</div>
+              </div>
+
+              <div className="glass-card p-6 rounded-2xl pl-8" style={{
+                ...glassStyle,
+                borderLeft: `3px solid ${isDarkMode ? '#ffffff' : '#000000'}`
+              }}>
+                <div className="font-semibold text-lg">{t.about.experience.education.role}</div>
+                <div className="text-sm opacity-60 mt-1">
+                  {t.about.experience.education.company} · {t.about.experience.education.duration}
+                </div>
+                <div className="text-sm opacity-70 mt-3">{t.about.experience.education.desc}</div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Skills */}
+        <section id="skills" className="max-w-6xl mx-auto px-6 py-20">
+          <h2 className="text-4xl font-bold mb-12">{t.skills.title}</h2>
+          <div className="grid md:grid-cols-3 gap-8">
+            {Object.entries(t.skills.categories).map(([key, category]) => (
+              <div key={key} className="glass-card p-8 rounded-2xl" style={glassStyle}>
+                <h3 className="font-semibold mb-6 text-lg" style={{
+                  color: isDarkMode ? '#ffffff' : '#000000'
+                }}>
+                  {category.name}
+                </h3>
+                <div className="flex flex-wrap gap-3">
+                  {category.items.map((skill, idx) => (
+                    <span key={idx} className="skill-badge text-sm px-4 py-2 rounded-full"
+                          style={{
+                            background: isDarkMode 
+                              ? 'rgba(255, 255, 255, 0.08)' 
+                              : 'rgba(0, 0, 0, 0.04)',
+                            border: `1px solid ${isDarkMode ? 'rgba(255, 255, 255, 0.15)' : 'rgba(0, 0, 0, 0.08)'}`,
+                            color: isDarkMode ? 'rgba(255, 255, 255, 0.7)' : 'rgba(0, 0, 0, 0.6)'
+                          }}>
+                      {skill}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        {/* Projects */}
+        <section id="projects" className="max-w-6xl mx-auto px-6 py-20">
+          <h2 className="text-4xl font-bold mb-12">{t.projects.title}</h2>
+          <div className="grid md:grid-cols-2 gap-8">
+            {t.projects.items.map((project, idx) => (
+              <div key={idx} 
+                   className="project-card p-8 rounded-2xl cursor-pointer"
+                   onMouseEnter={() => setHoveredProject(idx)}
+                   onMouseLeave={() => setHoveredProject(null)}
+                   style={{
+                     ...glassStyle,
+                     background: hoveredProject === idx
+                       ? (isDarkMode ? 'rgba(255, 255, 255, 0.08)' : 'rgba(0, 0, 0, 0.04)')
+                       : glassStyle.background
+                   }}>
+                <h3 className="text-xl font-bold mb-3">{project.title}</h3>
+                <p className="opacity-75 mb-6 leading-relaxed text-sm">{project.desc}</p>
+                <div className="flex flex-wrap gap-2 mb-6">
+                  {project.tech.map((tech, i) => (
+                    <span key={i} className="text-xs px-3 py-1.5 rounded-full font-medium"
+                          style={{
+                            background: isDarkMode 
+                              ? 'rgba(255, 255, 255, 0.08)' 
+                              : 'rgba(0, 0, 0, 0.04)',
+                            color: isDarkMode ? 'rgba(255, 255, 255, 0.7)' : 'rgba(0, 0, 0, 0.6)',
+                            border: `1px solid ${isDarkMode ? 'rgba(255, 255, 255, 0.15)' : 'rgba(0, 0, 0, 0.08)'}`
+                          }}>
+                      {tech}
+                    </span>
+                  ))}
+                </div>
+                <a href={project.link} className="inline-flex items-center gap-2 opacity-70 hover:opacity-100 transition text-sm font-medium group">
+                  Learn More 
+                  <ArrowUpRight size={14} style={{
+                    transition: 'all 0.3s ease',
+                    transform: hoveredProject === idx ? 'translate(2px, -2px)' : 'translate(0, 0)'
+                  }} />
+                </a>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        {/* Contact */}
+        <section id="contact" className="max-w-6xl mx-auto px-6 py-20">
+          <div className="glass-card p-12 rounded-3xl" style={glassStyle}>
+            <h2 className="text-4xl font-bold mb-4">{t.contact.title}</h2>
+            <p className="opacity-70 mb-10 text-lg">{t.contact.subtitle}</p>
+            
+            <div className="flex gap-4 flex-wrap">
+              <a href="mailto:nguyenhuuhoang5038@gmail.com"
+                 className="glass-button px-8 py-4 rounded-xl font-medium inline-flex items-center gap-2"
+                 style={glassStyle}>
+                <Mail size={20} /> {t.contact.email}
+              </a>
+              <a href="https://github.com/Hoangnguyenhuu12" target="_blank" rel="noopener noreferrer"
+                 className="glass-button px-8 py-4 rounded-xl font-medium inline-flex items-center gap-2"
+                 style={{
+                   ...glassStyle,
+                   background: isDarkMode ? '#ffffff' : '#000000',
+                   color: isDarkMode ? '#000000' : '#ffffff',
+                   border: 'none'
+                 }}>
+                <Github size={20} /> {t.contact.github}
+              </a>
+            </div>
+          </div>
+        </section>
+
+        {/* Footer */}
+        <section className="max-w-6xl mx-auto px-6 py-12 mt-8 border-t"
+                 style={{borderColor: isDarkMode ? 'rgba(255,255,255,0.1)' : 'rgba(0,0,0,0.1)'}}>
+          <p className="text-sm opacity-40 text-center">
+            © 2024 Nguyen Huu Hoang. Designed with focus on clarity and impact.
+          </p>
+        </section>
+      </div>
     </div>
   );
 };
