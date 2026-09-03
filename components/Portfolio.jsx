@@ -152,8 +152,8 @@ const Portfolio = () => {
     backdropFilter: 'blur(10px)',
     border: `1px solid ${isDarkMode ? 'rgba(255,255,255,0.15)' : 'rgba(255,255,255,0.3)'}`,
     boxShadow: isDarkMode
-      ? '0 8px 32px 0 rgba(31, 38, 135, 0.15)'
-      : '0 8px 32px 0 rgba(31, 38, 135, 0.1)'
+      ? '0 8px 32px 0 rgba(0, 0, 0, 0.3)'
+      : '0 8px 32px 0 rgba(0, 0, 0, 0.1)'
   };
 
   return (
@@ -174,8 +174,8 @@ const Portfolio = () => {
             ? 'background: rgba(255, 255, 255, 0.08) !important;' 
             : 'background: rgba(255, 255, 255, 0.8) !important;'}
           box-shadow: ${isDarkMode
-            ? '0 12px 48px 0 rgba(31, 38, 135, 0.25) !important;'
-            : '0 12px 48px 0 rgba(31, 38, 135, 0.2) !important;'}
+            ? '0 12px 48px 0 rgba(0, 0, 0, 0.4) !important;'
+            : '0 12px 48px 0 rgba(0, 0, 0, 0.15) !important;'}
         }
         
         .glass-button {
@@ -185,14 +185,6 @@ const Portfolio = () => {
         .glass-button:hover {
           transform: translateY(-2px);
           box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
-        }
-        
-        .hover-button-primary {
-          transition: all 0.3s cubic-bezier(0.23, 1, 0.320, 1);
-        }
-        
-        .hover-button-secondary {
-          transition: all 0.3s cubic-bezier(0.23, 1, 0.320, 1);
         }
         
         .skill-badge {
@@ -236,7 +228,7 @@ const Portfolio = () => {
         }
       `}</style>
 
-      {/* Full Screen Hero - Sticky with fade out on scroll */}
+      {/* Full Screen Hero - Only "Hoang's Portfolio" */}
       <div className="fixed inset-0 z-0 flex flex-col items-center justify-center pointer-events-none"
            style={{
              backgroundColor: isDarkMode ? '#000000' : '#ffffff',
@@ -247,47 +239,14 @@ const Portfolio = () => {
              pointerEvents: heroOpacity > 0 ? 'auto' : 'none'
            }}>
         <div className="text-center max-w-3xl px-6">
-          <h1 className="text-7xl md:text-8xl font-bold mb-10 leading-tight">
+          <h1 className="text-8xl md:text-9xl font-bold leading-tight">
             Hoang's Portfolio
           </h1>
-          <div className="flex gap-4 justify-center flex-wrap">
-            <a href="#projects" className="glass-button px-8 py-4 rounded-xl font-medium hover-button-primary"
-               style={{
-                 ...glassStyle,
-                 background: isDarkMode ? '#ffffff' : '#000000',
-                 color: isDarkMode ? '#000000' : '#ffffff',
-                 border: 'none',
-                 pointerEvents: 'auto'
-               }}>
-              {t.hero.cta}
-            </a>
-            <a href="https://github.com/Hoangnguyenhuu12" target="_blank" rel="noopener noreferrer"
-               className="glass-button px-8 py-4 rounded-xl font-medium inline-flex items-center gap-2 hover-button-secondary"
-               style={{
-                 ...glassStyle,
-                 pointerEvents: 'auto',
-                 transition: 'all 0.3s cubic-bezier(0.23, 1, 0.320, 1)'
-               }}
-               onMouseEnter={(e) => {
-                 e.currentTarget.style.background = isDarkMode ? '#ffffff' : '#000000';
-                 e.currentTarget.style.color = isDarkMode ? '#000000' : '#ffffff';
-                 e.currentTarget.style.transform = 'translateY(-2px)';
-               }}
-               onMouseLeave={(e) => {
-                 e.currentTarget.style.background = isDarkMode 
-                   ? 'rgba(255, 255, 255, 0.05)' 
-                   : 'rgba(255, 255, 255, 0.7)';
-                 e.currentTarget.style.color = isDarkMode ? '#ffffff' : '#000000';
-                 e.currentTarget.style.transform = 'translateY(0)';
-               }}>
-              GitHub <ArrowUpRight size={18} />
-            </a>
-          </div>
         </div>
       </div>
 
       {/* Main Content - appears as you scroll */}
-      <div className="relative z-10 pt-screen"
+      <div className="relative z-10"
            style={{
              paddingTop: '100vh'
            }}>
@@ -331,6 +290,42 @@ const Portfolio = () => {
             </div>
           </div>
         </nav>
+
+        {/* Hero Content Section - below hero */}
+        <section className="max-w-6xl mx-auto px-6 py-20">
+          <div className="text-center max-w-3xl mx-auto">
+            <h2 className="text-4xl md:text-5xl font-bold mb-4">{t.hero.title}</h2>
+            <p className="text-lg md:text-xl opacity-70 mb-10">{t.hero.subtitle}</p>
+            <div className="flex gap-4 justify-center flex-wrap">
+              <a href="#projects" className="glass-button px-8 py-4 rounded-xl font-medium"
+                 style={{
+                   ...glassStyle,
+                   background: isDarkMode ? '#ffffff' : '#000000',
+                   color: isDarkMode ? '#000000' : '#ffffff',
+                   border: 'none'
+                 }}>
+                {t.hero.cta}
+              </a>
+              <a href="https://github.com/Hoangnguyenhuu12" target="_blank" rel="noopener noreferrer"
+                 className="glass-button px-8 py-4 rounded-xl font-medium inline-flex items-center gap-2"
+                 style={glassStyle}
+                 onMouseEnter={(e) => {
+                   e.currentTarget.style.background = isDarkMode ? '#ffffff' : '#000000';
+                   e.currentTarget.style.color = isDarkMode ? '#000000' : '#ffffff';
+                   e.currentTarget.style.transform = 'translateY(-2px)';
+                 }}
+                 onMouseLeave={(e) => {
+                   e.currentTarget.style.background = isDarkMode 
+                     ? 'rgba(255, 255, 255, 0.05)' 
+                     : 'rgba(255, 255, 255, 0.7)';
+                   e.currentTarget.style.color = isDarkMode ? '#ffffff' : '#000000';
+                   e.currentTarget.style.transform = 'translateY(0)';
+                 }}>
+                GitHub <ArrowUpRight size={18} />
+              </a>
+            </div>
+          </div>
+        </section>
 
         {/* About */}
         <section className="max-w-6xl mx-auto px-6 py-20">
