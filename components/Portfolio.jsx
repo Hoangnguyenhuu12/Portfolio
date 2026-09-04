@@ -75,7 +75,7 @@ const Portfolio = () => {
         title: 'Get In Touch',
         subtitle: 'Open to opportunities at Big Tech companies and innovative startups',
         email: 'Email me',
-        github: 'View Resume'
+        github: 'View GitHub'
       }
     },
     vi: {
@@ -133,7 +133,7 @@ const Portfolio = () => {
         title: 'Liên Hệ Tôi',
         subtitle: 'Mở cửa cho cơ hội tại các công ty Big Tech và startup sáng tạo',
         email: 'Gửi Email',
-        github: 'Xem CV'
+        github: 'Xem GitHub'
       }
     }
   };
@@ -358,7 +358,7 @@ const Portfolio = () => {
                    e.currentTarget.style.color = isDarkMode ? '#ffffff' : '#000000';
                    e.currentTarget.style.transform = 'translateY(0)';
                  }}>
-                Resume <ArrowUpRight size={18} />
+                GitHub <ArrowUpRight size={18} />
               </a>
             </div>
           </div>
