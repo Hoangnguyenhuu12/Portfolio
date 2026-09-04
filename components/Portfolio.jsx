@@ -172,13 +172,13 @@ const Portfolio = () => {
         .glass-card:hover {
           transform: translateY(-4px);
           background: ${isDarkMode 
-            ? 'rgba(255, 255, 255, 0.18)' 
+            ? 'rgba(255, 255, 255, 0.08)' 
             : 'rgba(255, 255, 255, 0.85)'} !important;
           box-shadow: ${isDarkMode
-            ? '0 16px 64px 0 rgba(255, 255, 255, 0.25)'
+            ? '0 16px 64px 0 rgba(255, 255, 255, 0.15)'
             : '0 16px 64px 0 rgba(0, 0, 0, 0.2)'} !important;
           border-color: ${isDarkMode 
-            ? 'rgba(255, 255, 255, 0.3)' 
+            ? 'rgba(255, 255, 255, 0.2)' 
             : 'rgba(0, 0, 0, 0.1)'} !important;
         }
         
@@ -190,10 +190,10 @@ const Portfolio = () => {
         .glass-button:hover {
           transform: translateY(-4px);
           box-shadow: ${isDarkMode 
-            ? '0 12px 48px 0 rgba(255, 255, 255, 0.3)'
+            ? '0 12px 48px 0 rgba(255, 255, 255, 0.2)'
             : '0 12px 48px 0 rgba(0, 0, 0, 0.2)'} !important;
           border-color: ${isDarkMode 
-            ? 'rgba(255, 255, 255, 0.3)' 
+            ? 'rgba(255, 255, 255, 0.2)' 
             : 'rgba(0, 0, 0, 0.15)'} !important;
         }
         
@@ -205,13 +205,13 @@ const Portfolio = () => {
         .skill-badge:hover {
           transform: scale(1.12) translateY(-4px);
           background: ${isDarkMode 
-            ? 'rgba(255, 255, 255, 0.22)' 
+            ? 'rgba(255, 255, 255, 0.1)' 
             : 'rgba(0, 0, 0, 0.12)'} !important;
           border-color: ${isDarkMode 
-            ? 'rgba(255, 255, 255, 0.4)' 
+            ? 'rgba(255, 255, 255, 0.2)' 
             : 'rgba(0, 0, 0, 0.15)'} !important;
           box-shadow: ${isDarkMode 
-            ? '0 8px 24px rgba(255, 255, 255, 0.2)'
+            ? '0 8px 24px rgba(255, 255, 255, 0.12)'
             : '0 8px 24px rgba(0, 0, 0, 0.1)'} !important;
         }
         
@@ -223,13 +223,13 @@ const Portfolio = () => {
         .project-card:hover {
           transform: translateY(-6px);
           background: ${isDarkMode 
-            ? 'rgba(255, 255, 255, 0.1)' 
+            ? 'rgba(255, 255, 255, 0.08)' 
             : 'rgba(255, 255, 255, 0.85)'} !important;
           box-shadow: ${isDarkMode
-            ? '0 20px 72px 0 rgba(255, 255, 255, 0.2)'
+            ? '0 20px 72px 0 rgba(255, 255, 255, 0.15)'
             : '0 20px 72px 0 rgba(0, 0, 0, 0.2)'} !important;
           border-color: ${isDarkMode 
-            ? 'rgba(255, 255, 255, 0.3)' 
+            ? 'rgba(255, 255, 255, 0.2)' 
             : 'rgba(0, 0, 0, 0.1)'} !important;
         }
         
