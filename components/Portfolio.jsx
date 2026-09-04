@@ -1,11 +1,39 @@
 import React, { useState, useEffect } from 'react';
 import { Mail, Github, ExternalLink, Moon, Sun, ArrowUpRight } from 'lucide-react';
 
+// Typing effect component
+const TypingText = ({ text, speed = 50, isActive = true }) => {
+  const [displayedText, setDisplayedText] = useState('');
+
+  useEffect(() => {
+    if (!isActive) {
+      setDisplayedText(text);
+      return;
+    }
+
+    let index = 0;
+    const interval = setInterval(() => {
+      if (index <= text.length) {
+        setDisplayedText(text.substring(0, index) + (index < text.length ? '_' : ''));
+        index++;
+      } else {
+        setDisplayedText(text);
+        clearInterval(interval);
+      }
+    }, speed);
+
+    return () => clearInterval(interval);
+  }, [text, speed, isActive]);
+
+  return <span>{displayedText}</span>;
+};
+
 const Portfolio = () => {
   const [isDark, setIsDark] = useState(false);
   const [isLang, setIsLang] = useState('en');
   const [scrollY, setScrollY] = useState(0);
   const [hoveredProject, setHoveredProject] = useState(null);
+  const [hoveredCard, setHoveredCard] = useState(null);
 
   useEffect(() => {
     if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
@@ -141,7 +169,6 @@ const Portfolio = () => {
   const t = content[isLang];
   const isDarkMode = isDark;
 
-  // Calculate hero opacity based on scroll
   const heroOpacity = Math.max(0, 1 - scrollY / 500);
   const heroScale = Math.max(0.95, 1 - scrollY / 2000);
 
@@ -251,7 +278,7 @@ const Portfolio = () => {
         }
       `}</style>
 
-      {/* Full Screen Hero - Only "Hoang's Portfolio" */}
+      {/* Full Screen Hero with Typing Effect */}
       <div className="fixed inset-0 z-0 flex flex-col items-center justify-center pointer-events-none"
            style={{
              backgroundColor: isDarkMode ? '#000000' : '#ffffff',
@@ -262,13 +289,13 @@ const Portfolio = () => {
              pointerEvents: heroOpacity > 0 ? 'auto' : 'none'
            }}>
         <div className="text-center max-w-3xl px-6">
-          <h1 className="text-8xl md:text-9xl font-bold leading-tight">
-            Hoang's Portfolio
+          <h1 className="text-8xl md:text-9xl font-bold leading-tight font-mono">
+            <TypingText text="Hoang's Portfolio" speed={80} isActive={heroOpacity > 0.5} />
           </h1>
         </div>
       </div>
 
-      {/* Main Content - appears as you scroll */}
+      {/* Main Content */}
       <div className="relative z-10"
            style={{
              paddingTop: '100vh'
@@ -314,10 +341,12 @@ const Portfolio = () => {
           </div>
         </nav>
 
-        {/* Hero Content - Building Intelligence */}
+        {/* Hero Content */}
         <section className="max-w-6xl mx-auto px-6 py-20">
           <div className="max-w-2xl">
-            <h2 className="text-4xl md:text-5xl font-bold mb-4">{t.hero.title}</h2>
+            <h2 className="text-4xl md:text-5xl font-bold mb-4">
+              <TypingText text={t.hero.title} speed={40} isActive={true} />
+            </h2>
             <p className="text-lg md:text-xl opacity-70 mb-10">{t.hero.subtitle}</p>
             <div className="flex gap-4 flex-wrap">
               <a href="#projects" className="glass-button px-8 py-4 rounded-xl font-medium"
@@ -370,29 +399,51 @@ const Portfolio = () => {
           <div className="grid md:grid-cols-2 gap-12">
             <div className="glass-card p-8 rounded-2xl" style={glassStyle}>
               <p className="text-lg opacity-80 leading-relaxed">
-                {t.about.intro}
+                {hoveredCard === 'about' ? (
+                  <TypingText text={t.about.intro} speed={25} isActive={true} />
+                ) : (
+                  t.about.intro
+                )}
               </p>
             </div>
 
             <div className="space-y-6">
               <h3 className="text-sm font-semibold opacity-50 uppercase tracking-widest">{t.about.experience.title}</h3>
               
-              <div className="glass-card p-6 rounded-2xl pl-8" style={{
+              <div className="glass-card p-6 rounded-2xl pl-8" 
+                   onMouseEnter={() => setHoveredCard('internship')}
+                   onMouseLeave={() => setHoveredCard(null)}
+                   style={{
                 ...glassStyle,
                 borderLeft: `3px solid ${isDarkMode ? '#ffffff' : '#000000'}`
               }}>
-                <div className="font-semibold text-lg">{t.about.experience.internship.role}</div>
+                <div className="font-semibold text-lg">
+                  {hoveredCard === 'internship' ? (
+                    <TypingText text={t.about.experience.internship.role} speed={40} isActive={true} />
+                  ) : (
+                    t.about.experience.internship.role
+                  )}
+                </div>
                 <div className="text-sm opacity-60 mt-1">
                   {t.about.experience.internship.company} · {t.about.experience.internship.duration}
                 </div>
                 <div className="text-sm opacity-70 mt-3">{t.about.experience.internship.desc}</div>
               </div>
 
-              <div className="glass-card p-6 rounded-2xl pl-8" style={{
+              <div className="glass-card p-6 rounded-2xl pl-8"
+                   onMouseEnter={() => setHoveredCard('education')}
+                   onMouseLeave={() => setHoveredCard(null)}
+                   style={{
                 ...glassStyle,
                 borderLeft: `3px solid ${isDarkMode ? '#ffffff' : '#000000'}`
               }}>
-                <div className="font-semibold text-lg">{t.about.experience.education.role}</div>
+                <div className="font-semibold text-lg">
+                  {hoveredCard === 'education' ? (
+                    <TypingText text={t.about.experience.education.role} speed={40} isActive={true} />
+                  ) : (
+                    t.about.experience.education.role
+                  )}
+                </div>
                 <div className="text-sm opacity-60 mt-1">
                   {t.about.experience.education.company} · {t.about.experience.education.duration}
                 </div>
@@ -418,7 +469,7 @@ const Portfolio = () => {
                     <span key={idx} className="skill-badge text-sm px-4 py-2 rounded-full"
                           style={{
                             background: isDarkMode 
-                              ? 'rgba(255, 255, 255, 0.08)' 
+                              ? 'rgba(255, 255, 255, 0.05)' 
                               : 'rgba(0, 0, 0, 0.04)',
                             border: `1px solid ${isDarkMode ? 'rgba(255, 255, 255, 0.15)' : 'rgba(0, 0, 0, 0.08)'}`,
                             color: isDarkMode ? 'rgba(255, 255, 255, 0.7)' : 'rgba(0, 0, 0, 0.6)'
@@ -441,20 +492,21 @@ const Portfolio = () => {
                    className="project-card p-8 rounded-2xl cursor-pointer"
                    onMouseEnter={() => setHoveredProject(idx)}
                    onMouseLeave={() => setHoveredProject(null)}
-                   style={{
-                     ...glassStyle,
-                     background: hoveredProject === idx
-                       ? (isDarkMode ? 'rgba(255, 255, 255, 0.08)' : 'rgba(0, 0, 0, 0.04)')
-                       : glassStyle.background
-                   }}>
-                <h3 className="text-xl font-bold mb-3">{project.title}</h3>
+                   style={glassStyle}>
+                <h3 className="text-xl font-bold mb-3">
+                  {hoveredProject === idx ? (
+                    <TypingText text={project.title} speed={35} isActive={true} />
+                  ) : (
+                    project.title
+                  )}
+                </h3>
                 <p className="opacity-75 mb-6 leading-relaxed text-sm">{project.desc}</p>
                 <div className="flex flex-wrap gap-2 mb-6">
                   {project.tech.map((tech, i) => (
                     <span key={i} className="text-xs px-3 py-1.5 rounded-full font-medium"
                           style={{
                             background: isDarkMode 
-                              ? 'rgba(255, 255, 255, 0.08)' 
+                              ? 'rgba(255, 255, 255, 0.05)' 
                               : 'rgba(0, 0, 0, 0.04)',
                             color: isDarkMode ? 'rgba(255, 255, 255, 0.7)' : 'rgba(0, 0, 0, 0.6)',
                             border: `1px solid ${isDarkMode ? 'rgba(255, 255, 255, 0.15)' : 'rgba(0, 0, 0, 0.08)'}`
