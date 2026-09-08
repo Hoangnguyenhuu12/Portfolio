@@ -85,16 +85,16 @@ const Portfolio = () => {
         title: 'Featured Projects',
         items: [
           {
-            title: 'Fashion Recommendation System',
-            desc: 'AI-powered personalized clothing recommendations using advanced recommendation algorithms and user behavior analysis',
-            tech: ['Python', 'Machine Learning', 'Personalization'],
-            link: '#'
+            title: 'OutfitMatch — AI Stylist',
+            desc: 'AI-powered personal stylist for Asian fashion market. Combines Qwen3-VL-8B vision model with graph knowledge base, Qdrant retrieval, and personalized recommendations using quiz-based preference learning.',
+            tech: ['Python', 'Next.js', 'Qwen3-VL-8B', 'Graph KB', 'Qdrant', 'Personalization'],
+            link: 'https://github.com/Hoangnguyenhuu12/Lendo-Stylix'
           },
           {
-            title: 'RAG Educational Assistant',
-            desc: 'Intelligent Q&A system for educational content. Combines OCR for PDF scanning with LangChain RAG pipeline for accurate document understanding and response generation',
-            tech: ['LangChain', 'OCR', 'Vector DB', 'RAG', 'Python'],
-            link: '#'
+            title: 'ReactAgent — SGK Q&A System',
+            desc: 'Intelligent Q&A system for Vietnamese textbooks (SGK). Multi-agent architecture with Knowledge Graph (Neo4j), Vector Search (Elasticsearch + pgvector), and RAG pipeline using LangChain for accurate education content understanding.',
+            tech: ['LangChain', 'Neo4j', 'Elasticsearch', 'PostgreSQL', 'OCR', 'RAG'],
+            link: 'https://github.com/Hoangnguyenhuu12/ReAct-agent-final'
           }
         ]
       },
@@ -143,16 +143,16 @@ const Portfolio = () => {
         title: 'Dự Án Nổi Bật',
         items: [
           {
-            title: 'Hệ Thống Gợi Ý Thời Trang',
-            desc: 'Hệ thống gợi ý quần áo cá nhân hóa sử dụng thuật toán học máy và phân tích hành vi người dùng',
-            tech: ['Python', 'Machine Learning', 'Personalization'],
-            link: '#'
+            title: 'OutfitMatch — AI Stylist',
+            desc: 'Trợ lý thời trang AI cá nhân hoá cho thị trường thời trang châu Á. Kết hợp mô hình Qwen3-VL-8B, Knowledge Graph, Qdrant retrieval, và học tùy chọn người dùng qua Quiz.',
+            tech: ['Python', 'Next.js', 'Qwen3-VL-8B', 'Graph KB', 'Qdrant', 'Personalization'],
+            link: 'https://github.com/Hoangnguyenhuu12/Lendo-Stylix'
           },
           {
-            title: 'Trợ Lý Giáo Dục RAG',
-            desc: 'Hệ thống Q&A thông minh cho nội dung giáo dục. Kết hợp OCR để quét PDF với pipeline RAG LangChain cho hiểu biết tài liệu chính xác',
-            tech: ['LangChain', 'OCR', 'Vector DB', 'RAG', 'Python'],
-            link: '#'
+            title: 'ReactAgent — Hệ thống Q&A SGK',
+            desc: 'Hệ thống hỏi-đáp thông minh cho sách giáo khoa Việt Nam. Kiến trúc multi-agent với Knowledge Graph (Neo4j), Vector Search (Elasticsearch + pgvector), và RAG pipeline sử dụng LangChain.',
+            tech: ['LangChain', 'Neo4j', 'Elasticsearch', 'PostgreSQL', 'OCR', 'RAG'],
+            link: 'https://github.com/Hoangnguyenhuu12/ReAct-agent-final'
           }
         ]
       },
