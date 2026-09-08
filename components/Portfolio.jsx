@@ -556,12 +556,9 @@ const Portfolio = () => {
                   {/* Facebook */}
                   <a href="https://facebook.com" target="_blank" rel="noopener noreferrer"
                      className="w-12 h-12 flex items-center justify-center hover:scale-110 transition"
-                     title="Facebook"
-                     style={{
-                       filter: isDarkMode ? 'none' : 'brightness(0)'
-                     }}>
+                     title="Facebook">
                     <img 
-                      src="/facebook-dark.png"
+                      src={isDarkMode ? "/facebook-dark.png" : "/facebook-light.png"}
                       alt="Facebook"
                       className="w-full h-full object-contain"
                     />
@@ -570,12 +567,9 @@ const Portfolio = () => {
                   {/* Instagram */}
                   <a href="https://instagram.com" target="_blank" rel="noopener noreferrer"
                      className="w-12 h-12 flex items-center justify-center hover:scale-110 transition"
-                     title="Instagram"
-                     style={{
-                       filter: isDarkMode ? 'none' : 'brightness(0)'
-                     }}>
+                     title="Instagram">
                     <img 
-                      src="/instagram-dark.png"
+                      src={isDarkMode ? "/instagram-dark.png" : "/instagram-light.png"}
                       alt="Instagram"
                       className="w-full h-full object-contain"
                     />
@@ -584,12 +578,9 @@ const Portfolio = () => {
                   {/* Strava */}
                   <a href="https://strava.com" target="_blank" rel="noopener noreferrer"
                      className="w-12 h-12 flex items-center justify-center hover:scale-110 transition"
-                     title="Strava"
-                     style={{
-                       filter: isDarkMode ? 'none' : 'brightness(0)'
-                     }}>
+                     title="Strava">
                     <img 
-                      src="/strava-dark.png"
+                      src={isDarkMode ? "/strava-dark.png" : "/strava-light.png"}
                       alt="Strava"
                       className="w-full h-full object-contain"
                     />
@@ -598,12 +589,9 @@ const Portfolio = () => {
                   {/* LinkedIn */}
                   <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer"
                      className="w-12 h-12 flex items-center justify-center hover:scale-110 transition"
-                     title="LinkedIn"
-                     style={{
-                       filter: isDarkMode ? 'none' : 'brightness(0)'
-                     }}>
+                     title="LinkedIn">
                     <img 
-                      src="/linkedin-dark.png"
+                      src={isDarkMode ? "/linkedin-dark.png" : "/linkedin-light.png"}
                       alt="LinkedIn"
                       className="w-full h-full object-contain"
                     />
