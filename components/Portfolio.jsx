@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Mail, Github, ExternalLink, Moon, Sun, ArrowUpRight, Facebook, Instagram, Linkedin } from 'lucide-react';
+import { Mail, Github, ExternalLink, Moon, Sun, ArrowUpRight } from 'lucide-react';
 
 // Typing effect component
 const TypingText = ({ text, speed = 50, isActive = true }) => {
@@ -555,52 +555,46 @@ const Portfolio = () => {
                 <div className="flex gap-4 items-center mt-8">
                   {/* Facebook */}
                   <a href="https://facebook.com" target="_blank" rel="noopener noreferrer"
-                     className="w-12 h-12 rounded-full flex items-center justify-center glass-button hover:scale-110 transition"
-                     title="Facebook"
-                     style={{
-                       ...glassStyle,
-                       cursor: 'pointer',
-                       color: isDarkMode ? '#1877F2' : '#000000'
-                     }}>
-                    <Facebook size={24} fill="currentColor" />
+                     className="w-12 h-12 flex items-center justify-center hover:scale-110 transition"
+                     title="Facebook">
+                    <img 
+                      src={isDarkMode ? "/facebook-dark.png" : "/facebook-light.png"}
+                      alt="Facebook"
+                      className="w-full h-full object-contain"
+                    />
                   </a>
 
                   {/* Instagram */}
                   <a href="https://instagram.com" target="_blank" rel="noopener noreferrer"
-                     className="w-12 h-12 rounded-full flex items-center justify-center glass-button hover:scale-110 transition"
-                     title="Instagram"
-                     style={{
-                       ...glassStyle,
-                       cursor: 'pointer',
-                       color: isDarkMode ? '#E4405F' : '#000000'
-                     }}>
-                    <Instagram size={24} fill="currentColor" />
+                     className="w-12 h-12 flex items-center justify-center hover:scale-110 transition"
+                     title="Instagram">
+                    <img 
+                      src={isDarkMode ? "/instagram-dark.png" : "/instagram-light.png"}
+                      alt="Instagram"
+                      className="w-full h-full object-contain"
+                    />
                   </a>
 
                   {/* Strava */}
                   <a href="https://strava.com" target="_blank" rel="noopener noreferrer"
-                     className="w-12 h-12 rounded-full flex items-center justify-center glass-button hover:scale-110 transition"
-                     title="Strava"
-                     style={{
-                       ...glassStyle,
-                       cursor: 'pointer',
-                       color: isDarkMode ? '#FF5200' : '#000000'
-                     }}>
-                    <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
-                      <path d="M15.387 17.944l-2.089-4.116h-3.065L15.387 24h4.236l3.065-6.172h-3.944m-7.381-5.25l3.833 7.64h4.236L8.006 0H3.771l6.236 12.694"/>
-                    </svg>
+                     className="w-12 h-12 flex items-center justify-center hover:scale-110 transition"
+                     title="Strava">
+                    <img 
+                      src={isDarkMode ? "/strava-dark.png" : "/strava-light.png"}
+                      alt="Strava"
+                      className="w-full h-full object-contain"
+                    />
                   </a>
 
                   {/* LinkedIn */}
                   <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer"
-                     className="w-12 h-12 rounded-full flex items-center justify-center glass-button hover:scale-110 transition"
-                     title="LinkedIn"
-                     style={{
-                       ...glassStyle,
-                       cursor: 'pointer',
-                       color: isDarkMode ? '#0A66C2' : '#000000'
-                     }}>
-                    <Linkedin size={24} fill="currentColor" />
+                     className="w-12 h-12 flex items-center justify-center hover:scale-110 transition"
+                     title="LinkedIn">
+                    <img 
+                      src={isDarkMode ? "/linkedin-dark.png" : "/linkedin-light.png"}
+                      alt="LinkedIn"
+                      className="w-full h-full object-contain"
+                    />
                   </a>
                 </div>
               </div>
