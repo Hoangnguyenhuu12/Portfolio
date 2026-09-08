@@ -33,7 +33,6 @@ const Portfolio = () => {
   const [isLang, setIsLang] = useState('en');
   const [scrollY, setScrollY] = useState(0);
   const [hoveredProject, setHoveredProject] = useState(null);
-  const [hoveredCard, setHoveredCard] = useState(null);
 
   useEffect(() => {
     if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
@@ -290,7 +289,7 @@ const Portfolio = () => {
            }}>
         <div className="text-center max-w-3xl px-6">
           <h1 className="text-8xl md:text-9xl font-bold leading-tight font-mono">
-            <TypingText text="Hoang's Portfolio" speed={80} isActive={heroOpacity > 0.5} />
+            <TypingText text="Hoang's Portfolio" speed={150} isActive={heroOpacity > 0.5} />
           </h1>
         </div>
       </div>
@@ -345,7 +344,7 @@ const Portfolio = () => {
         <section className="max-w-6xl mx-auto px-6 py-20">
           <div className="max-w-2xl">
             <h2 className="text-4xl md:text-5xl font-bold mb-4">
-              <TypingText text={t.hero.title} speed={40} isActive={true} />
+              {t.hero.title}
             </h2>
             <p className="text-lg md:text-xl opacity-70 mb-10">{t.hero.subtitle}</p>
             <div className="flex gap-4 flex-wrap">
@@ -399,11 +398,7 @@ const Portfolio = () => {
           <div className="grid md:grid-cols-2 gap-12">
             <div className="glass-card p-8 rounded-2xl" style={glassStyle}>
               <p className="text-lg opacity-80 leading-relaxed">
-                {hoveredCard === 'about' ? (
-                  <TypingText text={t.about.intro} speed={25} isActive={true} />
-                ) : (
-                  t.about.intro
-                )}
+                {t.about.intro}
               </p>
             </div>
 
@@ -411,18 +406,12 @@ const Portfolio = () => {
               <h3 className="text-sm font-semibold opacity-50 uppercase tracking-widest">{t.about.experience.title}</h3>
               
               <div className="glass-card p-6 rounded-2xl pl-8" 
-                   onMouseEnter={() => setHoveredCard('internship')}
-                   onMouseLeave={() => setHoveredCard(null)}
                    style={{
                 ...glassStyle,
                 borderLeft: `3px solid ${isDarkMode ? '#ffffff' : '#000000'}`
               }}>
                 <div className="font-semibold text-lg">
-                  {hoveredCard === 'internship' ? (
-                    <TypingText text={t.about.experience.internship.role} speed={40} isActive={true} />
-                  ) : (
-                    t.about.experience.internship.role
-                  )}
+                  {t.about.experience.internship.role}
                 </div>
                 <div className="text-sm opacity-60 mt-1">
                   {t.about.experience.internship.company} · {t.about.experience.internship.duration}
@@ -431,18 +420,12 @@ const Portfolio = () => {
               </div>
 
               <div className="glass-card p-6 rounded-2xl pl-8"
-                   onMouseEnter={() => setHoveredCard('education')}
-                   onMouseLeave={() => setHoveredCard(null)}
                    style={{
                 ...glassStyle,
                 borderLeft: `3px solid ${isDarkMode ? '#ffffff' : '#000000'}`
               }}>
                 <div className="font-semibold text-lg">
-                  {hoveredCard === 'education' ? (
-                    <TypingText text={t.about.experience.education.role} speed={40} isActive={true} />
-                  ) : (
-                    t.about.experience.education.role
-                  )}
+                  {t.about.experience.education.role}
                 </div>
                 <div className="text-sm opacity-60 mt-1">
                   {t.about.experience.education.company} · {t.about.experience.education.duration}
@@ -494,11 +477,7 @@ const Portfolio = () => {
                    onMouseLeave={() => setHoveredProject(null)}
                    style={glassStyle}>
                 <h3 className="text-xl font-bold mb-3">
-                  {hoveredProject === idx ? (
-                    <TypingText text={project.title} speed={35} isActive={true} />
-                  ) : (
-                    project.title
-                  )}
+                  {project.title}
                 </h3>
                 <p className="opacity-75 mb-6 leading-relaxed text-sm">{project.desc}</p>
                 <div className="flex flex-wrap gap-2 mb-6">
