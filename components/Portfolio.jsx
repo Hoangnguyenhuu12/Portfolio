@@ -577,7 +577,7 @@ const Portfolio = () => {
 
                   {/* Strava */}
                   <a href="https://strava.com" target="_blank" rel="noopener noreferrer"
-                     className="w-12 h-12 flex items-center justify-center hover:scale-110 transition"
+                     className="w-10 h-10 flex items-center justify-center hover:scale-110 transition"
                      title="Strava">
                     <img 
                       src={isDarkMode ? "/strava-dark.png" : "/strava-light.png"}
