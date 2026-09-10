@@ -555,7 +555,7 @@ const Portfolio = () => {
                 <div className="flex gap-4 items-center mt-8">
                   {/* Facebook */}
                   <a href="https://facebook.com" target="_blank" rel="noopener noreferrer"
-                     className="w-12 h-12 flex items-center justify-center hover:scale-110 transition"
+                     className="w-10 h-10 flex items-center justify-center hover:scale-110 transition"
                      title="Facebook">
                     <img 
                       src={isDarkMode ? "/facebook-dark.png" : "/facebook-light.png"}
@@ -566,7 +566,7 @@ const Portfolio = () => {
 
                   {/* Instagram */}
                   <a href="https://instagram.com" target="_blank" rel="noopener noreferrer"
-                     className="w-12 h-12 flex items-center justify-center hover:scale-110 transition"
+                     className="w-10 h-10 flex items-center justify-center hover:scale-110 transition"
                      title="Instagram">
                     <img 
                       src={isDarkMode ? "/instagram-dark.png" : "/instagram-light.png"}
@@ -577,7 +577,7 @@ const Portfolio = () => {
 
                   {/* Strava */}
                   <a href="https://strava.com" target="_blank" rel="noopener noreferrer"
-                     className="w-12 h-12 flex items-center justify-center hover:scale-110 transition"
+                     className="w-10 h-10 flex items-center justify-center hover:scale-110 transition"
                      title="Strava">
                     <img 
                       src={isDarkMode ? "/strava-dark.png" : "/strava-light.png"}
@@ -588,7 +588,7 @@ const Portfolio = () => {
 
                   {/* LinkedIn */}
                   <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer"
-                     className="w-12 h-12 flex items-center justify-center hover:scale-110 transition"
+                     className="w-10 h-10 flex items-center justify-center hover:scale-110 transition"
                      title="LinkedIn">
                     <img 
                       src={isDarkMode ? "/linkedin-dark.png" : "/linkedin-light.png"}
