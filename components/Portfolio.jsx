@@ -602,12 +602,14 @@ const Portfolio = () => {
               {/* Right: Buttons (Vertical Stack) */}
               <div className="flex flex-col gap-3 justify-start">
                 <a href="mailto:nguyenhuuhoang5038@gmail.com"
-                   className="px-5 py-2.5 rounded-lg font-medium inline-flex items-center justify-center gap-2 w-full transition-all"
+                   className="rounded-lg font-medium inline-flex items-center justify-center gap-2 w-full transition-all"
                    style={{
                      background: '#000000',
                      color: '#ffffff',
                      border: 'none',
-                     cursor: 'pointer'
+                     cursor: 'pointer',
+                     padding: '8px 16px',
+                     fontSize: '14px'
                    }}
                    onMouseEnter={(e) => {
                      e.currentTarget.style.opacity = '0.9';
@@ -620,12 +622,14 @@ const Portfolio = () => {
                   <Mail size={16} /> {t.contact.email}
                 </a>
                 <a href="https://github.com/Hoangnguyenhuu12" target="_blank" rel="noopener noreferrer"
-                   className="px-5 py-2.5 rounded-lg font-medium inline-flex items-center justify-center gap-2 w-full transition-all"
+                   className="rounded-lg font-medium inline-flex items-center justify-center gap-2 w-full transition-all"
                    style={{
                      background: isDarkMode ? '#ffffff' : '#000000',
                      color: isDarkMode ? '#000000' : '#ffffff',
                      border: 'none',
-                     cursor: 'pointer'
+                     cursor: 'pointer',
+                     padding: '8px 16px',
+                     fontSize: '14px'
                    }}
                    onMouseEnter={(e) => {
                      e.currentTarget.style.opacity = '0.9';
