@@ -600,49 +600,47 @@ const Portfolio = () => {
               </div>
 
               {/* Right: Buttons (Vertical Stack) */}
-              <div className="flex flex-col gap-3 items-start">
+              <div style={{display:'flex', flexDirection:'column', gap:'12px', alignItems:'flex-start', justifyContent:'flex-start'}}>
                 <a href="mailto:nguyenhuuhoang5038@gmail.com"
-                   className="rounded-lg font-medium inline-flex items-center gap-2 transition-all"
                    style={{
                      background: '#000000',
                      color: '#ffffff',
                      border: 'none',
                      cursor: 'pointer',
-                     padding: '6px 20px',
+                     padding: '8px 24px',
                      fontSize: '14px',
-                     width: '100%',
-                     justifyContent: 'center'
+                     borderRadius: '8px',
+                     fontWeight: '500',
+                     display: 'inline-flex',
+                     alignItems: 'center',
+                     gap: '8px',
+                     textDecoration: 'none',
+                     whiteSpace: 'nowrap',
+                     transition: 'all 0.3s ease'
                    }}
-                   onMouseEnter={(e) => {
-                     e.currentTarget.style.opacity = '0.9';
-                     e.currentTarget.style.transform = 'translateY(-2px)';
-                   }}
-                   onMouseLeave={(e) => {
-                     e.currentTarget.style.opacity = '1';
-                     e.currentTarget.style.transform = 'translateY(0)';
-                   }}>
+                   onMouseEnter={(e) => { e.currentTarget.style.opacity='0.85'; e.currentTarget.style.transform='translateY(-2px)'; }}
+                   onMouseLeave={(e) => { e.currentTarget.style.opacity='1'; e.currentTarget.style.transform='translateY(0)'; }}>
                   <Mail size={15} /> {t.contact.email}
                 </a>
                 <a href="https://github.com/Hoangnguyenhuu12" target="_blank" rel="noopener noreferrer"
-                   className="rounded-lg font-medium inline-flex items-center gap-2 transition-all"
                    style={{
                      background: isDarkMode ? '#ffffff' : '#000000',
                      color: isDarkMode ? '#000000' : '#ffffff',
                      border: 'none',
                      cursor: 'pointer',
-                     padding: '6px 20px',
+                     padding: '8px 24px',
                      fontSize: '14px',
-                     width: '100%',
-                     justifyContent: 'center'
+                     borderRadius: '8px',
+                     fontWeight: '500',
+                     display: 'inline-flex',
+                     alignItems: 'center',
+                     gap: '8px',
+                     textDecoration: 'none',
+                     whiteSpace: 'nowrap',
+                     transition: 'all 0.3s ease'
                    }}
-                   onMouseEnter={(e) => {
-                     e.currentTarget.style.opacity = '0.9';
-                     e.currentTarget.style.transform = 'translateY(-2px)';
-                   }}
-                   onMouseLeave={(e) => {
-                     e.currentTarget.style.opacity = '1';
-                     e.currentTarget.style.transform = 'translateY(0)';
-                   }}>
+                   onMouseEnter={(e) => { e.currentTarget.style.opacity='0.85'; e.currentTarget.style.transform='translateY(-2px)'; }}
+                   onMouseLeave={(e) => { e.currentTarget.style.opacity='1'; e.currentTarget.style.transform='translateY(0)'; }}>
                   <Github size={15} /> {t.contact.github}
                 </a>
               </div>
