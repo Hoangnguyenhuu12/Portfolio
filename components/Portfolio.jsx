@@ -608,7 +608,7 @@ const Portfolio = () => {
                      color: '#ffffff',
                      border: 'none',
                      cursor: 'pointer',
-                     padding: '8px 16px',
+                     padding: '5px 10px',
                      fontSize: '14px'
                    }}
                    onMouseEnter={(e) => {
@@ -628,7 +628,7 @@ const Portfolio = () => {
                      color: isDarkMode ? '#000000' : '#ffffff',
                      border: 'none',
                      cursor: 'pointer',
-                     padding: '8px 16px',
+                     padding: '5px 10px',
                      fontSize: '14px'
                    }}
                    onMouseEnter={(e) => {
