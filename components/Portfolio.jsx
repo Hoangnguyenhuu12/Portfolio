@@ -41,8 +41,10 @@ const Portfolio = () => {
   }, []);
 
   useEffect(() => {
+    // Set initial scroll position immediately on mount
+    setScrollY(window.scrollY);
     const handleScroll = () => setScrollY(window.scrollY);
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
@@ -168,8 +170,9 @@ const Portfolio = () => {
   const t = content[isLang];
   const isDarkMode = isDark;
 
-  const heroOpacity = Math.max(0, 1 - scrollY / 500);
+  const heroOpacity = Math.max(0, 1 - scrollY / 150);
   const heroScale = Math.max(0.95, 1 - scrollY / 2000);
+  const heroVisible = scrollY < 50;
 
   const glassStyle = {
     background: isDarkMode 
@@ -284,8 +287,9 @@ const Portfolio = () => {
              color: isDarkMode ? '#ffffff' : '#000000',
              opacity: heroOpacity,
              transform: `scale(${heroScale})`,
-             transition: 'opacity 0.1s linear, transform 0.1s linear',
-             pointerEvents: heroOpacity > 0 ? 'auto' : 'none'
+             transition: 'opacity 0.15s linear, transform 0.15s linear',
+             pointerEvents: heroVisible ? 'auto' : 'none',
+             visibility: heroOpacity === 0 ? 'hidden' : 'visible'
            }}>
         <div className="text-center max-w-3xl px-6">
           <h1 className="text-8xl md:text-9xl font-bold leading-tight font-mono">
