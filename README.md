@@ -1,4 +1,4 @@
-# AI Engineer Portfolio - Nguyễn Hữu Hoàng
+# My Portfolio - Nguyen Huu Hoang
 
 Minimalist, modern portfolio website for AI engineers specializing in LLM & RAG systems. Built with Next.js, React, and Tailwind CSS.
 
