@@ -603,9 +603,9 @@ const Portfolio = () => {
               <div style={{display:'flex', flexDirection:'column', gap:'12px', alignItems:'flex-start', justifyContent:'flex-start'}}>
                 <a href="mailto:nguyenhuuhoang5038@gmail.com"
                    style={{
-                     background: '#000000',
-                     color: '#ffffff',
-                     border: 'none',
+                     background: isDarkMode ? '#000000' : '#ffffff',
+                     color: isDarkMode ? '#ffffff' : '#000000',
+                     border: isDarkMode ? 'none' : '1px solid #000000',
                      cursor: 'pointer',
                      padding: '8px 24px',
                      fontSize: '14px',
