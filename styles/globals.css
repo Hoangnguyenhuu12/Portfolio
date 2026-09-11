@@ -6,6 +6,7 @@
 
 html {
   scroll-behavior: smooth;
+  scroll-padding-top: 80px;
 }
 
 body {
@@ -33,7 +34,7 @@ button {
 
 /* Smooth transitions */
 * {
-  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+  transition: background-color 0.2s ease, color 0.2s ease;
 }
 
 /* For better accessibility */
@@ -43,4 +44,204 @@ button {
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
   }
+}
+
+/* ==========================================================================
+   BẢNG TUỲ CHỈNH ĐỘ MỜ & TRONG SUỐT CHO CÁC COMPONENT (GLASS CARDS)
+   Bạn có thể chỉnh sửa trực tiếp các thông số dưới đây theo ý muốn:
+   ========================================================================== */
+:root {
+  /* --- 1. CHẾ ĐỘ NỀN TỐI (DARK MODE) --- */
+  /* [A] Khi KHÔNG rê chuột vào (Trạng thái nghỉ): */
+  --dark-card-blur: 2px;
+  /* Độ mờ kính (blur): 0px là trong vắt, 4px-8px là mờ nhòe */
+  --dark-card-bg: rgba(255, 255, 255, 0.025);
+  /* Độ đục của nền: 0.01 (rất trong) -> 0.15 (đục dần) */
+  --dark-card-border: rgba(255, 255, 255, 0.08);
+  /* Độ sáng của đường viền card */
+
+  /* [B] Khi RÊ CHUỘT vào (Hover): */
+  --dark-card-hover-blur: 8px;
+  /* Độ mờ kính khi rê chuột */
+  --dark-card-hover-bg: rgba(255, 255, 255, 0.04);
+  /* Màu/độ đục nền khi rê chuột */
+  --dark-card-hover-border: rgba(255, 255, 255, 0.16);
+  /* Độ sáng viền khi rê chuột */
+
+
+  /* --- 2. CHẾ ĐỘ NỀN SÁNG (LIGHT MODE) --- */
+  /* [A] Khi KHÔNG rê chuột vào (Trạng thái nghỉ): */
+  --light-card-blur: 2px;
+  /* Độ mờ kính (blur) */
+  --light-card-bg: rgba(255, 255, 255, 0.20);
+  /* Độ đục nền trắng: 0.1 (trong suốt) -> 0.6 (trắng đục) */
+  --light-card-border: rgba(0, 0, 0, 0.06);
+  /* Độ đậm viền xám */
+
+  /* [B] Khi RÊ CHUỘT vào (Hover): */
+  --light-card-hover-blur: 6px;
+  /* Độ mờ kính khi rê chuột */
+  --light-card-hover-bg: rgba(255, 255, 255, 0.28);
+  /* Độ đục nền khi rê chuột */
+  --light-card-hover-border: rgba(0, 0, 0, 0.16);
+  /* Độ đậm viền khi rê chuột */
+}
+
+/* Pure Black & White Component Styles - Interactive Shader & Depth Effects */
+.glass-card,
+.project-card {
+  position: relative;
+  transition: transform 0.32s cubic-bezier(0.23, 1, 0.320, 1),
+    box-shadow 0.32s ease,
+    border-color 0.32s ease,
+    background-color 0.32s ease,
+    backdrop-filter 0.32s ease,
+    -webkit-backdrop-filter 0.32s ease;
+  cursor: pointer;
+}
+
+/* 1. Dark Mode - Khi KHÔNG rê chuột */
+.dark .glass-card,
+.dark .project-card {
+  background-color: var(--dark-card-bg);
+  backdrop-filter: blur(var(--dark-card-blur));
+  -webkit-backdrop-filter: blur(var(--dark-card-blur));
+  border: 1px solid var(--dark-card-border);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.20);
+}
+
+/* 2. Dark Mode - Khi RÊ CHUỘT vào */
+.dark .glass-card:hover,
+.dark .project-card:hover {
+  transform: translateY(-3px);
+  background-color: var(--dark-card-hover-bg) !important;
+  backdrop-filter: blur(var(--dark-card-hover-blur)) !important;
+  -webkit-backdrop-filter: blur(var(--dark-card-hover-blur)) !important;
+  border-color: var(--dark-card-hover-border) !important;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.45), 0 0 20px rgba(255, 255, 255, 0.03) !important;
+}
+
+/* 3. Light Mode - Khi KHÔNG rê chuột */
+.light .glass-card,
+.light .project-card {
+  background-color: var(--light-card-bg);
+  backdrop-filter: blur(var(--light-card-blur));
+  -webkit-backdrop-filter: blur(var(--light-card-blur));
+  border: 1px solid var(--light-card-border);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.03);
+}
+
+/* 4. Light Mode - Khi RÊ CHUỘT vào */
+.light .glass-card:hover,
+.light .project-card:hover {
+  transform: translateY(-3px);
+  background-color: var(--light-card-hover-bg) !important;
+  backdrop-filter: blur(var(--light-card-hover-blur)) !important;
+  -webkit-backdrop-filter: blur(var(--light-card-hover-blur)) !important;
+  border-color: var(--light-card-hover-border) !important;
+  box-shadow: 0 14px 32px rgba(0, 0, 0, 0.07), 0 2px 8px rgba(0, 0, 0, 0.03) !important;
+}
+
+/* Mouse Spotlight Shader for Cards */
+.spotlight-card {
+  position: relative;
+  overflow: hidden;
+}
+
+.spotlight-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+  z-index: 0;
+}
+
+/* Dark mode spotlight: Dịu nhẹ, không lóa */
+.dark .spotlight-card::before {
+  background: radial-gradient(400px circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
+      rgba(255, 255, 255, 0.05),
+      transparent 55%);
+}
+
+/* Light mode spotlight: Đổ bóng rọi nhẹ nhàng, tuyệt đối không phủ trắng làm mờ chữ */
+.light .spotlight-card::before {
+  background: radial-gradient(400px circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
+      rgba(0, 0, 0, 0.035),
+      transparent 55%);
+}
+
+.spotlight-card:hover::before {
+  opacity: 1;
+}
+
+.glass-button {
+  transition: transform 0.3s cubic-bezier(0.23, 1, 0.320, 1), box-shadow 0.3s ease, border-color 0.3s ease;
+  cursor: pointer;
+}
+
+.dark .glass-button:hover {
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.15) !important;
+}
+
+.light .glass-button:hover {
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.10) !important;
+}
+
+.skill-badge {
+  transition: transform 0.3s cubic-bezier(0.23, 1, 0.320, 1), box-shadow 0.3s ease, border-color 0.3s ease;
+  cursor: pointer;
+}
+
+.dark .skill-badge:hover {
+  transform: scale(1.05) translateY(-2px);
+  box-shadow: 0 0 16px rgba(255, 255, 255, 0.20) !important;
+  border-color: rgba(255, 255, 255, 0.35) !important;
+}
+
+.light .skill-badge:hover {
+  transform: scale(1.05) translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12) !important;
+  border-color: rgba(0, 0, 0, 0.25) !important;
+}
+
+/* Ambient Spatial Dot Grid Shader */
+.spatial-grid {
+  background-image: radial-gradient(circle at 1px 1px, currentColor 1px, transparent 0);
+  background-size: 36px 36px;
+  mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 40%, transparent 100%);
+  -webkit-mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 40%, transparent 100%);
+}
+
+.nav-link {
+  position: relative;
+  cursor: pointer;
+}
+
+.nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: currentColor;
+  transition: width 0.3s ease;
+}
+
+.nav-link:hover::after {
+  width: 100%;
+}
+
+/* Interactive 3D Hexagon Parallax Background Canvas */
+#hex-bg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  pointer-events: none;
 }

@@ -10,7 +10,7 @@ module.exports = {
       colors: {
         bg: {
           light: '#ffffff',
-          dark: '#0a0a0a',
+          dark: '#000000',
         },
       },
       fontFamily: {

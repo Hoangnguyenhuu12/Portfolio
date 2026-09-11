@@ -1,32 +1,66 @@
-import React, { useState, useEffect } from 'react';
-import { Mail, Github, ExternalLink, Moon, Sun, ArrowUpRight } from 'lucide-react';
+import React, { useState, useEffect, useRef } from 'react';
+import { Mail, Github, ExternalLink, Moon, Sun, ArrowUpRight, Copy, Check } from 'lucide-react';
+import HexagonBackground from './HexagonBackground';
 
-// Typing effect component
-const TypingText = ({ text, speed = 50, isActive = true }) => {
-  const [displayedText, setDisplayedText] = useState('');
+// Rotating typewriter component with type-in and backspace/delete loop ("tụt ra tụt vô")
+const RotatingTypewriter = ({
+  phrases = ["Hoang Nguyen", "an AI Engineer", "a Hedgehog"],
+  typingSpeed = 140,
+  deletingSpeed = 60,
+  pauseDuration = 2000,
+  cursor = '_'
+}) => {
+  const [phraseIndex, setPhraseIndex] = useState(0);
+  const [text, setText] = useState('');
+  const [isDeleting, setIsDeleting] = useState(false);
 
   useEffect(() => {
-    if (!isActive) {
-      setDisplayedText(text);
-      return;
+    setText('');
+    setIsDeleting(false);
+    setPhraseIndex(0);
+  }, [phrases]);
+
+  useEffect(() => {
+    const currentPhrase = phrases[phraseIndex % phrases.length];
+    let timeout;
+
+    if (!isDeleting) {
+      if (text.length < currentPhrase.length) {
+        timeout = setTimeout(() => {
+          setText(currentPhrase.substring(0, text.length + 1));
+        }, typingSpeed);
+      } else {
+        timeout = setTimeout(() => {
+          setIsDeleting(true);
+        }, pauseDuration);
+      }
+    } else {
+      if (text.length > 0) {
+        timeout = setTimeout(() => {
+          setText(currentPhrase.substring(0, text.length - 1));
+        }, deletingSpeed);
+      } else {
+        setIsDeleting(false);
+        setPhraseIndex((prev) => (prev + 1) % phrases.length);
+      }
     }
 
-    let index = 0;
-    const interval = setInterval(() => {
-      if (index <= text.length) {
-        setDisplayedText(text.substring(0, index) + (index < text.length ? '_' : ''));
-        index++;
-      } else {
-        setDisplayedText(text);
-        clearInterval(interval);
-      }
-    }, speed);
+    return () => clearTimeout(timeout);
+  }, [text, isDeleting, phraseIndex, phrases, typingSpeed, deletingSpeed, pauseDuration]);
 
-    return () => clearInterval(interval);
-  }, [text, speed, isActive]);
-
-  return <span>{displayedText}</span>;
+  return (
+    <span>
+      <span>{text}</span>
+      <span
+        className="ml-1 inline-block animate-pulse select-none font-bold align-baseline"
+        aria-hidden="true"
+      >
+        {cursor}
+      </span>
+    </span>
+  );
 };
+
 
 const Portfolio = () => {
   const [isDark, setIsDark] = useState(false);
@@ -50,27 +84,28 @@ const Portfolio = () => {
 
   const content = {
     en: {
-      nav: { skills: 'Skills', projects: 'Projects', contact: 'Contact' },
+      nav: { about: 'About', skills: 'Skills', projects: 'Projects', contact: 'Contact' },
       hero: {
-        title: 'Building Intelligence at Scale',
-        subtitle: 'AI Engineer specializing in LLM & RAG systems',
+        staticPrefix: "Hi, I'm ",
+        phrases: ["Hoang Nguyen", "an AI Engineer", "a Hedgehog"],
+        subtitle: 'A passionate AI engineer from Vietnam',
         cta: 'Explore My Work'
       },
       about: {
         title: 'About',
-        intro: 'I\'m a 3rd-year student passionate about building production-grade AI systems. Recently completed an AI internship at Lạc Việt, where I developed RAG applications and personalization systems using cutting-edge LLM technologies.',
+        intro: 'As a 19-year-old Artificial Intelligence student at FPT University, I bring strong discipline, persistence, and a logical mindset. By actively organizing club events and building tech projects for my classes, I have developed strong problem-solving and effective teamwork skills. I am currently seeking hands-on experience in a professional tech environment to further grow my AI knowledge and develop myself.',
         experience: {
           title: 'Experience',
           internship: {
             role: 'AI Engineer Intern',
-            company: 'Lạc Việt',
-            duration: '3 months',
+            company: 'Lac Viet Company',
+            duration: '06-09/2026',
             desc: 'Developed RAG & recommendation systems using LangChain, Vector DB, and OCR'
           },
           education: {
             role: 'Computer Science Student',
-            company: 'University',
-            duration: 'Currently Year 3',
+            company: 'FPT University',
+            duration: '09/2024 - Now',
             desc: 'Specialized coursework in ML, NLP, and system design'
           }
         }
@@ -102,15 +137,24 @@ const Portfolio = () => {
       },
       contact: {
         title: 'Get In Touch',
+        badge: 'Available for Opportunities',
         subtitle: 'Open to opportunities at Big Tech companies and innovative startups',
-        email: 'Email me',
-        github: 'View GitHub'
+        quote: "We've become so focused on that tiny screen that we forget the big picture, the people right in front of us.",
+        quoteAuthor: 'Kanye West',
+        email: 'Email Me',
+        emailSub: 'Direct inquiry & collaboration',
+        github: 'View GitHub',
+        githubSub: 'Open source & AI repositories',
+        copied: 'Copied to clipboard!',
+        copyBtn: 'Copy',
+        socialTitle: 'Connect on Social'
       }
     },
     vi: {
-      nav: { skills: 'Kỹ Năng', projects: 'Dự Án', contact: 'Liên Hệ' },
+      nav: { about: 'Về Tôi', skills: 'Kỹ Năng', projects: 'Dự Án', contact: 'Liên Hệ' },
       hero: {
-        title: 'Xây Dựng Trí Tuệ Nhân Tạo',
+        staticPrefix: "Hi, I'm ",
+        phrases: ["Hoang Nguyen", "an AI Engineer", "a Hedgehog"],
         subtitle: 'AI Engineer chuyên về LLM & RAG systems',
         cta: 'Xem Công Việc'
       },
@@ -160,9 +204,17 @@ const Portfolio = () => {
       },
       contact: {
         title: 'Liên Hệ Tôi',
+        badge: 'Sẵn Sàng Cho Cơ Hội Mới',
         subtitle: 'Mở cửa cho cơ hội tại các công ty Big Tech và startup sáng tạo',
-        email: 'Gửi Email',
-        github: 'Xem GitHub'
+        quote: "Chúng ta quá tập trung vào màn hình nhỏ bé đó đến mức quên đi bức tranh lớn, những người đang ở ngay trước mắt chúng ta.",
+        quoteAuthor: 'Kanye West',
+        email: 'Gửi Email Trực Tiếp',
+        emailSub: 'Liên hệ công việc & cộng tác',
+        github: 'Xem GitHub',
+        githubSub: 'Dự án AI & mã nguồn mở',
+        copied: 'Đã sao chép email!',
+        copyBtn: 'Sao chép',
+        socialTitle: 'Mạng Xã Hội'
       }
     }
   };
@@ -170,173 +222,80 @@ const Portfolio = () => {
   const t = content[isLang];
   const isDarkMode = isDark;
 
-  const heroOpacity = Math.max(0, 1 - scrollY / 150);
-  const heroScale = Math.max(0.95, 1 - scrollY / 2000);
-  const heroVisible = scrollY < 50;
-
-  const glassStyle = {
-    background: isDarkMode 
-      ? 'rgba(255, 255, 255, 0.05)' 
-      : 'rgba(255, 255, 255, 0.7)',
-    backdropFilter: 'blur(10px)',
-    border: `1px solid ${isDarkMode ? 'rgba(255,255,255,0.15)' : 'rgba(255,255,255,0.3)'}`,
-    boxShadow: isDarkMode
-      ? '0 8px 32px 0 rgba(255, 255, 255, 0.08)'
-      : '0 8px 32px 0 rgba(0, 0, 0, 0.1)'
+  const handleMouseMove = (e) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    e.currentTarget.style.setProperty('--mouse-x', `${x}px`);
+    e.currentTarget.style.setProperty('--mouse-y', `${y}px`);
   };
 
-  return (
-    <div className={`${isDarkMode ? 'dark' : 'light'}`}
-         style={{
-           backgroundColor: isDarkMode ? '#0a0a0a' : '#f9f9f9',
-           color: isDarkMode ? '#e5e5e5' : '#1a1a1a'
-         }}>
-      
-      <style>{`
-        .glass-card {
-          transition: all 0.3s cubic-bezier(0.23, 1, 0.320, 1);
-          cursor: pointer;
-        }
-        
-        .glass-card:hover {
-          transform: translateY(-4px);
-          box-shadow: ${isDarkMode
-            ? '0 0 20px rgba(255, 255, 255, 0.2), 0 16px 64px 0 rgba(255, 255, 255, 0.12)'
-            : '0 16px 64px 0 rgba(0, 0, 0, 0.2)'} !important;
-          border-color: ${isDarkMode 
-            ? 'rgba(255, 255, 255, 0.4)' 
-            : 'rgba(0, 0, 0, 0.1)'} !important;
-        }
-        
-        .glass-button {
-          transition: all 0.3s cubic-bezier(0.23, 1, 0.320, 1);
-          cursor: pointer;
-        }
-        
-        .glass-button:hover {
-          transform: translateY(-4px);
-          box-shadow: ${isDarkMode 
-            ? '0 0 16px rgba(255, 255, 255, 0.15), 0 12px 48px 0 rgba(255, 255, 255, 0.15)'
-            : '0 12px 48px 0 rgba(0, 0, 0, 0.2)'} !important;
-          border-color: ${isDarkMode 
-            ? 'rgba(255, 255, 255, 0.4)' 
-            : 'rgba(0, 0, 0, 0.15)'} !important;
-        }
-        
-        .skill-badge {
-          transition: all 0.3s cubic-bezier(0.23, 1, 0.320, 1);
-          cursor: pointer;
-        }
-        
-        .skill-badge:hover {
-          transform: scale(1.12) translateY(-4px);
-          border-color: ${isDarkMode 
-            ? 'rgba(255, 255, 255, 0.4)' 
-            : 'rgba(0, 0, 0, 0.15)'} !important;
-          box-shadow: ${isDarkMode 
-            ? '0 0 12px rgba(255, 255, 255, 0.15)'
-            : '0 8px 24px rgba(0, 0, 0, 0.1)'} !important;
-        }
-        
-        .project-card {
-          transition: all 0.4s cubic-bezier(0.23, 1, 0.320, 1);
-          cursor: pointer;
-        }
-        
-        .project-card:hover {
-          transform: translateY(-6px);
-          box-shadow: ${isDarkMode
-            ? '0 0 24px rgba(255, 255, 255, 0.2), 0 20px 72px 0 rgba(255, 255, 255, 0.12)'
-            : '0 20px 72px 0 rgba(0, 0, 0, 0.2)'} !important;
-          border-color: ${isDarkMode 
-            ? 'rgba(255, 255, 255, 0.4)' 
-            : 'rgba(0, 0, 0, 0.1)'} !important;
-        }
-        
-        .nav-link {
-          transition: all 0.3s ease;
-          position: relative;
-          cursor: pointer;
-        }
-        
-        .nav-link:hover {
-          opacity: 1 !important;
-          color: ${isDarkMode ? '#ffffff' : '#000000'} !important;
-        }
-        
-        .nav-link::after {
-          content: '';
-          position: absolute;
-          bottom: -2px;
-          left: 0;
-          width: 0;
-          height: 2px;
-          background: currentColor;
-          transition: width 0.3s ease;
-        }
-        
-        .nav-link:hover::after {
-          width: 100%;
-        }
-      `}</style>
 
-      {/* Full Screen Hero with Typing Effect */}
-      <div className="fixed inset-0 z-0 flex flex-col items-center justify-center pointer-events-none"
-           style={{
-             backgroundColor: isDarkMode ? '#000000' : '#ffffff',
-             color: isDarkMode ? '#ffffff' : '#000000',
-             opacity: heroOpacity,
-             transform: `scale(${heroScale})`,
-             transition: 'opacity 0.15s linear, transform 0.15s linear',
-             pointerEvents: heroVisible ? 'auto' : 'none',
-             visibility: heroOpacity === 0 ? 'hidden' : 'visible'
-           }}>
-        <div className="text-center max-w-3xl px-6">
-          <h1 className="text-8xl md:text-9xl font-bold leading-tight font-mono">
-            <TypingText text="Hoang's Portfolio" speed={150} isActive={heroOpacity > 0.5} />
-          </h1>
-        </div>
-      </div>
+  // Phong cách kính (glass) hiện được quản lý tập trung và tuỳ chỉnh dễ dàng qua CSS Variables trong globals.css
+  const glassStyle = {};
+
+  return (
+    <div className={`${isDarkMode ? 'dark' : 'light'} relative overflow-hidden`}
+      style={{
+        backgroundColor: isDarkMode ? '#000000' : '#ffffff',
+        color: isDarkMode ? '#ffffff' : '#000000'
+      }}>
+
+      {/* Interactive 3D Hexagon Parallax Background */}
+      <HexagonBackground isDark={isDarkMode} />
 
       {/* Main Content */}
-      <div className="relative z-10"
-           style={{
-             paddingTop: '100vh'
-           }}>
-        
-        {/* Navigation */}
-        <nav className="sticky top-0 z-50" 
-             style={{
-               background: isDarkMode 
-                 ? 'rgba(10, 10, 10, 0.7)' 
-                 : 'rgba(255, 255, 255, 0.5)',
-               backdropFilter: 'blur(10px)',
-               borderBottom: `1px solid ${isDarkMode ? 'rgba(255,255,255,0.1)' : 'rgba(0,0,0,0.1)'}`
-             }}>
+      <div className="relative z-10">
+
+        {/* Navigation - Fixed/Locked Header */}
+        <nav className="fixed top-0 left-0 right-0 z-50 transition-all duration-200"
+          style={{
+            background: isDarkMode ? 'rgba(0, 0, 0, 0.85)' : 'rgba(255, 255, 255, 0.88)',
+            backdropFilter: 'blur(16px)',
+            WebkitBackdropFilter: 'blur(16px)',
+            borderBottom: scrollY > 20
+              ? (isDarkMode ? '1px solid rgba(255, 255, 255, 0.12)' : '1px solid rgba(0, 0, 0, 0.08)')
+              : '1px solid transparent'
+          }}>
           <div className="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center">
             <div className="text-xl font-bold tracking-tight" style={{
               color: isDarkMode ? '#ffffff' : '#000000'
             }}>
               Hoangf
             </div>
-            
+
             <div className="flex items-center gap-8">
               <div className="hidden md:flex gap-8 text-sm">
-                <a href="#skills" className="nav-link opacity-70">{t.nav.skills}</a>
-                <a href="#projects" className="nav-link opacity-70">{t.nav.projects}</a>
-                <a href="#contact" className="nav-link opacity-70">{t.nav.contact}</a>
+                <a href="#about" className="nav-link">{t.nav.about}</a>
+                <a href="#skills" className="nav-link">{t.nav.skills}</a>
+                <a href="#projects" className="nav-link">{t.nav.projects}</a>
+                <a href="#contact" className="nav-link">{t.nav.contact}</a>
               </div>
 
-              <div className="flex items-center gap-3 pl-6" style={{borderLeft: `1px solid ${isDarkMode ? 'rgba(255,255,255,0.1)' : 'rgba(0,0,0,0.1)'}`}}>
+              <div className="flex items-center gap-3 pl-6">
                 <button onClick={() => setIsLang(isLang === 'en' ? 'vi' : 'en')}
-                        className="text-xs font-semibold px-3 py-1.5 rounded-lg glass-button"
-                        style={glassStyle}>
+                  className="text-xs font-semibold px-3 py-1.5 rounded-lg glass-button"
+                  style={{
+                    background: isDarkMode ? 'rgba(255, 255, 255, 0.08)' : 'rgba(0, 0, 0, 0.05)',
+                    color: isDarkMode ? '#ffffff' : '#000000',
+                    border: isDarkMode ? '1px solid rgba(255, 255, 255, 0.14)' : '1px solid rgba(0, 0, 0, 0.10)',
+                    backdropFilter: 'blur(10px)',
+                    WebkitBackdropFilter: 'blur(10px)',
+                    boxShadow: 'none'
+                  }}>
                   {isLang === 'en' ? 'VI' : 'EN'}
                 </button>
 
                 <button onClick={() => setIsDark(!isDarkMode)}
-                        className="p-1.5 rounded-lg glass-button"
-                        style={glassStyle}>
+                  className="p-1.5 rounded-lg glass-button"
+                  style={{
+                    background: isDarkMode ? 'rgba(255, 255, 255, 0.08)' : 'rgba(0, 0, 0, 0.05)',
+                    color: isDarkMode ? '#ffffff' : '#000000',
+                    border: isDarkMode ? '1px solid rgba(255, 255, 255, 0.14)' : '1px solid rgba(0, 0, 0, 0.10)',
+                    backdropFilter: 'blur(10px)',
+                    WebkitBackdropFilter: 'blur(10px)',
+                    boxShadow: 'none'
+                  }}>
                   {isDarkMode ? <Sun size={18} /> : <Moon size={18} />}
                 </button>
               </div>
@@ -345,81 +304,109 @@ const Portfolio = () => {
         </nav>
 
         {/* Hero Content */}
-        <section className="max-w-6xl mx-auto px-6 py-20">
-          <div className="grid md:grid-cols-2 gap-12 items-center">
-            <div className="max-w-2xl">
-              <h2 className="text-4xl md:text-5xl font-bold mb-4">
-                {t.hero.title}
-              </h2>
-              <p className="text-lg md:text-xl opacity-70 mb-10">{t.hero.subtitle}</p>
+        <section className="max-w-6xl mx-auto px-6 pt-24 md:pt-28 pb-20">
+          <div className="grid lg:grid-cols-[1.3fr,0.7fr] gap-8 lg:gap-12 items-center">
+            <div className="w-full">
+              <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-[46px] xl:text-[52px] font-bold tracking-tight mb-6 whitespace-nowrap min-h-[1.3em] leading-tight"
+                style={{
+                  color: isDarkMode ? '#ffffff' : '#000000'
+                }}>
+                <span>{t.hero.staticPrefix}</span>
+                <RotatingTypewriter
+                  phrases={t.hero.phrases}
+                  typingSpeed={100}
+                  deletingSpeed={45}
+                  pauseDuration={2200}
+                  cursor="_"
+                />
+              </h1>
+              <p className="text-base sm:text-lg mb-10 leading-relaxed max-w-xl"
+                style={{
+                  color: isDarkMode ? '#ffffff' : '#000000'
+                }}>
+                {t.hero.subtitle}
+              </p>
               <div className="flex gap-4 flex-wrap">
                 <a href="#projects" className="glass-button px-8 py-4 rounded-xl font-medium"
-                   style={{
-                     ...glassStyle,
-                     background: isDarkMode ? '#ffffff' : '#000000',
-                     color: isDarkMode ? '#000000' : '#ffffff',
-                     border: 'none',
-                     transition: 'all 0.3s cubic-bezier(0.23, 1, 0.320, 1)'
-                   }}
-                   onMouseEnter={(e) => {
-                     e.currentTarget.style.background = isDarkMode ? '#000000' : '#ffffff';
-                     e.currentTarget.style.color = isDarkMode ? '#ffffff' : '#000000';
-                     e.currentTarget.style.transform = 'translateY(-2px)';
-                   }}
-                   onMouseLeave={(e) => {
-                     e.currentTarget.style.background = isDarkMode ? '#ffffff' : '#000000';
-                     e.currentTarget.style.color = isDarkMode ? '#000000' : '#ffffff';
-                     e.currentTarget.style.transform = 'translateY(0)';
-                   }}>
+                  style={{
+                    background: isDarkMode ? 'rgba(255, 255, 255, 0.08)' : 'rgba(0, 0, 0, 0.05)',
+                    color: isDarkMode ? '#ffffff' : '#000000',
+                    border: isDarkMode ? '1px solid rgba(255, 255, 255, 0.18)' : '1px solid rgba(0, 0, 0, 0.12)',
+                    backdropFilter: 'blur(12px)',
+                    WebkitBackdropFilter: 'blur(12px)',
+                    outline: 'none',
+                    transition: 'all 0.25s cubic-bezier(0.23, 1, 0.320, 1)'
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.transform = 'translateY(-2px)';
+                    e.currentTarget.style.background = isDarkMode ? 'rgba(255, 255, 255, 0.18)' : 'rgba(0, 0, 0, 0.12)';
+                    e.currentTarget.style.borderColor = isDarkMode ? 'rgba(255, 255, 255, 0.38)' : 'rgba(0, 0, 0, 0.22)';
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.transform = 'translateY(0)';
+                    e.currentTarget.style.background = isDarkMode ? 'rgba(255, 255, 255, 0.08)' : 'rgba(0, 0, 0, 0.05)';
+                    e.currentTarget.style.borderColor = isDarkMode ? 'rgba(255, 255, 255, 0.18)' : '1px solid rgba(0, 0, 0, 0.12)';
+                  }}>
                   {t.hero.cta}
                 </a>
                 <a href="https://github.com/Hoangnguyenhuu12" target="_blank" rel="noopener noreferrer"
-                   className="glass-button px-8 py-4 rounded-xl font-medium inline-flex items-center gap-2"
-                   style={{
-                     ...glassStyle,
-                     transition: 'all 0.3s cubic-bezier(0.23, 1, 0.320, 1)'
-                   }}
-                   onMouseEnter={(e) => {
-                     e.currentTarget.style.background = isDarkMode ? '#ffffff' : '#000000';
-                     e.currentTarget.style.color = isDarkMode ? '#000000' : '#ffffff';
-                     e.currentTarget.style.transform = 'translateY(-2px)';
-                   }}
-                   onMouseLeave={(e) => {
-                     e.currentTarget.style.background = isDarkMode 
-                       ? 'rgba(255, 255, 255, 0.05)' 
-                       : 'rgba(255, 255, 255, 0.7)';
-                     e.currentTarget.style.color = isDarkMode ? '#ffffff' : '#000000';
-                     e.currentTarget.style.transform = 'translateY(0)';
-                   }}>
+                  className="glass-button px-8 py-4 rounded-xl font-medium inline-flex items-center gap-2"
+                  style={{
+                    background: isDarkMode ? 'rgba(255, 255, 255, 0.04)' : 'rgba(0, 0, 0, 0.03)',
+                    color: isDarkMode ? '#ffffff' : '#000000',
+                    border: isDarkMode ? '1px solid rgba(255, 255, 255, 0.12)' : '1px solid rgba(0, 0, 0, 0.08)',
+                    backdropFilter: 'blur(12px)',
+                    WebkitBackdropFilter: 'blur(12px)',
+                    outline: 'none',
+                    transition: 'all 0.25s cubic-bezier(0.23, 1, 0.320, 1)'
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.transform = 'translateY(-2px)';
+                    e.currentTarget.style.background = isDarkMode ? 'rgba(255, 255, 255, 0.12)' : 'rgba(0, 0, 0, 0.08)';
+                    e.currentTarget.style.borderColor = isDarkMode ? 'rgba(255, 255, 255, 0.28)' : 'rgba(0, 0, 0, 0.18)';
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.transform = 'translateY(0)';
+                    e.currentTarget.style.background = isDarkMode ? 'rgba(255, 255, 255, 0.04)' : 'rgba(0, 0, 0, 0.03)';
+                    e.currentTarget.style.borderColor = isDarkMode ? '1px solid rgba(255, 255, 255, 0.12)' : '1px solid rgba(0, 0, 0, 0.08)';
+                  }}>
                   GitHub <ArrowUpRight size={18} />
                 </a>
               </div>
             </div>
 
-            {/* Avatar Section */}
+            {/* Avatar Section with Contrasting Frame */}
             <div className="flex justify-center md:justify-end">
               <div style={{
                 width: '300px',
                 height: '300px',
                 borderRadius: '50%',
-                border: `4px solid ${isDarkMode ? '#ffffff' : '#000000'}`,
+                border: `3px solid ${isDarkMode ? '#ffffff' : '#000000'}`,
                 overflow: 'hidden',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
-                background: isDarkMode ? 'rgba(255,255,255,0.05)' : 'rgba(0,0,0,0.05)',
-                boxShadow: isDarkMode 
-                  ? '0 0 30px rgba(255, 255, 255, 0.15)'
-                  : '0 0 30px rgba(0, 0, 0, 0.1)',
-                transition: 'all 0.3s ease'
-              }}>
-                <img 
-                  src="/avatar.jpg" 
+                background: isDarkMode ? '#000000' : '#ffffff',
+                boxShadow: isDarkMode ? '0 0 35px rgba(255, 255, 255, 0.2)' : '0 12px 35px rgba(0, 0, 0, 0.15)',
+                transition: 'all 0.35s cubic-bezier(0.23, 1, 0.320, 1)',
+                cursor: 'pointer'
+              }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.transform = 'scale(1.04)';
+                  e.currentTarget.style.boxShadow = isDarkMode ? '0 0 50px rgba(255, 255, 255, 0.35)' : '0 16px 45px rgba(0, 0, 0, 0.25)';
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.transform = 'scale(1)';
+                  e.currentTarget.style.boxShadow = isDarkMode ? '0 0 35px rgba(255, 255, 255, 0.2)' : '0 12px 35px rgba(0, 0, 0, 0.15)';
+                }}>
+                <img
+                  src={isDarkMode ? "/avatar.jpg" : "/avatar1.jpg"}
                   alt="Hoang's Portfolio Avatar"
                   style={{
                     width: '100%',
                     height: '100%',
-                    objectFit: 'cover'
+                    objectFit: 'cover',
+                    filter: 'none'
                   }}
                 />
               </div>
@@ -427,45 +414,49 @@ const Portfolio = () => {
           </div>
         </section>
 
-        {/* About */}
-        <section className="max-w-6xl mx-auto px-6 py-20">
-          <h2 className="text-4xl font-bold mb-12">{t.about.title}</h2>
-          <div className="grid md:grid-cols-2 gap-12">
-            <div className="glass-card p-8 rounded-2xl" style={glassStyle}>
-              <p className="text-lg opacity-80 leading-relaxed">
-                {t.about.intro}
-              </p>
+
+        {/* About & Experience */}
+        <section id="about" className="max-w-6xl mx-auto px-6 py-20">
+          <div className="grid md:grid-cols-2 gap-12 items-start">
+            {/* Left Column: About */}
+            <div>
+              <h2 className="text-4xl font-bold mb-8">{t.about.title}</h2>
+              <div className="glass-card spotlight-card p-8 rounded-2xl"
+                onMouseMove={handleMouseMove}
+                style={glassStyle}>
+                <p className="text-lg leading-relaxed">
+                  {t.about.intro}
+                </p>
+              </div>
             </div>
 
-            <div className="space-y-6">
-              <h3 className="text-sm font-semibold opacity-50 uppercase tracking-widest">{t.about.experience.title}</h3>
-              
-              <div className="glass-card p-6 rounded-2xl pl-8" 
-                   style={{
-                ...glassStyle,
-                borderLeft: `3px solid ${isDarkMode ? '#ffffff' : '#000000'}`
-              }}>
-                <div className="font-semibold text-lg">
-                  {t.about.experience.internship.role}
+            {/* Right Column: Experience */}
+            <div>
+              <h2 className="text-4xl font-bold mb-8">{t.about.experience.title}</h2>
+              <div className="space-y-6">
+                <div className="glass-card spotlight-card p-6 rounded-2xl pl-8"
+                  onMouseMove={handleMouseMove}
+                  style={glassStyle}>
+                  <div className="font-semibold text-lg">
+                    {t.about.experience.internship.role}
+                  </div>
+                  <div className="text-sm mt-1">
+                    {t.about.experience.internship.company} · {t.about.experience.internship.duration}
+                  </div>
+                  <div className="text-sm mt-3">{t.about.experience.internship.desc}</div>
                 </div>
-                <div className="text-sm opacity-60 mt-1">
-                  {t.about.experience.internship.company} · {t.about.experience.internship.duration}
-                </div>
-                <div className="text-sm opacity-70 mt-3">{t.about.experience.internship.desc}</div>
-              </div>
 
-              <div className="glass-card p-6 rounded-2xl pl-8"
-                   style={{
-                ...glassStyle,
-                borderLeft: `3px solid ${isDarkMode ? '#ffffff' : '#000000'}`
-              }}>
-                <div className="font-semibold text-lg">
-                  {t.about.experience.education.role}
+                <div className="glass-card spotlight-card p-6 rounded-2xl pl-8"
+                  onMouseMove={handleMouseMove}
+                  style={glassStyle}>
+                  <div className="font-semibold text-lg">
+                    {t.about.experience.education.role}
+                  </div>
+                  <div className="text-sm mt-1">
+                    {t.about.experience.education.company} · {t.about.experience.education.duration}
+                  </div>
+                  <div className="text-sm mt-3">{t.about.experience.education.desc}</div>
                 </div>
-                <div className="text-sm opacity-60 mt-1">
-                  {t.about.experience.education.company} · {t.about.experience.education.duration}
-                </div>
-                <div className="text-sm opacity-70 mt-3">{t.about.experience.education.desc}</div>
               </div>
             </div>
           </div>
@@ -476,7 +467,10 @@ const Portfolio = () => {
           <h2 className="text-4xl font-bold mb-12">{t.skills.title}</h2>
           <div className="grid md:grid-cols-3 gap-8">
             {Object.entries(t.skills.categories).map(([key, category]) => (
-              <div key={key} className="glass-card p-8 rounded-2xl" style={glassStyle}>
+              <div key={key}
+                className="glass-card spotlight-card p-8 rounded-2xl"
+                onMouseMove={handleMouseMove}
+                style={glassStyle}>
                 <h3 className="font-semibold mb-6 text-lg" style={{
                   color: isDarkMode ? '#ffffff' : '#000000'
                 }}>
@@ -484,14 +478,15 @@ const Portfolio = () => {
                 </h3>
                 <div className="flex flex-wrap gap-3">
                   {category.items.map((skill, idx) => (
-                    <span key={idx} className="skill-badge text-sm px-4 py-2 rounded-full"
-                          style={{
-                            background: isDarkMode 
-                              ? 'rgba(255, 255, 255, 0.05)' 
-                              : 'rgba(0, 0, 0, 0.04)',
-                            border: `1px solid ${isDarkMode ? 'rgba(255, 255, 255, 0.15)' : 'rgba(0, 0, 0, 0.08)'}`,
-                            color: isDarkMode ? 'rgba(255, 255, 255, 0.7)' : 'rgba(0, 0, 0, 0.6)'
-                          }}>
+                    <span key={idx} className="skill-badge text-sm px-4 py-2 rounded-full font-medium"
+                      style={{
+                        background: isDarkMode ? 'rgba(255, 255, 255, 0.06)' : 'rgba(0, 0, 0, 0.04)',
+                        color: isDarkMode ? '#ffffff' : '#000000',
+                        border: isDarkMode ? '1px solid rgba(255, 255, 255, 0.12)' : '1px solid rgba(0, 0, 0, 0.08)',
+                        backdropFilter: 'blur(8px)',
+                        WebkitBackdropFilter: 'blur(8px)',
+                        boxShadow: 'none'
+                      }}>
                       {skill}
                     </span>
                   ))}
@@ -506,33 +501,35 @@ const Portfolio = () => {
           <h2 className="text-4xl font-bold mb-12">{t.projects.title}</h2>
           <div className="grid md:grid-cols-2 gap-8">
             {t.projects.items.map((project, idx) => (
-              <div key={idx} 
-                   className="project-card p-8 rounded-2xl cursor-pointer"
-                   onMouseEnter={() => setHoveredProject(idx)}
-                   onMouseLeave={() => setHoveredProject(null)}
-                   style={glassStyle}>
+              <div key={idx}
+                className="project-card spotlight-card p-8 rounded-2xl cursor-pointer"
+                onMouseMove={handleMouseMove}
+                onMouseEnter={() => setHoveredProject(idx)}
+                onMouseLeave={() => setHoveredProject(null)}
+                style={glassStyle}>
                 <h3 className="text-xl font-bold mb-3">
                   {project.title}
                 </h3>
-                <p className="opacity-75 mb-6 leading-relaxed text-sm">{project.desc}</p>
+                <p className="mb-6 leading-relaxed text-sm">{project.desc}</p>
                 <div className="flex flex-wrap gap-2 mb-6">
                   {project.tech.map((tech, i) => (
                     <span key={i} className="text-xs px-3 py-1.5 rounded-full font-medium"
-                          style={{
-                            background: isDarkMode 
-                              ? 'rgba(255, 255, 255, 0.05)' 
-                              : 'rgba(0, 0, 0, 0.04)',
-                            color: isDarkMode ? 'rgba(255, 255, 255, 0.7)' : 'rgba(0, 0, 0, 0.6)',
-                            border: `1px solid ${isDarkMode ? 'rgba(255, 255, 255, 0.15)' : 'rgba(0, 0, 0, 0.08)'}`
-                          }}>
+                      style={{
+                        background: isDarkMode ? 'rgba(255, 255, 255, 0.05)' : 'rgba(0, 0, 0, 0.04)',
+                        color: isDarkMode ? '#ffffff' : '#000000',
+                        border: isDarkMode ? '1px solid rgba(255, 255, 255, 0.10)' : '1px solid rgba(0, 0, 0, 0.08)',
+                        backdropFilter: 'blur(6px)',
+                        WebkitBackdropFilter: 'blur(6px)',
+                        boxShadow: 'none'
+                      }}>
                       {tech}
                     </span>
                   ))}
                 </div>
-                <a href={project.link} className="inline-flex items-center gap-2 opacity-70 hover:opacity-100 transition text-sm font-medium group">
-                  Learn More 
+                <a href={project.link} className="inline-flex items-center gap-2 transition text-sm font-medium group">
+                  Learn More
                   <ArrowUpRight size={14} style={{
-                    transition: 'all 0.3s ease',
+                    transition: 'transform 0.2s ease',
                     transform: hoveredProject === idx ? 'translate(2px, -2px)' : 'translate(0, 0)'
                   }} />
                 </a>
@@ -543,25 +540,27 @@ const Portfolio = () => {
 
         {/* Contact */}
         <section id="contact" className="max-w-6xl mx-auto px-6 py-20">
-          <div className="glass-card p-12 rounded-3xl" style={glassStyle}>
-            <div className="grid md:grid-cols-2 gap-12">
+          <div className="glass-card spotlight-card p-12 rounded-3xl"
+            onMouseMove={handleMouseMove}
+            style={glassStyle}>
+            <div className="grid md:grid-cols-2 gap-12 items-center">
               {/* Left: Quote & Social Icons */}
               <div className="flex flex-col justify-between">
                 <div>
                   <h2 className="text-4xl font-bold mb-6">{t.contact.title}</h2>
-                  <p className="opacity-80 mb-8 text-lg italic">
+                  <p className="mb-8 text-lg italic">
                     "We've become so focused on that tiny screen that we forget the big picture, the people right in front of us."
                   </p>
-                  <p className="opacity-60 text-sm">— Kanye West</p>
+                  <p className="text-sm">— Kanye West</p>
                 </div>
 
-                {/* Social Media Icons */}
+                {/* Social Media Icons (Pure Black & White) */}
                 <div className="flex gap-4 items-center mt-8">
                   {/* Facebook */}
                   <a href="https://facebook.com" target="_blank" rel="noopener noreferrer"
-                     className="w-10 h-10 flex items-center justify-center hover:scale-110 transition"
-                     title="Facebook">
-                    <img 
+                    className="w-10 h-10 flex items-center justify-center hover:scale-110 transition"
+                    title="Facebook">
+                    <img
                       src={isDarkMode ? "/facebook-dark.png" : "/facebook-light.png"}
                       alt="Facebook"
                       className="w-full h-full object-contain"
@@ -570,9 +569,9 @@ const Portfolio = () => {
 
                   {/* Instagram */}
                   <a href="https://instagram.com" target="_blank" rel="noopener noreferrer"
-                     className="w-10 h-10 flex items-center justify-center hover:scale-110 transition"
-                     title="Instagram">
-                    <img 
+                    className="w-10 h-10 flex items-center justify-center hover:scale-110 transition"
+                    title="Instagram">
+                    <img
                       src={isDarkMode ? "/instagram-dark.png" : "/instagram-light.png"}
                       alt="Instagram"
                       className="w-full h-full object-contain"
@@ -581,9 +580,9 @@ const Portfolio = () => {
 
                   {/* Strava */}
                   <a href="https://strava.com" target="_blank" rel="noopener noreferrer"
-                     className="w-10 h-10 flex items-center justify-center hover:scale-110 transition"
-                     title="Strava">
-                    <img 
+                    className="w-10 h-10 flex items-center justify-center hover:scale-110 transition"
+                    title="Strava">
+                    <img
                       src={isDarkMode ? "/strava-dark.png" : "/strava-light.png"}
                       alt="Strava"
                       className="w-full h-full object-contain"
@@ -592,9 +591,9 @@ const Portfolio = () => {
 
                   {/* LinkedIn */}
                   <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer"
-                     className="w-10 h-10 flex items-center justify-center hover:scale-110 transition"
-                     title="LinkedIn">
-                    <img 
+                    className="w-10 h-10 flex items-center justify-center hover:scale-110 transition"
+                    title="LinkedIn">
+                    <img
                       src={isDarkMode ? "/linkedin-dark.png" : "/linkedin-light.png"}
                       alt="LinkedIn"
                       className="w-full h-full object-contain"
@@ -603,49 +602,57 @@ const Portfolio = () => {
                 </div>
               </div>
 
-              {/* Right: Buttons (Vertical Stack) */}
-              <div style={{display:'flex', flexDirection:'column', gap:'12px', alignItems:'flex-start', justifyContent:'flex-start'}}>
+              {/* Right: Buttons (Frosted Glass Blur with Delicate Hover Glow) */}
+              <div className="flex flex-col gap-4 items-start md:items-end justify-center">
                 <a href="mailto:nguyenhuuhoang5038@gmail.com"
-                   style={{
-                     background: isDarkMode ? '#000000' : '#ffffff',
-                     color: isDarkMode ? '#ffffff' : '#000000',
-                     border: isDarkMode ? 'none' : '1px solid #000000',
-                     cursor: 'pointer',
-                     padding: '8px 24px',
-                     fontSize: '14px',
-                     borderRadius: '8px',
-                     fontWeight: '500',
-                     display: 'inline-flex',
-                     alignItems: 'center',
-                     gap: '8px',
-                     textDecoration: 'none',
-                     whiteSpace: 'nowrap',
-                     transition: 'all 0.3s ease'
-                   }}
-                   onMouseEnter={(e) => { e.currentTarget.style.opacity='0.85'; e.currentTarget.style.transform='translateY(-2px)'; }}
-                   onMouseLeave={(e) => { e.currentTarget.style.opacity='1'; e.currentTarget.style.transform='translateY(0)'; }}>
-                  <Mail size={15} /> {t.contact.email}
+                  className="w-full sm:w-64 px-6 py-3.5 rounded-xl font-medium inline-flex items-center justify-center gap-3 glass-button"
+                  style={{
+                    background: isDarkMode ? 'rgba(255, 255, 255, 0.08)' : 'rgba(0, 0, 0, 0.05)',
+                    color: isDarkMode ? '#ffffff' : '#000000',
+                    border: isDarkMode ? '1px solid rgba(255, 255, 255, 0.16)' : '1px solid rgba(0, 0, 0, 0.10)',
+                    backdropFilter: 'blur(12px)',
+                    WebkitBackdropFilter: 'blur(12px)',
+                    outline: 'none',
+                    fontSize: '15px',
+                    textDecoration: 'none',
+                    transition: 'all 0.25s cubic-bezier(0.23, 1, 0.320, 1)'
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.transform = 'translateY(-2px)';
+                    e.currentTarget.style.background = isDarkMode ? 'rgba(255, 255, 255, 0.18)' : 'rgba(0, 0, 0, 0.12)';
+                    e.currentTarget.style.borderColor = isDarkMode ? 'rgba(255, 255, 255, 0.36)' : 'rgba(0, 0, 0, 0.22)';
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.transform = 'translateY(0)';
+                    e.currentTarget.style.background = isDarkMode ? 'rgba(255, 255, 255, 0.08)' : 'rgba(0, 0, 0, 0.05)';
+                    e.currentTarget.style.borderColor = isDarkMode ? 'rgba(255, 255, 255, 0.16)' : 'rgba(0, 0, 0, 0.10)';
+                  }}>
+                  <Mail size={18} /> {t.contact.email}
                 </a>
                 <a href="https://github.com/Hoangnguyenhuu12" target="_blank" rel="noopener noreferrer"
-                   style={{
-                     background: isDarkMode ? '#ffffff' : '#000000',
-                     color: isDarkMode ? '#000000' : '#ffffff',
-                     border: 'none',
-                     cursor: 'pointer',
-                     padding: '8px 24px',
-                     fontSize: '14px',
-                     borderRadius: '8px',
-                     fontWeight: '500',
-                     display: 'inline-flex',
-                     alignItems: 'center',
-                     gap: '8px',
-                     textDecoration: 'none',
-                     whiteSpace: 'nowrap',
-                     transition: 'all 0.3s ease'
-                   }}
-                   onMouseEnter={(e) => { e.currentTarget.style.opacity='0.85'; e.currentTarget.style.transform='translateY(-2px)'; }}
-                   onMouseLeave={(e) => { e.currentTarget.style.opacity='1'; e.currentTarget.style.transform='translateY(0)'; }}>
-                  <Github size={15} /> {t.contact.github}
+                  className="w-full sm:w-64 px-6 py-3.5 rounded-xl font-medium inline-flex items-center justify-center gap-3 glass-button"
+                  style={{
+                    background: isDarkMode ? 'rgba(255, 255, 255, 0.04)' : 'rgba(0, 0, 0, 0.03)',
+                    color: isDarkMode ? '#ffffff' : '#000000',
+                    border: isDarkMode ? '1px solid rgba(255, 255, 255, 0.12)' : '1px solid rgba(0, 0, 0, 0.08)',
+                    backdropFilter: 'blur(12px)',
+                    WebkitBackdropFilter: 'blur(12px)',
+                    outline: 'none',
+                    fontSize: '15px',
+                    textDecoration: 'none',
+                    transition: 'all 0.25s cubic-bezier(0.23, 1, 0.320, 1)'
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.transform = 'translateY(-2px)';
+                    e.currentTarget.style.background = isDarkMode ? 'rgba(255, 255, 255, 0.12)' : 'rgba(0, 0, 0, 0.08)';
+                    e.currentTarget.style.borderColor = isDarkMode ? 'rgba(255, 255, 255, 0.28)' : 'rgba(0, 0, 0, 0.18)';
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.transform = 'translateY(0)';
+                    e.currentTarget.style.background = isDarkMode ? 'rgba(255, 255, 255, 0.04)' : 'rgba(0, 0, 0, 0.03)';
+                    e.currentTarget.style.borderColor = isDarkMode ? '1px solid rgba(255, 255, 255, 0.12)' : '1px solid rgba(0, 0, 0, 0.08)';
+                  }}>
+                  <Github size={18} /> {t.contact.github}
                 </a>
               </div>
             </div>
@@ -653,9 +660,14 @@ const Portfolio = () => {
         </section>
 
         {/* Footer */}
-        <section className="max-w-6xl mx-auto px-6 py-12 mt-8 border-t"
-                 style={{borderColor: isDarkMode ? 'rgba(255,255,255,0.1)' : 'rgba(0,0,0,0.1)'}}>
-          <p className="text-sm opacity-40 text-center">
+        <section className="max-w-6xl mx-auto px-6 py-12 mt-8"
+          style={{
+            border: 'none'
+          }}>
+          <p className="text-sm text-center"
+            style={{
+              color: isDarkMode ? '#ffffff' : '#000000'
+            }}>
             © 2024 Nguyen Huu Hoang. Designed with focus on clarity and impact.
           </p>
         </section>
