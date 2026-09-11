@@ -608,8 +608,8 @@ const Portfolio = () => {
                      color: '#ffffff',
                      border: 'none',
                      cursor: 'pointer',
-                     padding: '8px 16px',
-                     fontSize: '14px'
+                     padding: '6px 12px',
+                     fontSize: '13px'
                    }}
                    onMouseEnter={(e) => {
                      e.currentTarget.style.opacity = '0.9';
@@ -628,8 +628,8 @@ const Portfolio = () => {
                      color: isDarkMode ? '#000000' : '#ffffff',
                      border: 'none',
                      cursor: 'pointer',
-                     padding: '8px 16px',
-                     fontSize: '14px'
+                     padding: '6px 12px',
+                     fontSize: '13px'
                    }}
                    onMouseEnter={(e) => {
                      e.currentTarget.style.opacity = '0.9';
