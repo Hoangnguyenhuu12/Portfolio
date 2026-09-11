@@ -600,16 +600,18 @@ const Portfolio = () => {
               </div>
 
               {/* Right: Buttons (Vertical Stack) */}
-              <div className="flex flex-col gap-3 justify-start">
+              <div className="flex flex-col gap-3 items-start">
                 <a href="mailto:nguyenhuuhoang5038@gmail.com"
-                   className="rounded-lg font-medium inline-flex items-center justify-center gap-2 w-full transition-all"
+                   className="rounded-lg font-medium inline-flex items-center gap-2 transition-all"
                    style={{
                      background: '#000000',
                      color: '#ffffff',
                      border: 'none',
                      cursor: 'pointer',
-                     padding: '5px 10px',
-                     fontSize: '14px'
+                     padding: '6px 20px',
+                     fontSize: '14px',
+                     width: '100%',
+                     justifyContent: 'center'
                    }}
                    onMouseEnter={(e) => {
                      e.currentTarget.style.opacity = '0.9';
@@ -619,17 +621,19 @@ const Portfolio = () => {
                      e.currentTarget.style.opacity = '1';
                      e.currentTarget.style.transform = 'translateY(0)';
                    }}>
-                  <Mail size={16} /> {t.contact.email}
+                  <Mail size={15} /> {t.contact.email}
                 </a>
                 <a href="https://github.com/Hoangnguyenhuu12" target="_blank" rel="noopener noreferrer"
-                   className="rounded-lg font-medium inline-flex items-center justify-center gap-2 w-full transition-all"
+                   className="rounded-lg font-medium inline-flex items-center gap-2 transition-all"
                    style={{
                      background: isDarkMode ? '#ffffff' : '#000000',
                      color: isDarkMode ? '#000000' : '#ffffff',
                      border: 'none',
                      cursor: 'pointer',
-                     padding: '5px 10px',
-                     fontSize: '14px'
+                     padding: '6px 20px',
+                     fontSize: '14px',
+                     width: '100%',
+                     justifyContent: 'center'
                    }}
                    onMouseEnter={(e) => {
                      e.currentTarget.style.opacity = '0.9';
@@ -639,7 +643,7 @@ const Portfolio = () => {
                      e.currentTarget.style.opacity = '1';
                      e.currentTarget.style.transform = 'translateY(0)';
                    }}>
-                  <Github size={16} /> {t.contact.github}
+                  <Github size={15} /> {t.contact.github}
                 </a>
               </div>
             </div>
