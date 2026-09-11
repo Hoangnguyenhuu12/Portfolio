@@ -276,11 +276,11 @@ const Portfolio = () => {
                 <button onClick={() => setIsLang(isLang === 'en' ? 'vi' : 'en')}
                   className="text-xs font-semibold px-3 py-1.5 rounded-lg glass-button"
                   style={{
-                    background: isDarkMode ? 'rgba(255, 255, 255, 0.08)' : 'rgba(0, 0, 0, 0.05)',
+                    background: isDarkMode ? 'rgba(255, 255, 255, 0.04)' : 'rgba(0, 0, 0, 0.03)',
                     color: isDarkMode ? '#ffffff' : '#000000',
-                    border: isDarkMode ? '1px solid rgba(255, 255, 255, 0.14)' : '1px solid rgba(0, 0, 0, 0.10)',
-                    backdropFilter: 'blur(10px)',
-                    WebkitBackdropFilter: 'blur(10px)',
+                    border: isDarkMode ? '1px solid rgba(255, 255, 255, 0.12)' : '1px solid rgba(0, 0, 0, 0.08)',
+                    backdropFilter: 'blur(12px)',
+                    WebkitBackdropFilter: 'blur(12px)',
                     boxShadow: 'none'
                   }}>
                   {isLang === 'en' ? 'VI' : 'EN'}
@@ -289,11 +289,11 @@ const Portfolio = () => {
                 <button onClick={() => setIsDark(!isDarkMode)}
                   className="p-1.5 rounded-lg glass-button"
                   style={{
-                    background: isDarkMode ? 'rgba(255, 255, 255, 0.08)' : 'rgba(0, 0, 0, 0.05)',
+                    background: isDarkMode ? 'rgba(255, 255, 255, 0.04)' : 'rgba(0, 0, 0, 0.03)',
                     color: isDarkMode ? '#ffffff' : '#000000',
-                    border: isDarkMode ? '1px solid rgba(255, 255, 255, 0.14)' : '1px solid rgba(0, 0, 0, 0.10)',
-                    backdropFilter: 'blur(10px)',
-                    WebkitBackdropFilter: 'blur(10px)',
+                    border: isDarkMode ? '1px solid rgba(255, 255, 255, 0.12)' : '1px solid rgba(0, 0, 0, 0.08)',
+                    backdropFilter: 'blur(12px)',
+                    WebkitBackdropFilter: 'blur(12px)',
                     boxShadow: 'none'
                   }}>
                   {isDarkMode ? <Sun size={18} /> : <Moon size={18} />}
@@ -329,9 +329,9 @@ const Portfolio = () => {
               <div className="flex gap-4 flex-wrap">
                 <a href="#projects" className="glass-button px-8 py-4 rounded-xl font-medium"
                   style={{
-                    background: isDarkMode ? 'rgba(255, 255, 255, 0.08)' : 'rgba(0, 0, 0, 0.05)',
+                    background: isDarkMode ? 'rgba(255, 255, 255, 0.04)' : 'rgba(0, 0, 0, 0.03)',
                     color: isDarkMode ? '#ffffff' : '#000000',
-                    border: isDarkMode ? '1px solid rgba(255, 255, 255, 0.18)' : '1px solid rgba(0, 0, 0, 0.12)',
+                    border: isDarkMode ? '1px solid rgba(255, 255, 255, 0.12)' : '1px solid rgba(0, 0, 0, 0.08)',
                     backdropFilter: 'blur(12px)',
                     WebkitBackdropFilter: 'blur(12px)',
                     outline: 'none',
@@ -339,13 +339,13 @@ const Portfolio = () => {
                   }}
                   onMouseEnter={(e) => {
                     e.currentTarget.style.transform = 'translateY(-2px)';
-                    e.currentTarget.style.background = isDarkMode ? 'rgba(255, 255, 255, 0.18)' : 'rgba(0, 0, 0, 0.12)';
-                    e.currentTarget.style.borderColor = isDarkMode ? 'rgba(255, 255, 255, 0.38)' : 'rgba(0, 0, 0, 0.22)';
+                    e.currentTarget.style.background = isDarkMode ? 'rgba(255, 255, 255, 0.12)' : 'rgba(0, 0, 0, 0.08)';
+                    e.currentTarget.style.borderColor = isDarkMode ? 'rgba(255, 255, 255, 0.28)' : 'rgba(0, 0, 0, 0.18)';
                   }}
                   onMouseLeave={(e) => {
                     e.currentTarget.style.transform = 'translateY(0)';
-                    e.currentTarget.style.background = isDarkMode ? 'rgba(255, 255, 255, 0.08)' : 'rgba(0, 0, 0, 0.05)';
-                    e.currentTarget.style.borderColor = isDarkMode ? 'rgba(255, 255, 255, 0.18)' : '1px solid rgba(0, 0, 0, 0.12)';
+                    e.currentTarget.style.background = isDarkMode ? 'rgba(255, 255, 255, 0.04)' : 'rgba(0, 0, 0, 0.03)';
+                    e.currentTarget.style.borderColor = isDarkMode ? '1px solid rgba(255, 255, 255, 0.12)' : '1px solid rgba(0, 0, 0, 0.08)';
                   }}>
                   {t.hero.cta}
                 </a>
@@ -607,9 +607,9 @@ const Portfolio = () => {
                 <a href="mailto:nguyenhuuhoang5038@gmail.com"
                   className="w-full sm:w-64 px-6 py-3.5 rounded-xl font-medium inline-flex items-center justify-center gap-3 glass-button"
                   style={{
-                    background: isDarkMode ? 'rgba(255, 255, 255, 0.08)' : 'rgba(0, 0, 0, 0.05)',
+                    background: isDarkMode ? 'rgba(255, 255, 255, 0.04)' : 'rgba(0, 0, 0, 0.03)',
                     color: isDarkMode ? '#ffffff' : '#000000',
-                    border: isDarkMode ? '1px solid rgba(255, 255, 255, 0.16)' : '1px solid rgba(0, 0, 0, 0.10)',
+                    border: isDarkMode ? '1px solid rgba(255, 255, 255, 0.12)' : '1px solid rgba(0, 0, 0, 0.08)',
                     backdropFilter: 'blur(12px)',
                     WebkitBackdropFilter: 'blur(12px)',
                     outline: 'none',
@@ -619,13 +619,13 @@ const Portfolio = () => {
                   }}
                   onMouseEnter={(e) => {
                     e.currentTarget.style.transform = 'translateY(-2px)';
-                    e.currentTarget.style.background = isDarkMode ? 'rgba(255, 255, 255, 0.18)' : 'rgba(0, 0, 0, 0.12)';
-                    e.currentTarget.style.borderColor = isDarkMode ? 'rgba(255, 255, 255, 0.36)' : 'rgba(0, 0, 0, 0.22)';
+                    e.currentTarget.style.background = isDarkMode ? 'rgba(255, 255, 255, 0.12)' : 'rgba(0, 0, 0, 0.08)';
+                    e.currentTarget.style.borderColor = isDarkMode ? 'rgba(255, 255, 255, 0.28)' : 'rgba(0, 0, 0, 0.18)';
                   }}
                   onMouseLeave={(e) => {
                     e.currentTarget.style.transform = 'translateY(0)';
-                    e.currentTarget.style.background = isDarkMode ? 'rgba(255, 255, 255, 0.08)' : 'rgba(0, 0, 0, 0.05)';
-                    e.currentTarget.style.borderColor = isDarkMode ? 'rgba(255, 255, 255, 0.16)' : 'rgba(0, 0, 0, 0.10)';
+                    e.currentTarget.style.background = isDarkMode ? 'rgba(255, 255, 255, 0.04)' : 'rgba(0, 0, 0, 0.03)';
+                    e.currentTarget.style.borderColor = isDarkMode ? '1px solid rgba(255, 255, 255, 0.12)' : '1px solid rgba(0, 0, 0, 0.08)';
                   }}>
                   <Mail size={18} /> {t.contact.email}
                 </a>
