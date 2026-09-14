@@ -113,7 +113,7 @@ const Portfolio = () => {
       skills: {
         title: 'Core Technologies',
         categories: {
-          ai: { name: 'AI/ML', items: ['LangChain', 'RAG', 'Vector Database', 'OCR'] },
+          ai: { name: 'AI / ML', items: ['LangChain', 'RAG', 'Vector DB', 'OCR'] },
           lang: { name: 'Languages', items: ['Python', 'SQL'] },
           tools: { name: 'Tools & Platforms', items: ['Docker', 'Neo4j', 'FastAPI', 'Git'] }
         }
@@ -132,10 +132,23 @@ const Portfolio = () => {
             desc: 'Intelligent Q&A system for Vietnamese textbooks (SGK). Multi-agent architecture with Knowledge Graph (Neo4j), Vector Search (Elasticsearch + pgvector), and RAG pipeline using LangChain for accurate education content understanding.',
             tech: ['LangChain', 'Neo4j', 'Elasticsearch', 'PostgreSQL', 'OCR', 'RAG'],
             link: 'https://github.com/Hoangnguyenhuu12/ReAct-agent-final'
+          },
+          {
+            title: 'Triad Synergy — Agentic RAG',
+            desc: 'Enterprise-grade multimodal RAG system built with LangGraph, ChromaDB, and GPT-4o/Gemini. Features stateful query routing, Corrective RAG (CRAG) self-grading, parallel vision PDF extraction, and strict citation enforcement.',
+            tech: ['LangGraph', 'ChromaDB', 'CRAG', 'GPT-4o', 'Gemini Vision', 'Streamlit'],
+            link: 'https://github.com/Hoangnguyenhuu12/Triad_Synergy_AgenticRAG'
+          },
+          {
+            title: 'Smart Scanner — QR & Barcode Vision',
+            desc: 'Real-time computer vision scanner for QR and barcodes (CODE128, EAN13) using OpenCV and pyzbar. Features Adaptive Gaussian Thresholding for low-light detection, product database lookup, and duplicate scan prevention.',
+            tech: ['Python', 'OpenCV', 'Computer Vision', 'pyzbar', 'Image Processing'],
+            link: 'https://github.com/Hoangnguyenhuu12/QR-Barcode-Scanner-Project'
           }
         ]
       },
       contact: {
+        heading: 'Contact',
         title: 'Get In Touch',
         badge: 'Available for Opportunities',
         subtitle: 'Open to opportunities at Big Tech companies and innovative startups',
@@ -178,9 +191,9 @@ const Portfolio = () => {
         }
       },
       skills: {
-        title: 'Công Nghệ Chính',
+        title: 'Công Nghệ Cốt Lõi',
         categories: {
-          ai: { name: 'AI/ML', items: ['LangChain', 'RAG', 'Vector Database', 'OCR'] },
+          ai: { name: 'AI / ML', items: ['LangChain', 'RAG', 'Vector DB', 'OCR'] },
           lang: { name: 'Ngôn Ngữ', items: ['Python', 'SQL'] },
           tools: { name: 'Công Cụ & Nền Tảng', items: ['Docker', 'Neo4j', 'FastAPI', 'Git'] }
         }
@@ -199,10 +212,23 @@ const Portfolio = () => {
             desc: 'Hệ thống hỏi-đáp thông minh cho sách giáo khoa Việt Nam. Kiến trúc multi-agent với Knowledge Graph (Neo4j), Vector Search (Elasticsearch + pgvector), và RAG pipeline sử dụng LangChain.',
             tech: ['LangChain', 'Neo4j', 'Elasticsearch', 'PostgreSQL', 'OCR', 'RAG'],
             link: 'https://github.com/Hoangnguyenhuu12/ReAct-agent-final'
+          },
+          {
+            title: 'Triad Synergy — Hệ thống Agentic RAG',
+            desc: 'Hệ thống Multimodal RAG cấp doanh nghiệp xây dựng trên LangGraph, ChromaDB và GPT-4o/Gemini. Tích hợp định tuyến query thông minh, cơ chế tự sửa đổi & chấm điểm (CRAG), trích xuất PDF song song bằng Vision AI và trích dẫn chuẩn xác.',
+            tech: ['LangGraph', 'ChromaDB', 'CRAG', 'GPT-4o', 'Gemini Vision', 'Streamlit'],
+            link: 'https://github.com/Hoangnguyenhuu12/Triad_Synergy_AgenticRAG'
+          },
+          {
+            title: 'Smart Scanner — Quét Mã QR & Barcode',
+            desc: 'Ứng dụng thị giác máy tính quét mã QR và mã vạch (CODE128, EAN13) thời gian thực bằng OpenCV và pyzbar. Tích hợp thuật toán Adaptive Gaussian Thresholding xử lý thiếu sáng, tra cứu dữ liệu sản phẩm tự động và chống quét trùng lặp.',
+            tech: ['Python', 'OpenCV', 'Computer Vision', 'pyzbar', 'Image Processing'],
+            link: 'https://github.com/Hoangnguyenhuu12/QR-Barcode-Scanner-Project'
           }
         ]
       },
       contact: {
+        heading: 'Liên Hệ',
         title: 'Liên Hệ Tôi',
         badge: 'Sẵn Sàng Cho Cơ Hội Mới',
         subtitle: 'Mở cửa cho cơ hội tại các công ty Big Tech và startup sáng tạo',
@@ -258,11 +284,20 @@ const Portfolio = () => {
               : '1px solid transparent'
           }}>
           <div className="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center">
-            <div className="text-xl font-bold tracking-tight" style={{
-              color: isDarkMode ? '#ffffff' : '#000000'
-            }}>
+            <a
+              href="#"
+              onClick={(e) => {
+                e.preventDefault();
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+              }}
+              className="text-xl font-bold tracking-tight cursor-pointer transition-opacity hover:opacity-80"
+              style={{
+                color: isDarkMode ? '#ffffff' : '#000000',
+                textDecoration: 'none'
+              }}
+              title="Return to top">
               Hoangf
-            </div>
+            </a>
 
             <div className="flex items-center gap-8">
               <div className="hidden md:flex gap-8 text-sm">
@@ -304,7 +339,7 @@ const Portfolio = () => {
         </nav>
 
         {/* Hero Content */}
-        <section className="max-w-6xl mx-auto px-6 pt-24 md:pt-28 pb-20">
+        <section className="max-w-6xl mx-auto px-6 pt-24 md:pt-26 pb-8 md:pb-10">
           <div className="grid lg:grid-cols-[1.3fr,0.7fr] gap-8 lg:gap-12 items-center">
             <div className="w-full">
               <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-[46px] xl:text-[52px] font-bold tracking-tight mb-6 whitespace-nowrap min-h-[1.3em] leading-tight"
@@ -320,7 +355,7 @@ const Portfolio = () => {
                   cursor="_"
                 />
               </h1>
-              <p className="text-base sm:text-lg mb-10 leading-relaxed max-w-xl"
+              <p className="text-base sm:text-lg mb-6 sm:mb-8 leading-relaxed max-w-xl"
                 style={{
                   color: isDarkMode ? '#ffffff' : '#000000'
                 }}>
@@ -400,27 +435,21 @@ const Portfolio = () => {
                   e.currentTarget.style.boxShadow = isDarkMode ? '0 0 35px rgba(255, 255, 255, 0.2)' : '0 12px 35px rgba(0, 0, 0, 0.15)';
                 }}>
                 <img
-                  src={isDarkMode ? "/avatar.jpg" : "/avatar1.jpg"}
-                  alt="Hoang's Portfolio Avatar"
-                  style={{
-                    width: '100%',
-                    height: '100%',
-                    objectFit: 'cover',
-                    filter: 'none'
-                  }}
+                  src={isDarkMode ? "/avatar.jpg" : "/avatar.jpg"}
+                  alt="Hoang Nguyen"
+                  className="w-full h-full object-cover"
                 />
               </div>
             </div>
           </div>
         </section>
 
-
         {/* About & Experience */}
-        <section id="about" className="max-w-6xl mx-auto px-6 py-20">
+        <section id="about" className="max-w-6xl mx-auto px-6 pt-16 pb-32">
           <div className="grid md:grid-cols-2 gap-12 items-start">
             {/* Left Column: About */}
             <div>
-              <h2 className="text-4xl font-bold mb-8">{t.about.title}</h2>
+              <h2 className="text-3xl sm:text-4xl font-bold mb-8">{t.about.title}</h2>
               <div className="glass-card spotlight-card p-8 rounded-2xl"
                 onMouseMove={handleMouseMove}
                 style={glassStyle}>
@@ -432,8 +461,8 @@ const Portfolio = () => {
 
             {/* Right Column: Experience */}
             <div>
-              <h2 className="text-4xl font-bold mb-8">{t.about.experience.title}</h2>
-              <div className="space-y-6">
+              <h2 className="text-3xl sm:text-4xl font-bold mb-8">{t.about.experience.title}</h2>
+              <div className="space-y-3">
                 <div className="glass-card spotlight-card p-6 rounded-2xl pl-8"
                   onMouseMove={handleMouseMove}
                   style={glassStyle}>
@@ -463,22 +492,22 @@ const Portfolio = () => {
         </section>
 
         {/* Skills */}
-        <section id="skills" className="max-w-6xl mx-auto px-6 py-20">
-          <h2 className="text-4xl font-bold mb-12">{t.skills.title}</h2>
-          <div className="grid md:grid-cols-3 gap-8">
+        <section id="skills" className="max-w-6xl mx-auto px-6 scroll-mt-16 pt-0 pb-32">
+          <h2 className="text-3xl sm:text-4xl font-bold mb-8">{t.skills.title}</h2>
+          <div className="grid md:grid-cols-3 gap-6">
             {Object.entries(t.skills.categories).map(([key, category]) => (
               <div key={key}
-                className="glass-card spotlight-card p-8 rounded-2xl"
+                className="glass-card spotlight-card p-6 rounded-2xl"
                 onMouseMove={handleMouseMove}
                 style={glassStyle}>
-                <h3 className="font-semibold mb-6 text-lg" style={{
+                <h3 className="font-semibold mb-4 text-base" style={{
                   color: isDarkMode ? '#ffffff' : '#000000'
                 }}>
                   {category.name}
                 </h3>
-                <div className="flex flex-wrap gap-3">
+                <div className="flex flex-wrap gap-2.5">
                   {category.items.map((skill, idx) => (
-                    <span key={idx} className="skill-badge text-sm px-4 py-2 rounded-full font-medium"
+                    <span key={idx} className="skill-badge text-xs px-3 py-1.5 rounded-full font-medium"
                       style={{
                         background: isDarkMode ? 'rgba(255, 255, 255, 0.06)' : 'rgba(0, 0, 0, 0.04)',
                         color: isDarkMode ? '#ffffff' : '#000000',
@@ -497,8 +526,8 @@ const Portfolio = () => {
         </section>
 
         {/* Projects */}
-        <section id="projects" className="max-w-6xl mx-auto px-6 py-20">
-          <h2 className="text-4xl font-bold mb-12">{t.projects.title}</h2>
+        <section id="projects" className="max-w-6xl mx-auto px-6 scroll-mt-16 pt-0 pb-48">
+          <h2 className="text-3xl sm:text-4xl font-bold mb-8">{t.projects.title}</h2>
           <div className="grid md:grid-cols-2 gap-8">
             {t.projects.items.map((project, idx) => (
               <div key={idx}
@@ -526,7 +555,7 @@ const Portfolio = () => {
                     </span>
                   ))}
                 </div>
-                <a href={project.link} className="inline-flex items-center gap-2 transition text-sm font-medium group">
+                <a href={project.link} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 transition text-sm font-medium group">
                   Learn More
                   <ArrowUpRight size={14} style={{
                     transition: 'transform 0.2s ease',
@@ -539,137 +568,137 @@ const Portfolio = () => {
         </section>
 
         {/* Contact */}
-        <section id="contact" className="max-w-6xl mx-auto px-6 py-20">
-          <div className="glass-card spotlight-card p-12 rounded-3xl"
-            onMouseMove={handleMouseMove}
-            style={glassStyle}>
-            <div className="grid md:grid-cols-2 gap-12 items-center">
-              {/* Left: Quote & Social Icons */}
-              <div className="flex flex-col justify-between">
-                <div>
-                  <h2 className="text-4xl font-bold mb-6">{t.contact.title}</h2>
-                  <p className="mb-8 text-lg italic">
-                    "We've become so focused on that tiny screen that we forget the big picture, the people right in front of us."
-                  </p>
-                  <p className="text-sm">— Kanye West</p>
+        <section id="contact" className="max-w-6xl mx-auto px-6 scroll-mt-16 pt-0 pb-4 min-h-[calc(100vh-11rem)] flex flex-col justify-between">
+          <div>
+            <h2 className="text-3xl sm:text-4xl font-bold mb-8">{t.contact.heading}</h2>
+            <div className="glass-card spotlight-card p-12 sm:p-14 rounded-3xl"
+              onMouseMove={handleMouseMove}
+              style={glassStyle}>
+              <div className="grid md:grid-cols-2 gap-12 items-center">
+                {/* Left: Quote & Social Icons */}
+                <div className="flex flex-col justify-between">
+                  <div>
+                    <h3 className="text-3xl font-bold mb-4">{t.contact.title}</h3>
+                    <p className="mb-6 text-base italic">
+                      "We've become so focused on that tiny screen that we forget the big picture, the people right in front of us."
+                    </p>
+                    <p className="text-xs">— Kanye West</p>
+                  </div>
+
+                  {/* Social Media Icons (Pure Black & White) */}
+                  <div className="flex gap-4 items-center mt-8">
+                    {/* Facebook */}
+                    <a href="https://facebook.com" target="_blank" rel="noopener noreferrer"
+                      className="w-10 h-10 flex items-center justify-center hover:scale-110 transition"
+                      title="Facebook">
+                      <img
+                        src={isDarkMode ? "/facebook-dark.png" : "/facebook-light.png"}
+                        alt="Facebook"
+                        className="w-full h-full object-contain"
+                      />
+                    </a>
+
+                    {/* Instagram */}
+                    <a href="https://instagram.com" target="_blank" rel="noopener noreferrer"
+                      className="w-10 h-10 flex items-center justify-center hover:scale-110 transition"
+                      title="Instagram">
+                      <img
+                        src={isDarkMode ? "/instagram-dark.png" : "/instagram-light.png"}
+                        alt="Instagram"
+                        className="w-full h-full object-contain"
+                      />
+                    </a>
+
+                    {/* Strava */}
+                    <a href="https://strava.com" target="_blank" rel="noopener noreferrer"
+                      className="w-10 h-10 flex items-center justify-center hover:scale-110 transition"
+                      title="Strava">
+                      <img
+                        src={isDarkMode ? "/strava-dark.png" : "/strava-light.png"}
+                        alt="Strava"
+                        className="w-full h-full object-contain"
+                      />
+                    </a>
+
+                    {/* LinkedIn */}
+                    <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer"
+                      className="w-10 h-10 flex items-center justify-center hover:scale-110 transition"
+                      title="LinkedIn">
+                      <img
+                        src={isDarkMode ? "/linkedin-dark.png" : "/linkedin-light.png"}
+                        alt="LinkedIn"
+                        className="w-full h-full object-contain"
+                      />
+                    </a>
+                  </div>
                 </div>
 
-                {/* Social Media Icons (Pure Black & White) */}
-                <div className="flex gap-4 items-center mt-8">
-                  {/* Facebook */}
-                  <a href="https://facebook.com" target="_blank" rel="noopener noreferrer"
-                    className="w-10 h-10 flex items-center justify-center hover:scale-110 transition"
-                    title="Facebook">
-                    <img
-                      src={isDarkMode ? "/facebook-dark.png" : "/facebook-light.png"}
-                      alt="Facebook"
-                      className="w-full h-full object-contain"
-                    />
+                {/* Right: Buttons (Frosted Glass Blur with Delicate Hover Glow) */}
+                <div className="flex flex-col gap-4 items-start md:items-end justify-center">
+                  <a href="mailto:nguyenhuuhoang5038@gmail.com"
+                    className="w-full sm:w-64 px-6 py-3.5 rounded-xl font-medium inline-flex items-center justify-center gap-3 glass-button"
+                    style={{
+                      background: isDarkMode ? 'rgba(255, 255, 255, 0.04)' : 'rgba(0, 0, 0, 0.03)',
+                      color: isDarkMode ? '#ffffff' : '#000000',
+                      border: isDarkMode ? '1px solid rgba(255, 255, 255, 0.12)' : '1px solid rgba(0, 0, 0, 0.08)',
+                      backdropFilter: 'blur(12px)',
+                      WebkitBackdropFilter: 'blur(12px)',
+                      outline: 'none',
+                      fontSize: '15px',
+                      textDecoration: 'none',
+                      transition: 'all 0.25s cubic-bezier(0.23, 1, 0.320, 1)'
+                    }}
+                    onMouseEnter={(e) => {
+                      e.currentTarget.style.transform = 'translateY(-2px)';
+                      e.currentTarget.style.background = isDarkMode ? 'rgba(255, 255, 255, 0.12)' : 'rgba(0, 0, 0, 0.08)';
+                      e.currentTarget.style.borderColor = isDarkMode ? 'rgba(255, 255, 255, 0.28)' : 'rgba(0, 0, 0, 0.18)';
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.transform = 'translateY(0)';
+                      e.currentTarget.style.background = isDarkMode ? 'rgba(255, 255, 255, 0.04)' : 'rgba(0, 0, 0, 0.03)';
+                      e.currentTarget.style.borderColor = isDarkMode ? '1px solid rgba(255, 255, 255, 0.12)' : '1px solid rgba(0, 0, 0, 0.08)';
+                    }}>
+                    <Mail size={18} /> {t.contact.email}
                   </a>
-
-                  {/* Instagram */}
-                  <a href="https://instagram.com" target="_blank" rel="noopener noreferrer"
-                    className="w-10 h-10 flex items-center justify-center hover:scale-110 transition"
-                    title="Instagram">
-                    <img
-                      src={isDarkMode ? "/instagram-dark.png" : "/instagram-light.png"}
-                      alt="Instagram"
-                      className="w-full h-full object-contain"
-                    />
-                  </a>
-
-                  {/* Strava */}
-                  <a href="https://strava.com" target="_blank" rel="noopener noreferrer"
-                    className="w-10 h-10 flex items-center justify-center hover:scale-110 transition"
-                    title="Strava">
-                    <img
-                      src={isDarkMode ? "/strava-dark.png" : "/strava-light.png"}
-                      alt="Strava"
-                      className="w-full h-full object-contain"
-                    />
-                  </a>
-
-                  {/* LinkedIn */}
-                  <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer"
-                    className="w-10 h-10 flex items-center justify-center hover:scale-110 transition"
-                    title="LinkedIn">
-                    <img
-                      src={isDarkMode ? "/linkedin-dark.png" : "/linkedin-light.png"}
-                      alt="LinkedIn"
-                      className="w-full h-full object-contain"
-                    />
+                  <a href="https://github.com/Hoangnguyenhuu12" target="_blank" rel="noopener noreferrer"
+                    className="w-full sm:w-64 px-6 py-3.5 rounded-xl font-medium inline-flex items-center justify-center gap-3 glass-button"
+                    style={{
+                      background: isDarkMode ? 'rgba(255, 255, 255, 0.04)' : 'rgba(0, 0, 0, 0.03)',
+                      color: isDarkMode ? '#ffffff' : '#000000',
+                      border: isDarkMode ? '1px solid rgba(255, 255, 255, 0.12)' : '1px solid rgba(0, 0, 0, 0.08)',
+                      backdropFilter: 'blur(12px)',
+                      WebkitBackdropFilter: 'blur(12px)',
+                      outline: 'none',
+                      fontSize: '15px',
+                      textDecoration: 'none',
+                      transition: 'all 0.25s cubic-bezier(0.23, 1, 0.320, 1)'
+                    }}
+                    onMouseEnter={(e) => {
+                      e.currentTarget.style.transform = 'translateY(-2px)';
+                      e.currentTarget.style.background = isDarkMode ? 'rgba(255, 255, 255, 0.12)' : 'rgba(0, 0, 0, 0.08)';
+                      e.currentTarget.style.borderColor = isDarkMode ? 'rgba(255, 255, 255, 0.28)' : 'rgba(0, 0, 0, 0.18)';
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.transform = 'translateY(0)';
+                      e.currentTarget.style.background = isDarkMode ? 'rgba(255, 255, 255, 0.04)' : 'rgba(0, 0, 0, 0.03)';
+                      e.currentTarget.style.borderColor = isDarkMode ? '1px solid rgba(255, 255, 255, 0.12)' : '1px solid rgba(0, 0, 0, 0.08)';
+                    }}>
+                    <Github size={18} /> {t.contact.github}
                   </a>
                 </div>
-              </div>
-
-              {/* Right: Buttons (Frosted Glass Blur with Delicate Hover Glow) */}
-              <div className="flex flex-col gap-4 items-start md:items-end justify-center">
-                <a href="mailto:nguyenhuuhoang5038@gmail.com"
-                  className="w-full sm:w-64 px-6 py-3.5 rounded-xl font-medium inline-flex items-center justify-center gap-3 glass-button"
-                  style={{
-                    background: isDarkMode ? 'rgba(255, 255, 255, 0.04)' : 'rgba(0, 0, 0, 0.03)',
-                    color: isDarkMode ? '#ffffff' : '#000000',
-                    border: isDarkMode ? '1px solid rgba(255, 255, 255, 0.12)' : '1px solid rgba(0, 0, 0, 0.08)',
-                    backdropFilter: 'blur(12px)',
-                    WebkitBackdropFilter: 'blur(12px)',
-                    outline: 'none',
-                    fontSize: '15px',
-                    textDecoration: 'none',
-                    transition: 'all 0.25s cubic-bezier(0.23, 1, 0.320, 1)'
-                  }}
-                  onMouseEnter={(e) => {
-                    e.currentTarget.style.transform = 'translateY(-2px)';
-                    e.currentTarget.style.background = isDarkMode ? 'rgba(255, 255, 255, 0.12)' : 'rgba(0, 0, 0, 0.08)';
-                    e.currentTarget.style.borderColor = isDarkMode ? 'rgba(255, 255, 255, 0.28)' : 'rgba(0, 0, 0, 0.18)';
-                  }}
-                  onMouseLeave={(e) => {
-                    e.currentTarget.style.transform = 'translateY(0)';
-                    e.currentTarget.style.background = isDarkMode ? 'rgba(255, 255, 255, 0.04)' : 'rgba(0, 0, 0, 0.03)';
-                    e.currentTarget.style.borderColor = isDarkMode ? '1px solid rgba(255, 255, 255, 0.12)' : '1px solid rgba(0, 0, 0, 0.08)';
-                  }}>
-                  <Mail size={18} /> {t.contact.email}
-                </a>
-                <a href="https://github.com/Hoangnguyenhuu12" target="_blank" rel="noopener noreferrer"
-                  className="w-full sm:w-64 px-6 py-3.5 rounded-xl font-medium inline-flex items-center justify-center gap-3 glass-button"
-                  style={{
-                    background: isDarkMode ? 'rgba(255, 255, 255, 0.04)' : 'rgba(0, 0, 0, 0.03)',
-                    color: isDarkMode ? '#ffffff' : '#000000',
-                    border: isDarkMode ? '1px solid rgba(255, 255, 255, 0.12)' : '1px solid rgba(0, 0, 0, 0.08)',
-                    backdropFilter: 'blur(12px)',
-                    WebkitBackdropFilter: 'blur(12px)',
-                    outline: 'none',
-                    fontSize: '15px',
-                    textDecoration: 'none',
-                    transition: 'all 0.25s cubic-bezier(0.23, 1, 0.320, 1)'
-                  }}
-                  onMouseEnter={(e) => {
-                    e.currentTarget.style.transform = 'translateY(-2px)';
-                    e.currentTarget.style.background = isDarkMode ? 'rgba(255, 255, 255, 0.12)' : 'rgba(0, 0, 0, 0.08)';
-                    e.currentTarget.style.borderColor = isDarkMode ? 'rgba(255, 255, 255, 0.28)' : 'rgba(0, 0, 0, 0.18)';
-                  }}
-                  onMouseLeave={(e) => {
-                    e.currentTarget.style.transform = 'translateY(0)';
-                    e.currentTarget.style.background = isDarkMode ? 'rgba(255, 255, 255, 0.04)' : 'rgba(0, 0, 0, 0.03)';
-                    e.currentTarget.style.borderColor = isDarkMode ? '1px solid rgba(255, 255, 255, 0.12)' : '1px solid rgba(0, 0, 0, 0.08)';
-                  }}>
-                  <Github size={18} /> {t.contact.github}
-                </a>
               </div>
             </div>
           </div>
-        </section>
 
-        {/* Footer */}
-        <section className="max-w-6xl mx-auto px-6 py-12 mt-8"
-          style={{
-            border: 'none'
-          }}>
-          <p className="text-sm text-center"
-            style={{
-              color: isDarkMode ? '#ffffff' : '#000000'
-            }}>
-            © 2024 Nguyen Huu Hoang. Designed with focus on clarity and impact.
-          </p>
+          {/* Footer */}
+          <footer className="pt-4 pb-4">
+            <p className="text-sm text-center"
+              style={{
+                color: isDarkMode ? '#ffffff' : '#000000'
+              }}>
+              © 2024 Nguyen Huu Hoang. Designed with focus on clarity and impact.
+            </p>
+          </footer>
         </section>
       </div>
     </div>
