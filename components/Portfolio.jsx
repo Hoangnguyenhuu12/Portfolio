@@ -568,25 +568,27 @@ const Portfolio = () => {
         </section>
 
         {/* Contact */}
-        <section id="contact" className="max-w-6xl mx-auto px-6 scroll-mt-16 pt-0 pb-4 min-h-[calc(100vh-11rem)] flex flex-col justify-between">
+        <section id="contact"
+          style={{ height: 'calc(100vh - 144px)', minHeight: '520px' }}
+          className="max-w-6xl mx-auto px-6 scroll-mt-16 pt-0 pb-6 flex flex-col justify-between">
           <div>
             <h2 className="text-3xl sm:text-4xl font-bold mb-8">{t.contact.heading}</h2>
-            <div className="glass-card spotlight-card p-12 sm:p-14 rounded-3xl"
+            <div className="glass-card spotlight-card p-8 sm:p-10 rounded-3xl"
               onMouseMove={handleMouseMove}
               style={glassStyle}>
-              <div className="grid md:grid-cols-2 gap-12 items-center">
+              <div className="grid md:grid-cols-2 gap-8 md:gap-12 items-center">
                 {/* Left: Quote & Social Icons */}
                 <div className="flex flex-col justify-between">
                   <div>
-                    <h3 className="text-3xl font-bold mb-4">{t.contact.title}</h3>
-                    <p className="mb-6 text-base italic">
+                    <h3 className="text-3xl font-bold mb-3">{t.contact.title}</h3>
+                    <p className="mb-4 text-base italic">
                       "We've become so focused on that tiny screen that we forget the big picture, the people right in front of us."
                     </p>
                     <p className="text-xs">— Kanye West</p>
                   </div>
 
                   {/* Social Media Icons (Pure Black & White) */}
-                  <div className="flex gap-4 items-center mt-8">
+                  <div className="flex gap-4 items-center mt-6">
                     {/* Facebook */}
                     <a href="https://facebook.com" target="_blank" rel="noopener noreferrer"
                       className="w-10 h-10 flex items-center justify-center hover:scale-110 transition"
@@ -691,7 +693,7 @@ const Portfolio = () => {
           </div>
 
           {/* Footer */}
-          <footer className="pt-4 pb-4">
+          <footer className="pt-2 pb-2">
             <p className="text-sm text-center"
               style={{
                 color: isDarkMode ? '#ffffff' : '#000000'
