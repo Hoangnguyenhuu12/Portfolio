@@ -18,23 +18,23 @@ const HEX_CONFIG = {
   // Tốc độ lún và nảy lại của các khối (0.08: mượt mà - 0.2: tức thì)
   springSpeed: 0.14,
 
-  // Chế độ nền đen (Dark Mode - phong cách lưới kim loại công nghệ)
+  // Chế độ nền đen (Dark Mode - kết hợp cùng TopoField)
   dark: {
-    bg: '#000000',
-    baseStroke: 'rgba(255, 255, 255, 0.14)',
+    bg: 'transparent',
+    baseStroke: 'rgba(255, 255, 255, 0.12)',
     activeStroke: 'rgba(255, 255, 255, 0.85)',
-    innerFloor: '#000000',
-    wallShadow: 'rgba(0, 0, 0, 0.8)',
-    wallHighlight: 'rgba(255, 255, 255, 0.16)'
+    innerFloor: 'rgba(0, 0, 0, 0.72)',
+    wallShadow: 'rgba(0, 0, 0, 0.85)',
+    wallHighlight: 'rgba(255, 255, 255, 0.18)'
   },
 
-  // Chế độ nền trắng (Light Mode - mượt mà, không bị sọc xám gắt xung quanh)
+  // Chế độ nền trắng (Light Mode - kết hợp cùng TopoField)
   light: {
-    bg: '#ffffff',
-    baseStroke: 'rgba(0, 0, 0, 0.10)',
+    bg: 'transparent',
+    baseStroke: 'rgba(0, 0, 0, 0.08)',
     activeStroke: 'rgba(0, 0, 0, 0.55)',
-    innerFloor: '#ffffff',
-    wallShadow: 'rgba(0, 0, 0, 0.09)',
+    innerFloor: 'rgba(238, 241, 246, 0.75)',
+    wallShadow: 'rgba(0, 0, 0, 0.10)',
     wallHighlight: '#ffffff'
   }
 };
@@ -135,9 +135,11 @@ const HexagonBackground = ({ isDark = true }) => {
       const theme = isDark ? HEX_CONFIG.dark : HEX_CONFIG.light;
       const R = HEX_CONFIG.influenceRadius;
 
-      // Nền chính phủ toàn màn hình
-      ctx.fillStyle = theme.bg;
-      ctx.fillRect(0, 0, width, height);
+      // Nền chính phủ toàn màn hình (chỉ tô nếu có màu nền, mặc định trong suốt để lộ TopoField)
+      if (theme.bg && theme.bg !== 'transparent') {
+        ctx.fillStyle = theme.bg;
+        ctx.fillRect(0, 0, width, height);
+      }
 
       // Duyệt qua từng khối lục giác trong toàn bộ màn hình
       for (let i = 0; i < hexGrid.length; i++) {
@@ -276,7 +278,7 @@ const HexagonBackground = ({ isDark = true }) => {
         left: 0,
         width: '100%',
         height: '100%',
-        zIndex: 0,
+        zIndex: 1,
         pointerEvents: 'none'
       }}
     />

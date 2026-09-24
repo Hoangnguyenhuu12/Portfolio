@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Mail, Github, ExternalLink, Moon, Sun, ArrowUpRight, Copy, Check } from 'lucide-react';
 import HexagonBackground from './HexagonBackground';
+import TopoField from '@/components/ui/topo-field';
 
 // Rotating typewriter component with type-in and backspace/delete loop ("tụt ra tụt vô")
 const RotatingTypewriter = ({
@@ -114,7 +115,7 @@ const Portfolio = () => {
         title: 'Core Technologies',
         categories: {
           ai: { name: 'AI / ML', items: ['LangChain', 'RAG', 'Vector DB', 'OCR'] },
-          lang: { name: 'Languages', items: ['Python', 'SQL'] },
+          lang: { name: 'Languages', items: ['Python', 'SQL', 'R'] },
           tools: { name: 'Tools & Platforms', items: ['Docker', 'Neo4j', 'FastAPI', 'Git'] }
         }
       },
@@ -263,9 +264,28 @@ const Portfolio = () => {
   return (
     <div className={`${isDarkMode ? 'dark' : 'light'} relative overflow-hidden`}
       style={{
-        backgroundColor: isDarkMode ? '#000000' : '#ffffff',
+        backgroundColor: isDarkMode ? '#000000' : '#eef1f6',
         color: isDarkMode ? '#ffffff' : '#000000'
       }}>
+
+      {/* Topographic WebGL Animated Field Background */}
+      <div className="fixed inset-0 z-0 pointer-events-none">
+        <TopoField
+          mode={isDarkMode ? 'dark' : 'light'}
+          speed={0.7}
+          density={1}
+          opacity={isDarkMode ? 0.75 : 0.65}
+        />
+        {/* Subtle radial vignette overlay for readability and depth */}
+        <div
+          className="absolute inset-0 pointer-events-none"
+          style={{
+            background: isDarkMode
+              ? 'radial-gradient(ellipse at center, rgba(0,0,0,0) 0%, rgba(0,0,0,0.6) 100%)'
+              : 'radial-gradient(ellipse at center, rgba(238,241,246,0) 0%, rgba(238,241,246,0.5) 100%)'
+          }}
+        />
+      </div>
 
       {/* Interactive 3D Hexagon Parallax Background */}
       <HexagonBackground isDark={isDarkMode} />
