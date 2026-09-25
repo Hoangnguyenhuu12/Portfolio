@@ -336,7 +336,7 @@ export type TopoFieldProps = {
   style?: CSSProperties;
 };
 
-const LIGHT_PAPER = "#eef1f6";
+const LIGHT_PAPER = "#ffffff";
 
 function clamp(value: number, minimum: number, maximum: number) {
   return Math.min(maximum, Math.max(minimum, value));
@@ -421,7 +421,7 @@ function patchTopoField(
         `vec3 color = vec3(0.0);
                     color += vec3(1.0) * gridLines;
                     color += vec3(1.0) * topoLines;`,
-        `vec3 paper = vec3(0.933, 0.945, 0.965);
+        `vec3 paper = vec3(1.0, 1.0, 1.0);
                     vec3 ink = vec3(0.15, 0.18, 0.22);
                     float lines = clamp(gridLines + topoLines, 0.0, 1.0);
                     vec3 color = mix(paper, ink, lines);`,

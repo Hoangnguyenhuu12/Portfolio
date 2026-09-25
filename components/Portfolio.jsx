@@ -267,7 +267,7 @@ const Portfolio = () => {
   return (
     <div className={`${isDarkMode ? 'dark' : 'light'} relative overflow-hidden`}
       style={{
-        backgroundColor: isDarkMode ? '#000000' : '#eef1f6',
+        backgroundColor: isDarkMode ? '#000000' : '#ffffff',
         color: isDarkMode ? '#ffffff' : '#000000'
       }}>
 
@@ -285,7 +285,7 @@ const Portfolio = () => {
           style={{
             background: isDarkMode
               ? 'radial-gradient(ellipse at center, rgba(0,0,0,0) 0%, rgba(0,0,0,0.6) 100%)'
-              : 'radial-gradient(ellipse at center, rgba(238,241,246,0) 0%, rgba(238,241,246,0.5) 100%)'
+              : 'radial-gradient(ellipse at center, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.6) 100%)'
           }}
         />
       </div>
