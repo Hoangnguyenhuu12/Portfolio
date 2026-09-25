@@ -1,7 +1,8 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Mail, Github, ExternalLink, Moon, Sun, ArrowUpRight, Copy, Check } from 'lucide-react';
+import { Mail, Github, ExternalLink, Moon, Sun, ArrowUpRight, Copy, Check, Home, User, Cpu, Briefcase } from 'lucide-react';
 import HexagonBackground from './HexagonBackground';
 import TopoField from '@/components/ui/topo-field';
+import GlassmorphismNavBar from '@/components/ui/glassmorphism-navigation';
 
 // Cờ bật/tắt hiển thị ô tổ ong và hiệu ứng phát sáng khi di chuyển chuột (Mặc định: false - Tạm ẩn theo yêu cầu, không xóa code)
 const SHOW_HEXAGON_BACKGROUND = false;
@@ -69,21 +70,12 @@ const RotatingTypewriter = ({
 const Portfolio = () => {
   const [isDark, setIsDark] = useState(false);
   const [isLang, setIsLang] = useState('en');
-  const [scrollY, setScrollY] = useState(0);
   const [hoveredProject, setHoveredProject] = useState(null);
 
   useEffect(() => {
     if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
       setIsDark(true);
     }
-  }, []);
-
-  useEffect(() => {
-    // Set initial scroll position immediately on mount
-    setScrollY(window.scrollY);
-    const handleScroll = () => setScrollY(window.scrollY);
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
   const content = {
@@ -252,6 +244,65 @@ const Portfolio = () => {
   const t = content[isLang];
   const isDarkMode = isDark;
 
+  const [activeTab, setActiveTab] = useState('Home');
+  const isClickScrollingRef = useRef(false);
+  const scrollTimeoutRef = useRef(null);
+
+  useEffect(() => {
+    let ticking = false;
+
+    const handleScrollSpy = () => {
+      if (isClickScrollingRef.current) return;
+
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          const scrollPosition = window.scrollY + 220;
+          const sections = [
+            { id: 'contact', name: t.nav.contact },
+            { id: 'projects', name: t.nav.projects },
+            { id: 'skills', name: t.nav.skills },
+            { id: 'about', name: t.nav.about },
+          ];
+
+          for (const section of sections) {
+            const el = document.getElementById(section.id);
+            if (el && scrollPosition >= el.offsetTop) {
+              setActiveTab(section.name);
+              ticking = false;
+              return;
+            }
+          }
+          setActiveTab('Home');
+          ticking = false;
+        });
+        ticking = true;
+      }
+    };
+
+    window.addEventListener('scroll', handleScrollSpy, { passive: true });
+    return () => {
+      window.removeEventListener('scroll', handleScrollSpy);
+      if (scrollTimeoutRef.current) clearTimeout(scrollTimeoutRef.current);
+    };
+  }, [t.nav]);
+
+  const handleTabChange = (name) => {
+    setActiveTab(name);
+    isClickScrollingRef.current = true;
+    if (scrollTimeoutRef.current) clearTimeout(scrollTimeoutRef.current);
+    scrollTimeoutRef.current = setTimeout(() => {
+      isClickScrollingRef.current = false;
+    }, 280);
+  };
+
+  const navItems = [
+    { name: 'Home', url: '#', icon: Home },
+    { name: t.nav.about, url: '#about', icon: User },
+    { name: t.nav.skills, url: '#skills', icon: Cpu },
+    { name: t.nav.projects, url: '#projects', icon: Briefcase },
+    { name: t.nav.contact, url: '#contact', icon: Mail },
+  ];
+
   const handleMouseMove = (e) => {
     const rect = e.currentTarget.getBoundingClientRect();
     const x = e.clientX - rect.left;
@@ -296,70 +347,14 @@ const Portfolio = () => {
       {/* Main Content */}
       <div className="relative z-10">
 
-        {/* Navigation - Fixed/Locked Header */}
-        <nav className="fixed top-0 left-0 right-0 z-50 transition-all duration-200"
-          style={{
-            background: isDarkMode ? 'rgba(0, 0, 0, 0.85)' : 'rgba(255, 255, 255, 0.88)',
-            backdropFilter: 'blur(16px)',
-            WebkitBackdropFilter: 'blur(16px)',
-            borderBottom: scrollY > 20
-              ? (isDarkMode ? '1px solid rgba(255, 255, 255, 0.12)' : '1px solid rgba(0, 0, 0, 0.08)')
-              : '1px solid transparent'
-          }}>
-          <div className="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center">
-            <a
-              href="#"
-              onClick={(e) => {
-                e.preventDefault();
-                window.scrollTo({ top: 0, behavior: 'smooth' });
-              }}
-              className="text-xl font-bold tracking-tight cursor-pointer transition-opacity hover:opacity-80"
-              style={{
-                color: isDarkMode ? '#ffffff' : '#000000',
-                textDecoration: 'none'
-              }}
-              title="Return to top">
-              Hoangf
-            </a>
-
-            <div className="flex items-center gap-8">
-              <div className="hidden md:flex gap-8 text-sm">
-                <a href="#about" className="nav-link">{t.nav.about}</a>
-                <a href="#skills" className="nav-link">{t.nav.skills}</a>
-                <a href="#projects" className="nav-link">{t.nav.projects}</a>
-                <a href="#contact" className="nav-link">{t.nav.contact}</a>
-              </div>
-
-              <div className="flex items-center gap-3 pl-6">
-                <button onClick={() => setIsLang(isLang === 'en' ? 'vi' : 'en')}
-                  className="text-xs font-semibold px-3 py-1.5 rounded-lg glass-button"
-                  style={{
-                    background: isDarkMode ? 'rgba(255, 255, 255, 0.04)' : 'rgba(0, 0, 0, 0.03)',
-                    color: isDarkMode ? '#ffffff' : '#000000',
-                    border: isDarkMode ? '1px solid rgba(255, 255, 255, 0.12)' : '1px solid rgba(0, 0, 0, 0.08)',
-                    backdropFilter: 'blur(12px)',
-                    WebkitBackdropFilter: 'blur(12px)',
-                    boxShadow: 'none'
-                  }}>
-                  {isLang === 'en' ? 'VI' : 'EN'}
-                </button>
-
-                <button onClick={() => setIsDark(!isDarkMode)}
-                  className="p-1.5 rounded-lg glass-button"
-                  style={{
-                    background: isDarkMode ? 'rgba(255, 255, 255, 0.04)' : 'rgba(0, 0, 0, 0.03)',
-                    color: isDarkMode ? '#ffffff' : '#000000',
-                    border: isDarkMode ? '1px solid rgba(255, 255, 255, 0.12)' : '1px solid rgba(0, 0, 0, 0.08)',
-                    backdropFilter: 'blur(12px)',
-                    WebkitBackdropFilter: 'blur(12px)',
-                    boxShadow: 'none'
-                  }}>
-                  {isDarkMode ? <Sun size={18} /> : <Moon size={18} />}
-                </button>
-              </div>
-            </div>
-          </div>
-        </nav>
+        {/* Floating Glassmorphism Island Navigation with Glowing Lamp Animation */}
+        <GlassmorphismNavBar
+          items={navItems}
+          theme={isDarkMode ? 'dark' : 'light'}
+          onThemeChange={(newTheme) => setIsDark(newTheme === 'dark')}
+          activeTab={activeTab}
+          onTabChange={handleTabChange}
+        />
 
         {/* Hero Content */}
         <section className="max-w-6xl mx-auto px-6 pt-24 md:pt-26 pb-8 md:pb-10">
