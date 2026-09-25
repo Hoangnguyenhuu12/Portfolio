@@ -277,7 +277,7 @@ const Portfolio = () => {
           mode={isDarkMode ? 'dark' : 'light'}
           speed={0.7}
           density={1}
-          opacity={isDarkMode ? 0.75 : 0.65}
+          opacity={isDarkMode ? 0.75 : 0.55}
         />
         {/* Subtle radial vignette overlay for readability and depth */}
         <div

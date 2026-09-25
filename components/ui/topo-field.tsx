@@ -407,21 +407,22 @@ function patchTopoField(
     );
   if (mode === "light") {
     // Additive white-on-black does not invert cleanly — mix paper toward ink by line strength.
+    // Hạ độ đậm của ô li (gridLines) và đường uốn lượn (topoLines) để chữ luôn sắc nét và dễ đọc
     next = next
       .replace(
         "gridLines = clamp(gridLines, 0.0, 1.0) * 0.12;",
-        "gridLines = clamp(gridLines, 0.0, 1.0) * 0.55;",
+        "gridLines = clamp(gridLines, 0.0, 1.0) * 0.10;",
       )
       .replace(
         "float topoLines = smoothstep(0.02, 0.00, triangleWave) * 0.45;",
-        "float topoLines = smoothstep(0.03, 0.00, triangleWave) * 0.95;",
+        "float topoLines = smoothstep(0.018, 0.00, triangleWave) * 0.22;",
       )
       .replace(
         `vec3 color = vec3(0.0);
                     color += vec3(1.0) * gridLines;
                     color += vec3(1.0) * topoLines;`,
         `vec3 paper = vec3(0.933, 0.945, 0.965);
-                    vec3 ink = vec3(0.12, 0.14, 0.18);
+                    vec3 ink = vec3(0.20, 0.24, 0.32);
                     float lines = clamp(gridLines + topoLines, 0.0, 1.0);
                     vec3 color = mix(paper, ink, lines);`,
       );
