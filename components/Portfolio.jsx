@@ -304,11 +304,28 @@ const Portfolio = () => {
   ];
 
   const handleMouseMove = (e) => {
-    const rect = e.currentTarget.getBoundingClientRect();
-    const x = e.clientX - rect.left;
-    const y = e.clientY - rect.top;
-    e.currentTarget.style.setProperty('--mouse-x', `${x}px`);
-    e.currentTarget.style.setProperty('--mouse-y', `${y}px`);
+    const card = e.currentTarget;
+    const clientX = e.clientX;
+    const clientY = e.clientY;
+
+    if (card._rafId) {
+      cancelAnimationFrame(card._rafId);
+    }
+    card._rafId = requestAnimationFrame(() => {
+      const rect = card.getBoundingClientRect();
+      const x = clientX - rect.left;
+      const y = clientY - rect.top;
+      card.style.setProperty('--mouse-x', `${Math.round(x)}px`);
+      card.style.setProperty('--mouse-y', `${Math.round(y)}px`);
+    });
+  };
+
+  const handleCardMouseLeave = (e) => {
+    const card = e.currentTarget;
+    if (card._rafId) {
+      cancelAnimationFrame(card._rafId);
+      card._rafId = null;
+    }
   };
 
 
@@ -470,6 +487,7 @@ const Portfolio = () => {
               <h2 className="text-3xl sm:text-4xl font-bold mb-8">{t.about.title}</h2>
               <div className="glass-card spotlight-card p-8 rounded-2xl"
                 onMouseMove={handleMouseMove}
+                onMouseLeave={handleCardMouseLeave}
                 style={glassStyle}>
                 <p className="text-lg leading-relaxed">
                   {t.about.intro}
@@ -483,6 +501,7 @@ const Portfolio = () => {
               <div className="space-y-3">
                 <div className="glass-card spotlight-card p-6 rounded-2xl pl-8"
                   onMouseMove={handleMouseMove}
+                  onMouseLeave={handleCardMouseLeave}
                   style={glassStyle}>
                   <div className="font-semibold text-lg">
                     {t.about.experience.internship.role}
@@ -495,6 +514,7 @@ const Portfolio = () => {
 
                 <div className="glass-card spotlight-card p-6 rounded-2xl pl-8"
                   onMouseMove={handleMouseMove}
+                  onMouseLeave={handleCardMouseLeave}
                   style={glassStyle}>
                   <div className="font-semibold text-lg">
                     {t.about.experience.education.role}
@@ -517,6 +537,7 @@ const Portfolio = () => {
               <div key={key}
                 className="glass-card spotlight-card p-6 rounded-2xl"
                 onMouseMove={handleMouseMove}
+                onMouseLeave={handleCardMouseLeave}
                 style={glassStyle}>
                 <h3 className="font-semibold mb-4 text-base" style={{
                   color: isDarkMode ? '#ffffff' : '#000000'
@@ -552,7 +573,10 @@ const Portfolio = () => {
                 className="project-card spotlight-card p-8 rounded-2xl cursor-pointer"
                 onMouseMove={handleMouseMove}
                 onMouseEnter={() => setHoveredProject(idx)}
-                onMouseLeave={() => setHoveredProject(null)}
+                onMouseLeave={(e) => {
+                  handleCardMouseLeave(e);
+                  setHoveredProject(null);
+                }}
                 style={glassStyle}>
                 <h3 className="text-xl font-bold mb-3">
                   {project.title}
@@ -593,6 +617,7 @@ const Portfolio = () => {
             <h2 className="text-3xl sm:text-4xl font-bold mb-8">{t.contact.heading}</h2>
             <div className="glass-card spotlight-card p-8 sm:p-10 rounded-3xl"
               onMouseMove={handleMouseMove}
+              onMouseLeave={handleCardMouseLeave}
               style={glassStyle}>
               <div className="grid md:grid-cols-2 gap-8 md:gap-12 items-center">
                 {/* Left: Quote & Social Icons */}
