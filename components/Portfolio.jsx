@@ -419,7 +419,7 @@ const Portfolio = () => {
                   }}>
                   {t.hero.cta}
                 </a>
-                <a href="https://github.com/Hoangnguyenhuu12" target="_blank" rel="noopener noreferrer"
+                <a href="/CV_Nguyen_Huu_Hoang_AI_Intern.pdf" target="_blank" rel="noopener noreferrer"
                   className="glass-button px-8 py-4 rounded-xl font-medium inline-flex items-center gap-2"
                   style={{
                     background: isDarkMode ? 'rgba(255, 255, 255, 0.04)' : 'rgba(0, 0, 0, 0.03)',
@@ -440,7 +440,7 @@ const Portfolio = () => {
                     e.currentTarget.style.background = isDarkMode ? 'rgba(255, 255, 255, 0.04)' : 'rgba(0, 0, 0, 0.03)';
                     e.currentTarget.style.borderColor = isDarkMode ? '1px solid rgba(255, 255, 255, 0.12)' : '1px solid rgba(0, 0, 0, 0.08)';
                   }}>
-                  GitHub <ArrowUpRight size={18} />
+                  Resume <ArrowUpRight size={18} />
                 </a>
               </div>
             </div>
