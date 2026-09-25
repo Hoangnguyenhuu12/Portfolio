@@ -113,13 +113,13 @@ export function GlassmorphismNavBar({
   return (
     <div
       className={cn(
-        "fixed bottom-0 sm:top-0 left-1/2 -translate-x-1/2 z-50 mb-6 sm:mb-0 sm:pt-6 pointer-events-auto",
+        "fixed top-auto bottom-0 sm:top-0 sm:bottom-auto left-1/2 -translate-x-1/2 z-50 mb-6 sm:mb-0 sm:pt-6 pointer-events-none",
         className
       )}
     >
       <div
         className={cn(
-          "flex items-center gap-3 py-1 px-1 rounded-full shadow-lg transition-all duration-300",
+          "pointer-events-auto flex items-center gap-3 py-1 px-1 rounded-full shadow-lg transition-all duration-300",
           theme === "dark"
             ? "bg-black/60 border border-white/10 backdrop-blur-xl text-white shadow-[0_8px_32px_rgba(0,0,0,0.5)]"
             : "bg-white/60 border border-black/5 backdrop-blur-xl text-black shadow-[0_8px_32px_rgba(0,0,0,0.06)]"
