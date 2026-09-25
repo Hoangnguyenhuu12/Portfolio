@@ -2,7 +2,7 @@
 
 Minimalist, modern portfolio website for AI engineers specializing in LLM & RAG systems. Built with Next.js, React, and Tailwind CSS.
 
-## 🚀 Quick Start
+## Quick Start
 
 ### Prerequisites
 - Node.js 16+ installed
@@ -32,7 +32,7 @@ npm start
 
 ---
 
-## 📋 Deployment Options
+## Deployment Options
 
 ### Option 1: Vercel (Recommended)
 **Fastest & easiest - takes 2 minutes**
@@ -75,7 +75,7 @@ Site lives at `yourusername.github.io` or custom domain
 
 ---
 
-## ✏️ Customization Guide
+## Customization Guide
 
 ### 1. Update Personal Info
 
@@ -179,7 +179,7 @@ Modify `Portfolio.jsx` color references:
 
 ---
 
-## 🎨 Design Decisions & Why They Work
+## Design Decisions & Why They Work
 
 ### Minimalism
 - **No clutter** → Recruiters can find what matters (projects, tech, contact) in 10 seconds
@@ -209,7 +209,7 @@ Modify `Portfolio.jsx` color references:
 
 ---
 
-## 📊 SEO & Visibility
+## SEO & Visibility
 
 This portfolio includes:
 - Meta tags for search engines
@@ -225,9 +225,9 @@ This portfolio includes:
 
 ---
 
-## 🔐 Security & Best Practices
+## Security & Best Practices
 
-✅ What this portfolio does right:
+What this portfolio does right:
 - No sensitive data hardcoded
 - No tracking/analytics (keep it clean)
 - Static site = no backend vulnerabilities
@@ -241,7 +241,7 @@ This portfolio includes:
 
 ---
 
-## 📱 Testing Checklist
+## Testing Checklist
 
 - [ ] Works on mobile (iPhone, Android)
 - [ ] Dark/Light mode toggle works
@@ -256,7 +256,7 @@ This portfolio includes:
 
 ---
 
-## 🎯 Optimization Tips for Big Tech Recruiting
+## Optimization Tips for Big Tech Recruiting
 
 ### Content
 - ✅ Keep projects concise but impactful
@@ -277,7 +277,7 @@ This portfolio includes:
 
 ---
 
-## 🚀 Next Steps
+## Next Steps
 
 1. **Customize content** (projects, skills, experience)
 2. **Deploy** (Vercel recommended)
@@ -288,7 +288,7 @@ This portfolio includes:
 
 ---
 
-## 💡 Pro Tips for Standing Out
+## Pro Tips for Standing Out
 
 1. **Make projects public on GitHub** → With good README
 2. **Add demo video/GIF** → Link in portfolio
@@ -299,7 +299,7 @@ This portfolio includes:
 
 ---
 
-## ❓ Troubleshooting
+## Troubleshooting
 
 **Dark mode not working?**
 - Clear browser cache
@@ -319,7 +319,7 @@ This portfolio includes:
 
 ---
 
-## 📝 License
+## License
 
 This portfolio is customized for Nguyễn Hữu Hoàng. Feel free to adapt the design for your own use.
 
