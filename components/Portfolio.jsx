@@ -3,6 +3,9 @@ import { Mail, Github, ExternalLink, Moon, Sun, ArrowUpRight, Copy, Check } from
 import HexagonBackground from './HexagonBackground';
 import TopoField from '@/components/ui/topo-field';
 
+// Cờ bật/tắt hiển thị ô tổ ong và hiệu ứng phát sáng khi di chuyển chuột (Mặc định: false - Tạm ẩn theo yêu cầu, không xóa code)
+const SHOW_HEXAGON_BACKGROUND = false;
+
 // Rotating typewriter component with type-in and backspace/delete loop ("tụt ra tụt vô")
 const RotatingTypewriter = ({
   phrases = ["Hoang Nguyen", "an AI Engineer", "a Hedgehog"],
@@ -287,8 +290,8 @@ const Portfolio = () => {
         />
       </div>
 
-      {/* Interactive 3D Hexagon Parallax Background */}
-      <HexagonBackground isDark={isDarkMode} />
+      {/* Interactive 3D Hexagon Parallax Background (Tạm ẩn theo yêu cầu, đổi SHOW_HEXAGON_BACKGROUND = true để bật lại bất cứ lúc nào) */}
+      {SHOW_HEXAGON_BACKGROUND && <HexagonBackground isDark={isDarkMode} />}
 
       {/* Main Content */}
       <div className="relative z-10">
